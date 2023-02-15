@@ -1,0 +1,47 @@
+PODS:
+  - R.swift (7.2.4)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - SnapKit (5.6.0)
+  - SwiftLint (0.50.3)
+  - Swinject (2.8.3)
+  - SwinjectAutoregistration (2.8.3):
+    - Swinject (~> 2.8.3)
+
+DEPENDENCIES:
+  - R.swift (= 7.2.4)
+  - RxCocoa (= 6.5.0)
+  - RxSwift (= 6.5.0)
+  - SnapKit (= 5.6.0)
+  - SwiftLint (= 0.50.3)
+  - Swinject (= 2.8.3)
+  - SwinjectAutoregistration (= 2.8.3)
+
+SPEC REPOS:
+  trunk:
+    - R.swift
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SnapKit
+    - SwiftLint
+    - Swinject
+    - SwinjectAutoregistration
+
+SPEC CHECKSUMS:
+  R.swift: 681bb9135f482e7a81d9d27445b837fef5467e11
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
+  Swinject: 893c9a543000ac2f10ee4cbaf0933c6992c935d5
+  SwinjectAutoregistration: e3ee378dc458acf78d176fc7fec3902603452667
+
+PODFILE CHECKSUM: b62143388ed991f53f855b2f21335f9012d2d2a4
+
+COCOAPODS: 1.11.3
