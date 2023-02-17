@@ -1,0 +1,9 @@
+// MARK: - Button
+"button.start" = "Поехали";
+"button.continue" = "Продолжить";
+
+// MARK: - InitialStart
+"initialStart.title" = "Пришло время меняться";
+"initialStart.info" = "А Shapely поможет не терять духа и отслеживать свой прогресс на пути к изменениям";
+
+

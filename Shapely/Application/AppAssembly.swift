@@ -18,6 +18,7 @@ private class InternalAppAssembly: Assembly {
         container.register(AppRouterImp.self) { resolver in
             AppRouterImp(rootController: resolver.resolve(RootNavigationController.self)!)
         }
+        .implements(AppRouter.self)
     }
 }
 
@@ -48,7 +49,8 @@ class AppAssembly: NSObject {
 
         // Modules list
         modules = [
-            LaunchModule()
+            LaunchModule(),
+            InitialStartModule()
         ]
 
         modules = modules.flatMap(AppAssembly.findSubmodules)
@@ -70,18 +72,6 @@ class AppAssembly: NSObject {
     func initializeModules() {
         for module in modules {
             module.initializeModule(resolver: container)
-        }
-    }
-
-    func beforeRegisterDelegates() {
-        for module in modules {
-            module.moduleWillRegisterDelegates()
-        }
-    }
-
-    private func postInitializeModules() {
-        for module in modules {
-            module.postInitializeModule(resolver: container)
         }
     }
 }
