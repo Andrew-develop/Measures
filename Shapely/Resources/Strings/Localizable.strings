@@ -1,9 +1,70 @@
 // MARK: - Button
 "button.start" = "Поехали";
 "button.continue" = "Продолжить";
+"button.cancel" = "Отмена";
+"button.done" = "Готово";
+
+// MARK: - Gender
+"gender.male" = "Парень";
+"gender.female" = "Девушка";
+
+// MARK: - UserTarget
+"userTarget.loseWeight" = "Похудеть";
+"userTarget.saveWeight" = "Сохранить вес";
+"userTarget.gainWeight" = "Набрать массу";
+
+// MARK: - ActivityLevel
+"activityLevel.bad.title" = "Низкий";
+"activityLevel.sad.title" = "Умеренный";
+"activityLevel.good.title" = "Средний";
+"activityLevel.high.title" = "Высокий";
+"activityLevel.sportsman.title" = "Спортсмен";
+
+"activityLevel.bad.info" = "Не занимаюсь спортом и веду сидячий образ жизни";
+"activityLevel.sad.info" = "Хожу в зал 1-3 раза в неделю или занимаюсь другими лёгкими физическими нагрузками";
+"activityLevel.good.info" = "Занимаюсь спортом 3-5 раз в неделю";
+"activityLevel.high.info" = "Занимаюсь интенсивными физическими нагрузками 6-7 раз в неделю";
+"activityLevel.sportsman.info" = "Профессионально занимаюсь спортом, тренировки 6-7 раз в неделю";
+
+// MARK: - TreckingParameters
+"treckingParameter.neck.title" = "Шея";
+"treckingParameter.chest.title" = "Грудь";
+"treckingParameter.biceps.title" = "Бицепс";
+"treckingParameter.waist.title" = "Талия";
+"treckingParameter.pelvis.title" = "Таз";
+"treckingParameter.shoulders.title" = "Плечевой пояс";
+"treckingParameter.forearm.title" = "Предплечье";
+"treckingParameter.wrist.title" = "Запястье";
+"treckingParameter.stomach.title" = "Живот";
+"treckingParameter.hip.title" = "Бедро";
+"treckingParameter.shin.title" = "Голень";
+"treckingParameter.ankle.title" = "Лодыжка";
+
+"treckingParameter.neck.info" = "Чуть выше основания";
+"treckingParameter.chest.info" = "Самая широкая часть
+груди";
+"treckingParameter.biceps.info" = "При согнутой в локте
+руке";
+"treckingParameter.waist.info" = "В самом узком месте";
+"treckingParameter.pelvis.info" = "Самая широкая часть";
+"treckingParameter.shoulders.info" = "В расслабленном
+состоянии";
+"treckingParameter.forearm.info" = "В самой широкой
+части";
+"treckingParameter.wrist.info" = "В самом тонком месте";
+"treckingParameter.stomach.info" = "Чуть ниже уровня
+пупка";
+"treckingParameter.hip.info" = "Самая широкая часть";
+"treckingParameter.shin.info" = "Самая широкая часть";
+"treckingParameter.ankle.info" = "Самая широкая часть";
 
 // MARK: - InitialStart
 "initialStart.title" = "Пришло время меняться";
 "initialStart.info" = "А Shapely поможет не терять духа и отслеживать свой прогресс на пути к изменениям";
+
+// MARK: - PersonalInfo
+"personalInfo.title" = "Расскажи о себе";
+"personalInfo.birthday" = "Дата рождения";
+"personalInfo.target" = "Цель";
 
 

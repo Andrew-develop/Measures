@@ -15,4 +15,7 @@ struct InitialStartPack: Hashable {
 enum InitialStartPackItem: Hashable {
     case text(InitialStartTextCellViewModel)
     case picture(InitialStartPictureCellViewModel)
+    case segment(InitialStartSegmentCellViewModel)
+    case title(InitialStartTitleCellViewModel)
+    case data(InitialStartDataCellViewModel)
 }

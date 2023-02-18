@@ -14,9 +14,21 @@ extension StyleWrapper where Element == UIView {
         }
     }
 
-    static func hidden(_ value: Bool) -> StyleWrapper {
-        return .wrap { button, _ in
-            button.isHidden = value
-        }
-    }
+//    static func borderWidth(_ value: CGFloat) -> StyleWrapper {
+//        return .wrap { button, _ in
+//            button.layer.borderWidth = value
+//        }
+//    }
+//
+//    static func borderColor(_ value: UIColor) -> StyleWrapper {
+//        return .wrap { button, _ in
+//            button.layer.borderColor = value.cgColor
+//        }
+//    }
+
+//    static func hidden(_ value: Bool) -> StyleWrapper {
+//        return .wrap { button, _ in
+//            button.isHidden = value
+//        }
+//    }
 }

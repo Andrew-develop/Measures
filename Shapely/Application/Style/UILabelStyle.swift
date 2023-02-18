@@ -34,6 +34,13 @@ extension StyleWrapper where Element == UILabel {
         }
     }
 
+    static var cellTitle: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.text
+            label.font = theme.typography.body1
+        }
+    }
+
     static var defaultText: StyleWrapper {
         return .wrap { label, theme in
             label.textColor = theme.colorPalette.text

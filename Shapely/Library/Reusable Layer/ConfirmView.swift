@@ -9,11 +9,11 @@ import UIKit
 
 final class ConfirmView: UIView {
     private let continueButton = with(UIButton()) {
-        ($0 as UIView).apply([.buttonColor, .cornerRadius(Grid.s.offset)])
+        $0.apply(.continueButton)
     }
 
     private let backButton = with(UIButton()) {
-        ($0 as UIView).apply([.surfaceColor, .cornerRadius(Grid.s.offset)])
+        $0.apply(.backButton)
     }
 
     var props: Props = .default {
