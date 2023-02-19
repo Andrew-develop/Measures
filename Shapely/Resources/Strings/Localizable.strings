@@ -3,17 +3,21 @@
 "button.continue" = "Продолжить";
 "button.cancel" = "Отмена";
 "button.done" = "Готово";
+"button.close" = "Закрыть";
 
 // MARK: - Gender
 "gender.male" = "Парень";
 "gender.female" = "Девушка";
 
 // MARK: - UserTarget
+"userTarget.select" = "Выбери цель";
 "userTarget.loseWeight" = "Похудеть";
 "userTarget.saveWeight" = "Сохранить вес";
 "userTarget.gainWeight" = "Набрать массу";
 
 // MARK: - ActivityLevel
+"activityLevel.title" = "Уровень активности";
+
 "activityLevel.bad.title" = "Низкий";
 "activityLevel.sad.title" = "Умеренный";
 "activityLevel.good.title" = "Средний";
@@ -66,5 +70,11 @@
 "personalInfo.title" = "Расскажи о себе";
 "personalInfo.birthday" = "Дата рождения";
 "personalInfo.target" = "Цель";
+
+// MARK: - Height/Weight
+"caloryIntake.title" = "Давай рассчитаем твою норму калорий";
+"caloryIntake.height" = "Рост";
+"caloryIntake.weight" = "Вес";
+"caloryIntake.activityLevel" = "Уровень активности";
 
 

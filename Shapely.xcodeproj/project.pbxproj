@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0BCFD729A1DF9E0082B2DD /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BCFD629A1DF9E0082B2DD /* UIAlertController.swift */; };
 		0A0CB909299F7E8A0086AA9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB908299F7E8A0086AA9B /* SceneDelegate.swift */; };
 		0A0CB90D299F8D400086AA9B /* UILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB90C299F8D400086AA9B /* UILabelStyle.swift */; };
 		0A0CB90F299F8FC10086AA9B /* ImageViewContentMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB90E299F8FC10086AA9B /* ImageViewContentMode.swift */; };
@@ -51,6 +52,18 @@
 		0A1FEA7D2997B61600DAEBC2 /* Preparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FE9A02997B61600DAEBC2 /* Preparable.swift */; };
 		0A1FEA7F2997B61600DAEBC2 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FE9A32997B61600DAEBC2 /* Command.swift */; };
 		0A1FEA802997B61600DAEBC2 /* Weakify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FE9A42997B61600DAEBC2 /* Weakify.swift */; };
+		0A33B41F29A233B600F2685B /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B41E29A233B600F2685B /* DateFormat.swift */; };
+		0A33B42129A238F600F2685B /* InitialStartTapeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42029A238F600F2685B /* InitialStartTapeCell.swift */; };
+		0A33B42329A2390900F2685B /* InitialStartTapeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42229A2390900F2685B /* InitialStartTapeCellViewModel.swift */; };
+		0A33B42B29A23E3300F2685B /* ActivityLevelModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42529A23E3300F2685B /* ActivityLevelModule.swift */; };
+		0A33B42C29A23E3300F2685B /* ActivityLevelPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42629A23E3300F2685B /* ActivityLevelPresenter.swift */; };
+		0A33B42D29A23E3300F2685B /* ActivityLevelRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42729A23E3300F2685B /* ActivityLevelRouter.swift */; };
+		0A33B42E29A23E3300F2685B /* ActivityLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42829A23E3300F2685B /* ActivityLevelViewController.swift */; };
+		0A33B42F29A23E3300F2685B /* ActivityLevelTableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42929A23E3300F2685B /* ActivityLevelTableAdapter.swift */; };
+		0A33B43029A23E3300F2685B /* ActivityLevelServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42A29A23E3300F2685B /* ActivityLevelServiceProvider.swift */; };
+		0A33B43429A2400100F2685B /* ActivityLevelInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B43329A2400100F2685B /* ActivityLevelInfoCell.swift */; };
+		0A33B43729A2404800F2685B /* ActivityLevelInfoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B43629A2404800F2685B /* ActivityLevelInfoCellViewModel.swift */; };
+		0A33B43929A2534400F2685B /* UINavigationBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B43829A2534400F2685B /* UINavigationBarStyle.swift */; };
 		0AD5FB13299BC3AA0096FAF6 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AD5FB0A299BC3A90096FAF6 /* Inter-SemiBold.ttf */; };
 		0AD5FB15299BC3AA0096FAF6 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AD5FB0C299BC3AA0096FAF6 /* Inter-Medium.ttf */; };
 		0AD5FB16299BC3AA0096FAF6 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AD5FB0D299BC3AA0096FAF6 /* Inter-Regular.ttf */; };
@@ -94,6 +107,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0BCFD629A1DF9E0082B2DD /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		0A0CB908299F7E8A0086AA9B /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0A0CB90C299F8D400086AA9B /* UILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelStyle.swift; sourceTree = "<group>"; };
 		0A0CB90E299F8FC10086AA9B /* ImageViewContentMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewContentMode.swift; sourceTree = "<group>"; };
@@ -140,6 +154,18 @@
 		0A1FE9A02997B61600DAEBC2 /* Preparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preparable.swift; sourceTree = "<group>"; };
 		0A1FE9A32997B61600DAEBC2 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		0A1FE9A42997B61600DAEBC2 /* Weakify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weakify.swift; sourceTree = "<group>"; };
+		0A33B41E29A233B600F2685B /* DateFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
+		0A33B42029A238F600F2685B /* InitialStartTapeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartTapeCell.swift; sourceTree = "<group>"; };
+		0A33B42229A2390900F2685B /* InitialStartTapeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartTapeCellViewModel.swift; sourceTree = "<group>"; };
+		0A33B42529A23E3300F2685B /* ActivityLevelModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelModule.swift; sourceTree = "<group>"; };
+		0A33B42629A23E3300F2685B /* ActivityLevelPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelPresenter.swift; sourceTree = "<group>"; };
+		0A33B42729A23E3300F2685B /* ActivityLevelRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelRouter.swift; sourceTree = "<group>"; };
+		0A33B42829A23E3300F2685B /* ActivityLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelViewController.swift; sourceTree = "<group>"; };
+		0A33B42929A23E3300F2685B /* ActivityLevelTableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelTableAdapter.swift; sourceTree = "<group>"; };
+		0A33B42A29A23E3300F2685B /* ActivityLevelServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelServiceProvider.swift; sourceTree = "<group>"; };
+		0A33B43329A2400100F2685B /* ActivityLevelInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelInfoCell.swift; sourceTree = "<group>"; };
+		0A33B43629A2404800F2685B /* ActivityLevelInfoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelInfoCellViewModel.swift; sourceTree = "<group>"; };
+		0A33B43829A2534400F2685B /* UINavigationBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBarStyle.swift; sourceTree = "<group>"; };
 		0AD5FB0A299BC3A90096FAF6 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		0AD5FB0C299BC3AA0096FAF6 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		0AD5FB0D299BC3AA0096FAF6 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
@@ -225,12 +251,9 @@
 		0A0CB91E299FB8880086AA9B /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				0A0CB929299FBAF50086AA9B /* InitialStartTextCell.swift */,
+				0A33B43529A2401900F2685B /* InitialStart */,
+				0A33B43329A2400100F2685B /* ActivityLevelInfoCell.swift */,
 				0A0CB927299FB97A0086AA9B /* MainHeaderCell.swift */,
-				0A0CB92D299FBC1E0086AA9B /* InitialStartPictureCell.swift */,
-				0AE35E1429A0847700FEFD58 /* InitialStartSegmentCell.swift */,
-				0AE35E1829A084CA00FEFD58 /* InitialStartTitleCell.swift */,
-				0AE35E1A29A084E200FEFD58 /* InitialStartDataCell.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -256,12 +279,9 @@
 		0A0CB923299FB9520086AA9B /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				0A33B43129A23FB000F2685B /* InitialStart */,
 				0A0CB925299FB96B0086AA9B /* MainHeaderCellViewModel.swift */,
-				0A0CB92B299FBB0F0086AA9B /* InitialStartTextCellViewModel.swift */,
-				0A0CB92F299FBC290086AA9B /* InitialStartPictureCellViewModel.swift */,
-				0AE35E1629A0848B00FEFD58 /* InitialStartSegmentCellViewModel.swift */,
-				0AE35E1C29A084F600FEFD58 /* InitialStartDataCellViewModel.swift */,
-				0AE35E1E29A0850700FEFD58 /* InitialStartTitleCellViewModel.swift */,
+				0A33B43629A2404800F2685B /* ActivityLevelInfoCellViewModel.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -456,6 +476,45 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		0A33B42429A23E1600F2685B /* ActivityLevel */ = {
+			isa = PBXGroup;
+			children = (
+				0A33B42529A23E3300F2685B /* ActivityLevelModule.swift */,
+				0A33B42629A23E3300F2685B /* ActivityLevelPresenter.swift */,
+				0A33B42729A23E3300F2685B /* ActivityLevelRouter.swift */,
+				0A33B42829A23E3300F2685B /* ActivityLevelViewController.swift */,
+				0A33B42929A23E3300F2685B /* ActivityLevelTableAdapter.swift */,
+				0A33B42A29A23E3300F2685B /* ActivityLevelServiceProvider.swift */,
+			);
+			path = ActivityLevel;
+			sourceTree = "<group>";
+		};
+		0A33B43129A23FB000F2685B /* InitialStart */ = {
+			isa = PBXGroup;
+			children = (
+				0A0CB92B299FBB0F0086AA9B /* InitialStartTextCellViewModel.swift */,
+				0A0CB92F299FBC290086AA9B /* InitialStartPictureCellViewModel.swift */,
+				0AE35E1629A0848B00FEFD58 /* InitialStartSegmentCellViewModel.swift */,
+				0AE35E1C29A084F600FEFD58 /* InitialStartDataCellViewModel.swift */,
+				0AE35E1E29A0850700FEFD58 /* InitialStartTitleCellViewModel.swift */,
+				0A33B42229A2390900F2685B /* InitialStartTapeCellViewModel.swift */,
+			);
+			path = InitialStart;
+			sourceTree = "<group>";
+		};
+		0A33B43529A2401900F2685B /* InitialStart */ = {
+			isa = PBXGroup;
+			children = (
+				0A0CB929299FBAF50086AA9B /* InitialStartTextCell.swift */,
+				0A0CB92D299FBC1E0086AA9B /* InitialStartPictureCell.swift */,
+				0AE35E1429A0847700FEFD58 /* InitialStartSegmentCell.swift */,
+				0AE35E1829A084CA00FEFD58 /* InitialStartTitleCell.swift */,
+				0AE35E1A29A084E200FEFD58 /* InitialStartDataCell.swift */,
+				0A33B42029A238F600F2685B /* InitialStartTapeCell.swift */,
+			);
+			path = InitialStart;
+			sourceTree = "<group>";
+		};
 		0AD5FB09299BC3260096FAF6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +557,7 @@
 		0AE35E2329A0A00D00FEFD58 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				0A33B41E29A233B600F2685B /* DateFormat.swift */,
 				0AE35E2429A0A01D00FEFD58 /* Enums */,
 			);
 			path = Constants;
@@ -543,6 +603,7 @@
 				0AE50D06299D2895001A67D8 /* InitialStartRouter.swift */,
 				0AE50D07299D2895001A67D8 /* InitialStartViewController.swift */,
 				0AE50D09299D2895001A67D8 /* InitialStartServiceProvider.swift */,
+				0A33B42429A23E1600F2685B /* ActivityLevel */,
 			);
 			path = InitialStart;
 			sourceTree = "<group>";
@@ -558,9 +619,11 @@
 		0AE50D13299D302F001A67D8 /* Style */ = {
 			isa = PBXGroup;
 			children = (
+				0A0BCFD629A1DF9E0082B2DD /* UIAlertController.swift */,
 				0A0CB90C299F8D400086AA9B /* UILabelStyle.swift */,
 				0AE35E3429A0FFEC00FEFD58 /* UIButtonStyle.swift */,
 				0A0CB91B299FB7DD0086AA9B /* UITableViewStyle.swift */,
+				0A33B43829A2534400F2685B /* UINavigationBarStyle.swift */,
 				0A0CB913299F964F0086AA9B /* UIViewStyle.swift */,
 				0AE35E2029A08F3C00FEFD58 /* UISegmentedControlStyle.swift */,
 				0AE35E2F29A0D29800FEFD58 /* UICalendarViewStyle.swift */,
@@ -751,7 +814,9 @@
 				0ADE995629991DC7001EE33E /* LaunchPresenter.swift in Sources */,
 				0A0CB92E299FBC1E0086AA9B /* InitialStartPictureCell.swift in Sources */,
 				0ADE9941299910F3001EE33E /* DefaultTheme.swift in Sources */,
+				0A33B42329A2390900F2685B /* InitialStartTapeCellViewModel.swift in Sources */,
 				0A0CB914299F964F0086AA9B /* UIViewStyle.swift in Sources */,
+				0A33B42E29A23E3300F2685B /* ActivityLevelViewController.swift in Sources */,
 				0ADE995529991DC7001EE33E /* LaunchModule.swift in Sources */,
 				0AE50D0B299D2895001A67D8 /* InitialStartPresenter.swift in Sources */,
 				0A0CB912299F91CE0086AA9B /* ConfirmView.swift in Sources */,
@@ -761,11 +826,13 @@
 				0AE35E2629A0A03800FEFD58 /* Gender.swift in Sources */,
 				0ADE9940299910F3001EE33E /* DefaultColorPalette.swift in Sources */,
 				0AE35E1729A0848B00FEFD58 /* InitialStartSegmentCellViewModel.swift in Sources */,
+				0A33B43929A2534400F2685B /* UINavigationBarStyle.swift in Sources */,
 				0A1FE8912997B17900DAEBC2 /* MainCoordinator.swift in Sources */,
 				0AE35E3029A0D29800FEFD58 /* UICalendarViewStyle.swift in Sources */,
 				0A1FE8942997B1D600DAEBC2 /* AppAssembly.swift in Sources */,
 				0A0CB933299FC01D0086AA9B /* InitialStartPack.swift in Sources */,
 				0A1FEA802997B61600DAEBC2 /* Weakify.swift in Sources */,
+				0A33B41F29A233B600F2685B /* DateFormat.swift in Sources */,
 				0AF2D06C299B731C0054CC0B /* R.generated.swift in Sources */,
 				0AE35E3729A1051A00FEFD58 /* UIToolbarStyle.swift in Sources */,
 				0ADE995829991DC7001EE33E /* LaunchViewController.swift in Sources */,
@@ -774,6 +841,7 @@
 				0AE50D0F299D2895001A67D8 /* InitialStartServiceProvider.swift in Sources */,
 				0ADE995A29991DC7001EE33E /* LaunchServiceProvider.swift in Sources */,
 				0A0CB928299FB97A0086AA9B /* MainHeaderCell.swift in Sources */,
+				0A0BCFD729A1DF9E0082B2DD /* UIAlertController.swift in Sources */,
 				0A1FE9DD2997B61600DAEBC2 /* MainAppDelegate.swift in Sources */,
 				0A0CB92A299FBAF50086AA9B /* InitialStartTextCell.swift in Sources */,
 				0AE50D01299D208C001A67D8 /* ViewBgColor.swift in Sources */,
@@ -782,7 +850,10 @@
 				0AE35E2A29A0A1FE00FEFD58 /* UserData.swift in Sources */,
 				0A0CB917299F9AA10086AA9B /* UIView_addSubviews.swift in Sources */,
 				0AE35E3529A0FFEC00FEFD58 /* UIButtonStyle.swift in Sources */,
+				0A33B42C29A23E3300F2685B /* ActivityLevelPresenter.swift in Sources */,
+				0A33B43029A23E3300F2685B /* ActivityLevelServiceProvider.swift in Sources */,
 				0A0CB930299FBC290086AA9B /* InitialStartPictureCellViewModel.swift in Sources */,
+				0A33B43729A2404800F2685B /* ActivityLevelInfoCellViewModel.swift in Sources */,
 				0A0CB909299F7E8A0086AA9B /* SceneDelegate.swift in Sources */,
 				0A0CB90F299F8FC10086AA9B /* ImageViewContentMode.swift in Sources */,
 				0A1FE9C52997B61600DAEBC2 /* Functions.swift in Sources */,
@@ -790,9 +861,11 @@
 				0A1FEA7A2997B61600DAEBC2 /* AppRouterImp.swift in Sources */,
 				0A0CB92C299FBB0F0086AA9B /* InitialStartTextCellViewModel.swift in Sources */,
 				0AE35E2129A08F3C00FEFD58 /* UISegmentedControlStyle.swift in Sources */,
+				0A33B42B29A23E3300F2685B /* ActivityLevelModule.swift in Sources */,
 				0A1FE9DE2997B61600DAEBC2 /* Grid.swift in Sources */,
 				0A0CB90D299F8D400086AA9B /* UILabelStyle.swift in Sources */,
 				0A1FE8812997AC5D00DAEBC2 /* Shapely.xcdatamodeld in Sources */,
+				0A33B42129A238F600F2685B /* InitialStartTapeCell.swift in Sources */,
 				0AE50D00299D208C001A67D8 /* LabelFont.swift in Sources */,
 				0A1FEA7D2997B61600DAEBC2 /* Preparable.swift in Sources */,
 				0ADE9942299910F3001EE33E /* DefaultTypography.swift in Sources */,
@@ -801,6 +874,7 @@
 				0AE35E3B29A10E7200FEFD58 /* InitialStartMapper.swift in Sources */,
 				0AE35E3229A0E9E000FEFD58 /* CalendarView.swift in Sources */,
 				0A1FEA7B2997B61600DAEBC2 /* AppRouter+Extension.swift in Sources */,
+				0A33B43429A2400100F2685B /* ActivityLevelInfoCell.swift in Sources */,
 				0AE35E2829A0A05200FEFD58 /* UserTarget.swift in Sources */,
 				0A1FEA742997B61600DAEBC2 /* PreparableCollectionCell.swift in Sources */,
 				0A1FEA732997B61600DAEBC2 /* PreparableHeaderCollectionCell.swift in Sources */,
@@ -810,6 +884,7 @@
 				0AE50D0A299D2895001A67D8 /* InitialStartModule.swift in Sources */,
 				0AE35E1D29A084F600FEFD58 /* InitialStartDataCellViewModel.swift in Sources */,
 				0AE35E1F29A0850700FEFD58 /* InitialStartTitleCellViewModel.swift in Sources */,
+				0A33B42D29A23E3300F2685B /* ActivityLevelRouter.swift in Sources */,
 				0A1FE9E02997B61600DAEBC2 /* Stylable.swift in Sources */,
 				0A1FE9CA2997B61600DAEBC2 /* SwinjectExtensions.swift in Sources */,
 				0AE35E1529A0847700FEFD58 /* InitialStartSegmentCell.swift in Sources */,
@@ -818,6 +893,7 @@
 				0AE35E2E29A0A56F00FEFD58 /* TreckingParameter.swift in Sources */,
 				0AE35E1B29A084E200FEFD58 /* InitialStartDataCell.swift in Sources */,
 				0A1FE9E12997B61600DAEBC2 /* ColorPalette.swift in Sources */,
+				0A33B42F29A23E3300F2685B /* ActivityLevelTableAdapter.swift in Sources */,
 				0A1FE9DF2997B61600DAEBC2 /* Typography.swift in Sources */,
 				0A1FE9C82997B61600DAEBC2 /* PropsProducerConsumer.swift in Sources */,
 				0ADE995729991DC7001EE33E /* LaunchRouter.swift in Sources */,

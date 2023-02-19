@@ -15,6 +15,10 @@ protocol InitialStartViewFactory {
 final class InitialStartModule: AppModule, Assembly {
     private var resolver: Resolver!
 
+    var submodules: [AppModule] = [
+        ActivityLevelModule()
+    ]
+
     func createAssembly() -> Assembly? {
         return self
     }

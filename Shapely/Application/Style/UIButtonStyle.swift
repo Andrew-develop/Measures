@@ -32,4 +32,12 @@ extension StyleWrapper where Element == UIButton {
             button.setTitleColor(theme.colorPalette.button, for: .normal)
         }
     }
+
+    static var closeButton: StyleWrapper {
+        return .wrap { button, theme in
+            button.backgroundColor = theme.colorPalette.background
+            button.setTitle(R.string.localizable.buttonClose(), for: .normal)
+            button.setTitleColor(theme.colorPalette.button, for: .normal)
+        }
+    }
 }

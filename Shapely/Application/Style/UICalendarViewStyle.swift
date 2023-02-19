@@ -12,6 +12,8 @@ extension StyleWrapper where Element == UICalendarView {
     static var primary: StyleWrapper {
         return .wrap { calendarView, theme in
             calendarView.calendar = Calendar(identifier: .gregorian)
+            calendarView.locale = .current
+            calendarView.timeZone = .current
             calendarView.fontDesign = .rounded
             calendarView.backgroundColor = .tertiarySystemBackground
             calendarView.tintColor = theme.colorPalette.button

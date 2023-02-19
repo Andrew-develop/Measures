@@ -7,13 +7,20 @@
 
 import RxSwift
 
-protocol InitialStartServiceProvider: AnyObject {}
-
-final class InitialStartServiceProviderImpl {
-//    private let service: <#Service#>
-
-//    init() {
-//    }
+protocol InitialStartServiceProvider: AnyObject {
+    var rx_activityLevel: Observable<ActivityLevel> { get }
 }
 
-extension InitialStartServiceProviderImpl: InitialStartServiceProvider {}
+final class InitialStartServiceProviderImpl {
+    private let activityLevelService: ActivityLevelServiceProvider
+
+    init(activityLevelService: ActivityLevelServiceProvider) {
+        self.activityLevelService = activityLevelService
+    }
+}
+
+extension InitialStartServiceProviderImpl: InitialStartServiceProvider {
+    var rx_activityLevel: RxSwift.Observable<ActivityLevel> {
+        activityLevelService.rx_activityLevel
+    }
+}

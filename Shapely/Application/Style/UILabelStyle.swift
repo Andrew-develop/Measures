@@ -49,4 +49,27 @@ extension StyleWrapper where Element == UILabel {
             label.lineBreakMode = .byWordWrapping
         }
     }
+
+    static var secondaryText: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.textSecondary
+            label.font = theme.typography.body2
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+        }
+    }
+
+    static var measureValue: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.button
+            label.font = theme.typography.header1
+        }
+    }
+
+    static var measureType: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.surfaceSecondary
+            label.font = theme.typography.body1
+        }
+    }
 }
