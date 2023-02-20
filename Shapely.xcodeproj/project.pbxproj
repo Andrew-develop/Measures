@@ -94,6 +94,15 @@
 		0AE35E3529A0FFEC00FEFD58 /* UIButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE35E3429A0FFEC00FEFD58 /* UIButtonStyle.swift */; };
 		0AE35E3729A1051A00FEFD58 /* UIToolbarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE35E3629A1051A00FEFD58 /* UIToolbarStyle.swift */; };
 		0AE35E3B29A10E7200FEFD58 /* InitialStartMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE35E3A29A10E7200FEFD58 /* InitialStartMapper.swift */; };
+		0AE437BB29A343F500B43A4B /* InitialStartParameterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE437BA29A343F500B43A4B /* InitialStartParameterCell.swift */; };
+		0AE437BD29A3440500B43A4B /* InitialStartParameterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE437BC29A3440500B43A4B /* InitialStartParameterCellViewModel.swift */; };
+		0AE437BF29A35E5C00B43A4B /* InitialStartEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE437BE29A35E5C00B43A4B /* InitialStartEditCell.swift */; };
+		0AE437C129A35E7400B43A4B /* InitialStartEditCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE437C029A35E7400B43A4B /* InitialStartEditCellViewModel.swift */; };
+		0AE437C329A3629000B43A4B /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE437C229A3629000B43A4B /* Measure.swift */; };
+		0AE437CB29A3783600B43A4B /* InitialStartTapeUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE437CA29A3783600B43A4B /* InitialStartTapeUnitCell.swift */; };
+		0AE437CD29A3785100B43A4B /* InitialStartTapeUnitCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE437CC29A3785100B43A4B /* InitialStartTapeUnitCellViewModel.swift */; };
+		0AE437D129A37C7200B43A4B /* UICollectionViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE437CF29A37C7200B43A4B /* UICollectionViewStyle.swift */; };
+		0AE437D229A37C7200B43A4B /* UICollectionViewFlowLayoutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE437D029A37C7200B43A4B /* UICollectionViewFlowLayoutStyle.swift */; };
 		0AE50D00299D208C001A67D8 /* LabelFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE50CFE299D208C001A67D8 /* LabelFont.swift */; };
 		0AE50D01299D208C001A67D8 /* ViewBgColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE50CFF299D208C001A67D8 /* ViewBgColor.swift */; };
 		0AE50D0A299D2895001A67D8 /* InitialStartModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE50D04299D2895001A67D8 /* InitialStartModule.swift */; };
@@ -196,6 +205,15 @@
 		0AE35E3429A0FFEC00FEFD58 /* UIButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonStyle.swift; sourceTree = "<group>"; };
 		0AE35E3629A1051A00FEFD58 /* UIToolbarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbarStyle.swift; sourceTree = "<group>"; };
 		0AE35E3A29A10E7200FEFD58 /* InitialStartMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartMapper.swift; sourceTree = "<group>"; };
+		0AE437BA29A343F500B43A4B /* InitialStartParameterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartParameterCell.swift; sourceTree = "<group>"; };
+		0AE437BC29A3440500B43A4B /* InitialStartParameterCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartParameterCellViewModel.swift; sourceTree = "<group>"; };
+		0AE437BE29A35E5C00B43A4B /* InitialStartEditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartEditCell.swift; sourceTree = "<group>"; };
+		0AE437C029A35E7400B43A4B /* InitialStartEditCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartEditCellViewModel.swift; sourceTree = "<group>"; };
+		0AE437C229A3629000B43A4B /* Measure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
+		0AE437CA29A3783600B43A4B /* InitialStartTapeUnitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartTapeUnitCell.swift; sourceTree = "<group>"; };
+		0AE437CC29A3785100B43A4B /* InitialStartTapeUnitCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartTapeUnitCellViewModel.swift; sourceTree = "<group>"; };
+		0AE437CF29A37C7200B43A4B /* UICollectionViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewStyle.swift; sourceTree = "<group>"; };
+		0AE437D029A37C7200B43A4B /* UICollectionViewFlowLayoutStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayoutStyle.swift; sourceTree = "<group>"; };
 		0AE50CFE299D208C001A67D8 /* LabelFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelFont.swift; sourceTree = "<group>"; };
 		0AE50CFF299D208C001A67D8 /* ViewBgColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewBgColor.swift; sourceTree = "<group>"; };
 		0AE50D04299D2895001A67D8 /* InitialStartModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartModule.swift; sourceTree = "<group>"; };
@@ -243,6 +261,7 @@
 		0A0CB91D299FB8820086AA9B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0AE437C429A3770500B43A4B /* Collection */,
 				0A0CB91E299FB8880086AA9B /* Table */,
 			);
 			path = Cell;
@@ -271,6 +290,7 @@
 		0A0CB922299FB94D0086AA9B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0AE437C729A3772A00B43A4B /* Collection */,
 				0A0CB923299FB9520086AA9B /* Table */,
 			);
 			path = Cell;
@@ -498,6 +518,8 @@
 				0AE35E1C29A084F600FEFD58 /* InitialStartDataCellViewModel.swift */,
 				0AE35E1E29A0850700FEFD58 /* InitialStartTitleCellViewModel.swift */,
 				0A33B42229A2390900F2685B /* InitialStartTapeCellViewModel.swift */,
+				0AE437BC29A3440500B43A4B /* InitialStartParameterCellViewModel.swift */,
+				0AE437C029A35E7400B43A4B /* InitialStartEditCellViewModel.swift */,
 			);
 			path = InitialStart;
 			sourceTree = "<group>";
@@ -511,6 +533,8 @@
 				0AE35E1829A084CA00FEFD58 /* InitialStartTitleCell.swift */,
 				0AE35E1A29A084E200FEFD58 /* InitialStartDataCell.swift */,
 				0A33B42029A238F600F2685B /* InitialStartTapeCell.swift */,
+				0AE437BA29A343F500B43A4B /* InitialStartParameterCell.swift */,
+				0AE437BE29A35E5C00B43A4B /* InitialStartEditCell.swift */,
 			);
 			path = InitialStart;
 			sourceTree = "<group>";
@@ -570,6 +594,7 @@
 				0AE35E2729A0A05200FEFD58 /* UserTarget.swift */,
 				0AE35E2B29A0A44400FEFD58 /* ActivityLevel.swift */,
 				0AE35E2D29A0A56F00FEFD58 /* TreckingParameter.swift */,
+				0AE437C229A3629000B43A4B /* Measure.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -580,6 +605,22 @@
 				0AE35E3A29A10E7200FEFD58 /* InitialStartMapper.swift */,
 			);
 			path = Mapping;
+			sourceTree = "<group>";
+		};
+		0AE437C429A3770500B43A4B /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				0AE437CA29A3783600B43A4B /* InitialStartTapeUnitCell.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		0AE437C729A3772A00B43A4B /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				0AE437CC29A3785100B43A4B /* InitialStartTapeUnitCellViewModel.swift */,
+			);
+			path = Collection;
 			sourceTree = "<group>";
 		};
 		0AE50CFC299D1F8D001A67D8 /* Launch */ = {
@@ -622,6 +663,8 @@
 				0A0BCFD629A1DF9E0082B2DD /* UIAlertController.swift */,
 				0A0CB90C299F8D400086AA9B /* UILabelStyle.swift */,
 				0AE35E3429A0FFEC00FEFD58 /* UIButtonStyle.swift */,
+				0AE437D029A37C7200B43A4B /* UICollectionViewFlowLayoutStyle.swift */,
+				0AE437CF29A37C7200B43A4B /* UICollectionViewStyle.swift */,
 				0A0CB91B299FB7DD0086AA9B /* UITableViewStyle.swift */,
 				0A33B43829A2534400F2685B /* UINavigationBarStyle.swift */,
 				0A0CB913299F964F0086AA9B /* UIViewStyle.swift */,
@@ -813,6 +856,7 @@
 				0AE35E1929A084CA00FEFD58 /* InitialStartTitleCell.swift in Sources */,
 				0ADE995629991DC7001EE33E /* LaunchPresenter.swift in Sources */,
 				0A0CB92E299FBC1E0086AA9B /* InitialStartPictureCell.swift in Sources */,
+				0AE437C129A35E7400B43A4B /* InitialStartEditCellViewModel.swift in Sources */,
 				0ADE9941299910F3001EE33E /* DefaultTheme.swift in Sources */,
 				0A33B42329A2390900F2685B /* InitialStartTapeCellViewModel.swift in Sources */,
 				0A0CB914299F964F0086AA9B /* UIViewStyle.swift in Sources */,
@@ -820,6 +864,7 @@
 				0ADE995529991DC7001EE33E /* LaunchModule.swift in Sources */,
 				0AE50D0B299D2895001A67D8 /* InitialStartPresenter.swift in Sources */,
 				0A0CB912299F91CE0086AA9B /* ConfirmView.swift in Sources */,
+				0AE437D129A37C7200B43A4B /* UICollectionViewStyle.swift in Sources */,
 				0A0CB926299FB96B0086AA9B /* MainHeaderCellViewModel.swift in Sources */,
 				0A1FEA752997B61600DAEBC2 /* PreparableHeaderTableCell.swift in Sources */,
 				0A1FEA762997B61600DAEBC2 /* PreparableTableCell.swift in Sources */,
@@ -834,15 +879,18 @@
 				0A1FEA802997B61600DAEBC2 /* Weakify.swift in Sources */,
 				0A33B41F29A233B600F2685B /* DateFormat.swift in Sources */,
 				0AF2D06C299B731C0054CC0B /* R.generated.swift in Sources */,
+				0AE437C329A3629000B43A4B /* Measure.swift in Sources */,
 				0AE35E3729A1051A00FEFD58 /* UIToolbarStyle.swift in Sources */,
 				0ADE995829991DC7001EE33E /* LaunchViewController.swift in Sources */,
 				0AE50D0D299D2895001A67D8 /* InitialStartViewController.swift in Sources */,
 				0A1FE9E22997B61600DAEBC2 /* Theme.swift in Sources */,
 				0AE50D0F299D2895001A67D8 /* InitialStartServiceProvider.swift in Sources */,
 				0ADE995A29991DC7001EE33E /* LaunchServiceProvider.swift in Sources */,
+				0AE437BF29A35E5C00B43A4B /* InitialStartEditCell.swift in Sources */,
 				0A0CB928299FB97A0086AA9B /* MainHeaderCell.swift in Sources */,
 				0A0BCFD729A1DF9E0082B2DD /* UIAlertController.swift in Sources */,
 				0A1FE9DD2997B61600DAEBC2 /* MainAppDelegate.swift in Sources */,
+				0AE437CD29A3785100B43A4B /* InitialStartTapeUnitCellViewModel.swift in Sources */,
 				0A0CB92A299FBAF50086AA9B /* InitialStartTextCell.swift in Sources */,
 				0AE50D01299D208C001A67D8 /* ViewBgColor.swift in Sources */,
 				0AE35E2C29A0A44400FEFD58 /* ActivityLevel.swift in Sources */,
@@ -857,23 +905,27 @@
 				0A0CB909299F7E8A0086AA9B /* SceneDelegate.swift in Sources */,
 				0A0CB90F299F8FC10086AA9B /* ImageViewContentMode.swift in Sources */,
 				0A1FE9C52997B61600DAEBC2 /* Functions.swift in Sources */,
+				0AE437BD29A3440500B43A4B /* InitialStartParameterCellViewModel.swift in Sources */,
 				0A1FEA772997B61600DAEBC2 /* AppModule.swift in Sources */,
 				0A1FEA7A2997B61600DAEBC2 /* AppRouterImp.swift in Sources */,
 				0A0CB92C299FBB0F0086AA9B /* InitialStartTextCellViewModel.swift in Sources */,
 				0AE35E2129A08F3C00FEFD58 /* UISegmentedControlStyle.swift in Sources */,
 				0A33B42B29A23E3300F2685B /* ActivityLevelModule.swift in Sources */,
+				0AE437D229A37C7200B43A4B /* UICollectionViewFlowLayoutStyle.swift in Sources */,
 				0A1FE9DE2997B61600DAEBC2 /* Grid.swift in Sources */,
 				0A0CB90D299F8D400086AA9B /* UILabelStyle.swift in Sources */,
 				0A1FE8812997AC5D00DAEBC2 /* Shapely.xcdatamodeld in Sources */,
 				0A33B42129A238F600F2685B /* InitialStartTapeCell.swift in Sources */,
 				0AE50D00299D208C001A67D8 /* LabelFont.swift in Sources */,
 				0A1FEA7D2997B61600DAEBC2 /* Preparable.swift in Sources */,
+				0AE437CB29A3783600B43A4B /* InitialStartTapeUnitCell.swift in Sources */,
 				0ADE9942299910F3001EE33E /* DefaultTypography.swift in Sources */,
 				0A1FEA782997B61600DAEBC2 /* RootNavigationController.swift in Sources */,
 				0A1FEA792997B61600DAEBC2 /* AppRouter.swift in Sources */,
 				0AE35E3B29A10E7200FEFD58 /* InitialStartMapper.swift in Sources */,
 				0AE35E3229A0E9E000FEFD58 /* CalendarView.swift in Sources */,
 				0A1FEA7B2997B61600DAEBC2 /* AppRouter+Extension.swift in Sources */,
+				0AE437BB29A343F500B43A4B /* InitialStartParameterCell.swift in Sources */,
 				0A33B43429A2400100F2685B /* ActivityLevelInfoCell.swift in Sources */,
 				0AE35E2829A0A05200FEFD58 /* UserTarget.swift in Sources */,
 				0A1FEA742997B61600DAEBC2 /* PreparableCollectionCell.swift in Sources */,

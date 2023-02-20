@@ -21,6 +21,9 @@ final class InitialStartViewController: UIViewController, PropsConsumer {
         $0.register(InitialStartTitleCell.self, forCellReuseIdentifier: InitialStartTitleCell.className)
         $0.register(InitialStartDataCell.self, forCellReuseIdentifier: InitialStartDataCell.className)
         $0.register(InitialStartSegmentCell.self, forCellReuseIdentifier: InitialStartSegmentCell.className)
+        $0.register(InitialStartParameterCell.self, forCellReuseIdentifier: InitialStartParameterCell.className)
+        $0.register(InitialStartEditCell.self, forCellReuseIdentifier: InitialStartEditCell.className)
+        $0.register(InitialStartTapeCell.self, forCellReuseIdentifier: InitialStartTapeCell.className)
         $0.register(
             MainHeaderCell.self, forHeaderFooterViewReuseIdentifier: MainHeaderCell.className
         )
@@ -55,12 +58,14 @@ private extension InitialStartViewController {
     func prepareView() {
         view.apply(.backgroundColor)
         view.addSubviews(tableView, calendarView, confirmView)
-        setBaseConstraints()
+        makeConstraints()
+        hideCalendar()
     }
 
     func render(oldProps: Props, newProps: Props) {
         tableAdapter.item = newProps.pack
-        if oldProps.confirmProps != newProps.confirmProps, let confirmProps = newProps.confirmProps {
+
+        if let confirmProps = newProps.confirmProps {
             confirmView.props = confirmProps
         }
 
@@ -70,20 +75,27 @@ private extension InitialStartViewController {
 
         if oldProps.isNeedCalendar != newProps.isNeedCalendar {
             if newProps.isNeedCalendar {
-                setCalendarConstraints()
+                showCalendar()
             } else {
-                setBaseConstraints()
+                hideCalendar()
             }
         }
     }
 
-    func setBaseConstraints() {
-        tableView.snp.remakeConstraints {
+    func makeConstraints() {
+        tableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(confirmView.snp.top).offset(-Grid.s.offset)
         }
 
+        calendarView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(0.4)
+        }
+    }
+
+    func hideCalendar() {
         confirmView.snp.remakeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
@@ -93,22 +105,11 @@ private extension InitialStartViewController {
         calendarView.isHidden = true
     }
 
-    func setCalendarConstraints() {
-        calendarView.snp.remakeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.4)
-        }
-
+    func showCalendar() {
         confirmView.snp.remakeConstraints {
             $0.bottom.equalTo(calendarView.snp.top).offset(-Grid.sm.offset)
             $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
             $0.height.equalTo(56.0)
-        }
-
-        tableView.snp.remakeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
-            $0.bottom.equalTo(confirmView.snp.top).offset(-Grid.sm.offset)
         }
 
         calendarView.isHidden = false

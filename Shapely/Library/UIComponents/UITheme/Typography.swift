@@ -13,6 +13,7 @@ public protocol Typography {
     static var body2: UIFont { get }
 
     static var title3: UIFont { get }
+    static var title4: UIFont { get }
 
     static var footnote: UIFont { get }
 }

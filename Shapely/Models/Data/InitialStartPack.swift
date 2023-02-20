@@ -18,4 +18,7 @@ enum InitialStartPackItem: Hashable {
     case segment(InitialStartSegmentCellViewModel)
     case title(InitialStartTitleCellViewModel)
     case data(InitialStartDataCellViewModel)
+    case parameter(InitialStartParameterCellViewModel)
+    case edit(InitialStartEditCellViewModel)
+    case tape(InitialStartTapeCellViewModel)
 }

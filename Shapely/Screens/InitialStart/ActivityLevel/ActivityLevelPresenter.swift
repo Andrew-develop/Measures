@@ -32,6 +32,9 @@ private extension ActivityLevelPresenter {
     func setup() {
         propsRelay.mutate {
             $0.items = mapActivityModels()
+            $0.onClose = Command { [weak self] in
+                self?.router.dismiss()
+            }
         }
     }
 

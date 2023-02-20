@@ -91,17 +91,13 @@ private extension ConfirmView {
 }
 
 extension ConfirmView {
-    struct Props: Mutable, Equatable {
+    struct Props: Mutable {
         var state: State
         var title: String
         var onContinue: Command
         var onBack: Command
 
         static var `default` = Props(state: .regular, title: "", onContinue: .empty, onBack: .empty)
-
-        static func == (lhs: ConfirmView.Props, rhs: ConfirmView.Props) -> Bool {
-            lhs.state == rhs.state && lhs.title == rhs.title
-        }
     }
 
     enum State {

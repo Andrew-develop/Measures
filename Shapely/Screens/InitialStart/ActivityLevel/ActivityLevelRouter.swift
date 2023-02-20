@@ -5,6 +5,8 @@
 //  Created by Andrew on 19.02.2023.
 //
 
+import UIKit
+
 protocol ActivityLevelPublicRouter: AnyObject {
     func runScreenFactory()
 }
@@ -26,7 +28,11 @@ final class ActivityLevelRouter {
 
 extension ActivityLevelRouter: ActivityLevelPublicRouter {
     func runScreenFactory() {
-        appRouter.present(factory.createViewController(), animated: true)
+        appRouter.present(
+            UINavigationController(
+                rootViewController: factory.createViewController()
+            ), animated: true
+        )
     }
 }
 

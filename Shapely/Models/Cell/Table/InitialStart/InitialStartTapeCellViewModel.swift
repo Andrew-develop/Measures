@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class InitialStartTapeCellViewModel: PreparableViewModel {
+final class InitialStartTapeCellViewModel: PreparableViewModel, Hashable {
     let cellId: String = InitialStartTapeCell.className
     let props: InitialStartTapeCell.Props
 
@@ -15,11 +15,13 @@ final class InitialStartTapeCellViewModel: PreparableViewModel {
         self.props = props
     }
 
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(props.title)
-//    }
-//
-//    static func == (lhs: InitialStartTapeCellViewModel, rhs: InitialStartTapeCellViewModel) -> Bool {
-//        lhs.props.title == rhs.props.title
-//    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(props.startValue)
+    }
+
+    static func == (lhs: InitialStartTapeCellViewModel, rhs: InitialStartTapeCellViewModel) -> Bool {
+        lhs.props.startValue == rhs.props.startValue &&
+        lhs.props.items == rhs.props.items &&
+        lhs.props.measureType == rhs.props.measureType
+    }
 }

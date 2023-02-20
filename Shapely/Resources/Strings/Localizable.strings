@@ -4,6 +4,7 @@
 "button.cancel" = "Отмена";
 "button.done" = "Готово";
 "button.close" = "Закрыть";
+"button.ready" = "Я готов!";
 
 // MARK: - Gender
 "gender.male" = "Парень";
@@ -71,10 +72,18 @@
 "personalInfo.birthday" = "Дата рождения";
 "personalInfo.target" = "Цель";
 
-// MARK: - Height/Weight
+// MARK: - CaloryIntake
 "caloryIntake.title" = "Давай рассчитаем твою норму калорий";
 "caloryIntake.height" = "Рост";
 "caloryIntake.weight" = "Вес";
 "caloryIntake.activityLevel" = "Уровень активности";
+
+// MARK: - Parameters
+"parameters.title" = "Какие параметры хочешь отслеживать?";
+
+// MARK: - Finish
+"finish.title" = "Отлично!\nВсё готово";
+"finish.first.info" = "Мы рассчитали твою дневную норму калорий. Ты можешь отредактировать её, если считаешь иначе";
+"finish.second.info" = "Соблюдай её каждый день, если хочешь достичь результата и записывай свой прогресс, чтобы увидеть изменения";
 
 

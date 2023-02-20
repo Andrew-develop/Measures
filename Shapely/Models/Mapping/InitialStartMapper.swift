@@ -61,4 +61,34 @@ enum InitialStartMapper {
             )
         )
     }
+
+    static func mapEdit(text: String,
+                        onTap: Command) -> InitialStartEditCellViewModel {
+        InitialStartEditCellViewModel(
+            props: InitialStartEditCell.Props(
+                text: text,
+                onTap: onTap
+            )
+        )
+    }
+
+    static func mapTape(startValue: Double,
+                        measureType: Measure,
+                        interval: Range<Int>,
+                        onChanged: CommandWith<Double>) -> InitialStartTapeCellViewModel {
+        InitialStartTapeCellViewModel(
+            props: InitialStartTapeCell.Props(
+                startValue: startValue,
+                measureType: measureType,
+                items: interval.map { value in
+                    InitialStartTapeUnitCellViewModel(
+                        props: InitialStartTapeUnitCell.Props(
+                            currentValue: String(value)
+                        )
+                    )
+                },
+                onChanged: onChanged
+            )
+        )
+    }
 }

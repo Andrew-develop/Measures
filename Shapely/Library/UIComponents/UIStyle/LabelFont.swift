@@ -26,6 +26,11 @@ public extension StyleWrapper where Element == UILabel {
         label.font = theme.typography.title3
     }
 
+    /// Set label font to title4 from app theme typography
+    static let title4: StyleWrapper = .wrap { label, theme in
+        label.font = theme.typography.title4
+    }
+
     /// Set label font to footnote from app theme typography
     static let footnote: StyleWrapper = .wrap { label, theme in
         label.font = theme.typography.footnote

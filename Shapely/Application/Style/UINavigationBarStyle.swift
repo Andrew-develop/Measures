@@ -11,7 +11,7 @@ extension StyleWrapper where Element == UINavigationBar {
     static func title(_ backgroundColor: UIColor, font: UIFont) -> StyleWrapper {
         return .wrap { bar, theme in
             let appearance = UINavigationBarAppearance()
-            appearance.largeTitleTextAttributes = [
+            appearance.titleTextAttributes = [
                 .foregroundColor: theme.colorPalette.text,
                 .font: font
             ]

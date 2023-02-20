@@ -72,4 +72,18 @@ extension StyleWrapper where Element == UILabel {
             label.font = theme.typography.body1
         }
     }
+
+    static var unitValue: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.surfaceSecondary
+            label.font = theme.typography.body2
+        }
+    }
+
+    static var editCell: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.button
+            label.font = theme.typography.header2
+        }
+    }
 }

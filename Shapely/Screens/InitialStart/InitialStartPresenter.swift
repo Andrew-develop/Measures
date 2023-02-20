@@ -64,6 +64,10 @@ final class InitialStartPresenter: PropsProducer {
         self?.setDate(value)
     }
 
+    private lazy var onSelectParameter = CommandWith<TreckingParameter> { [weak self] value in
+        self?.setParameter(value)
+    }
+
     private lazy var onTapBirthday = Command { [weak self] in
         self?.makeCalendarVisible(true)
     }
@@ -79,6 +83,11 @@ final class InitialStartPresenter: PropsProducer {
 
     private lazy var onTapActivity = Command { [weak self] in
         self?.router.runActivityLevelScreen()
+    }
+
+    private lazy var onTapEdit = Command { [weak self] in
+        guard let self else { return }
+        self.router.runActionSheet(with: self.targetActionSheet)
     }
 
     // MARK: - Segue
@@ -212,9 +221,25 @@ private extension InitialStartPresenter {
                                 with: R.string.localizable.caloryIntakeHeight()
                             )
                         ),
+                        .tape(
+                            InitialStartMapper.mapTape(
+                                startValue: userData.height,
+                                measureType: .sm,
+                                interval: Range(50...250),
+                                onChanged: .empty
+                            )
+                        ),
                         .title(
                             InitialStartMapper.mapTitle(
                                 with: R.string.localizable.caloryIntakeWeight()
+                            )
+                        ),
+                        .tape(
+                            InitialStartMapper.mapTape(
+                                startValue: userData.weight,
+                                measureType: .kg,
+                                interval: Range(30...300),
+                                onChanged: .empty
                             )
                         ),
                         .title(
@@ -235,15 +260,85 @@ private extension InitialStartPresenter {
             $0.confirmProps = ConfirmView.Props(
                 state: .full,
                 title: R.string.localizable.buttonContinue(),
-                onContinue: .empty,
+                onContinue: parametersSegue,
                 onBack: personalInfoSegue
             )
         }
     }
 
-    func mapParametersPack() {}
+    func mapParametersPack() {
+        propsRelay.mutate {
+            $0.pack = (
+                .parameters,
+                InitialStartPack(
+                    header: InitialStartMapper.mapHeader(
+                        with: R.string.localizable.parametersTitle()
+                    ),
+                    viewModels:
+                        TreckingParameter.allCases.sorted {
+                            userData.treckingParameters.contains($0) &&
+                            !userData.treckingParameters.contains($1)
+                        }
+                        .map { parameter in
+                            .parameter(
+                                InitialStartParameterCellViewModel(
+                                    props: InitialStartParameterCell.Props(
+                                        parameter: parameter,
+                                        isSelected: userData.treckingParameters.contains(parameter),
+                                        onTap: Command { [weak self] in
+                                            self?.setParameter(parameter)
+                                        }
+                                    )
+                                )
+                            )
+                        }
+                )
+            )
+            $0.confirmProps = ConfirmView.Props(
+                state: .full,
+                title: R.string.localizable.buttonContinue(),
+                onContinue: finalSegue,
+                onBack: caloryIntakeSegue
+            )
+        }
+    }
 
-    func mapFinalPack() {}
+    func mapFinalPack() {
+        propsRelay.mutate {
+            $0.pack = (
+                .finish,
+                InitialStartPack(
+                    header: InitialStartMapper.mapHeader(
+                        with: R.string.localizable.finishTitle()
+                    ),
+                    viewModels: [
+                        .text(
+                            InitialStartMapper.mapText(
+                                with: R.string.localizable.finishFirstInfo()
+                            )
+                        ),
+                        .edit(
+                            InitialStartMapper.mapEdit(
+                                text: String(userData.caloryIntake) + " " + Measure.kcal.rawValue,
+                                onTap: onTapEdit
+                            )
+                        ),
+                        .text(
+                            InitialStartMapper.mapText(
+                                with: R.string.localizable.finishSecondInfo()
+                            )
+                        )
+                    ]
+                )
+            )
+            $0.confirmProps = ConfirmView.Props(
+                state: .full,
+                title: R.string.localizable.buttonReady(),
+                onContinue: .empty,
+                onBack: parametersSegue
+            )
+        }
+    }
 
     // MARK: - Helpers
 
@@ -265,6 +360,15 @@ private extension InitialStartPresenter {
         mapPersonalInfoPack()
     }
 
+    func setParameter(_ parameter: TreckingParameter) {
+        if userData.treckingParameters.contains(parameter) {
+            userData.treckingParameters.remove(parameter)
+        } else {
+            userData.treckingParameters.insert(parameter)
+        }
+        mapParametersPack()
+    }
+
     func setActivityLevel(_ level: ActivityLevel) {
         userData.activityLevel = level
         mapCaloryIntakePack()
@@ -274,5 +378,9 @@ private extension InitialStartPresenter {
         let formatter = DateFormatter()
         formatter.dateFormat = DateFormat.dateFullMonth.rawValue
         return formatter.string(from: date)
+    }
+
+    func sortParameters(_ parameters: [InitialStartParameterCellViewModel]) -> [InitialStartParameterCellViewModel] {
+        parameters.sorted { $0.props.isSelected && !$1.props.isSelected }
     }
 }

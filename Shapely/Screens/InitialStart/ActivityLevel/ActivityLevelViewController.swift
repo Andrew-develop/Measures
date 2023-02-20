@@ -45,7 +45,7 @@ final class ActivityLevelViewController: UIViewController, PropsConsumer {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(navigationItem)
+
         navigationItem.title = R.string.localizable.activityLevelTitle()
         navigationController?.navigationBar.apply(.title(DefaultColorPalette.background,
                                                          font: DefaultTypography.body1))
@@ -59,9 +59,8 @@ final class ActivityLevelViewController: UIViewController, PropsConsumer {
 
     private func makeConstraints() {
         tableView.snp.remakeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
-            $0.bottom.equalToSuperview()
         }
     }
 

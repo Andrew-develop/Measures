@@ -45,6 +45,12 @@ final class InitialStartTableAdapter: NSObject {
                 model = titleModel
             case let .data(dataModel):
                 model = dataModel
+            case let .parameter(parameterModel):
+                model = parameterModel
+            case let .edit(editModel):
+                model = editModel
+            case let .tape(tapeModel):
+                model = tapeModel
             }
 
             let cell = tableView.dequeueReusableCell(withIdentifier: model.cellId, for: indexPath)
@@ -61,7 +67,7 @@ final class InitialStartTableAdapter: NSObject {
         var snapshot = NSDiffableDataSourceSnapshot<Section, InitialStartPackItem>()
         snapshot.appendSections([item.0])
         snapshot.appendItems(item.1.viewModels, toSection: item.0)
-        diffableDataSource?.apply(snapshot, animatingDifferences: false)
+        diffableDataSource?.apply(snapshot, animatingDifferences: item.0 != .parameters)
     }
 }
 
