@@ -67,7 +67,7 @@ final class InitialStartTableAdapter: NSObject {
         var snapshot = NSDiffableDataSourceSnapshot<Section, InitialStartPackItem>()
         snapshot.appendSections([item.0])
         snapshot.appendItems(item.1.viewModels, toSection: item.0)
-        diffableDataSource?.apply(snapshot, animatingDifferences: item.0 != .parameters)
+        diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
 }
 

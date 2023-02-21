@@ -80,6 +80,7 @@ enum InitialStartMapper {
             props: InitialStartTapeCell.Props(
                 startValue: startValue,
                 measureType: measureType,
+                range: interval,
                 items: interval.map { value in
                     InitialStartTapeUnitCellViewModel(
                         props: InitialStartTapeUnitCell.Props(

@@ -9,14 +9,14 @@ import UIKit
 
 enum TreckingParameter: Int, CaseIterable, CustomStringConvertible {
     case neck
+    case shoulders
     case chest
     case biceps
     case waist
-    case pelvis
-    case shoulders
     case forearm
     case wrist
     case stomach
+    case pelvis
     case hip
     case shin
     case ankle

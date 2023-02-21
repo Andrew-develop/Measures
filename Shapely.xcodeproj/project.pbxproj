@@ -64,6 +64,8 @@
 		0A33B43429A2400100F2685B /* ActivityLevelInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B43329A2400100F2685B /* ActivityLevelInfoCell.swift */; };
 		0A33B43729A2404800F2685B /* ActivityLevelInfoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B43629A2404800F2685B /* ActivityLevelInfoCellViewModel.swift */; };
 		0A33B43929A2534400F2685B /* UINavigationBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B43829A2534400F2685B /* UINavigationBarStyle.swift */; };
+		0AA2806329A4E8C00064BBB6 /* DialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2806229A4E8C00064BBB6 /* DialogController.swift */; };
+		0AA2806529A507620064BBB6 /* UITextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2806429A507620064BBB6 /* UITextFieldStyle.swift */; };
 		0AD5FB13299BC3AA0096FAF6 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AD5FB0A299BC3A90096FAF6 /* Inter-SemiBold.ttf */; };
 		0AD5FB15299BC3AA0096FAF6 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AD5FB0C299BC3AA0096FAF6 /* Inter-Medium.ttf */; };
 		0AD5FB16299BC3AA0096FAF6 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AD5FB0D299BC3AA0096FAF6 /* Inter-Regular.ttf */; };
@@ -175,6 +177,8 @@
 		0A33B43329A2400100F2685B /* ActivityLevelInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelInfoCell.swift; sourceTree = "<group>"; };
 		0A33B43629A2404800F2685B /* ActivityLevelInfoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelInfoCellViewModel.swift; sourceTree = "<group>"; };
 		0A33B43829A2534400F2685B /* UINavigationBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBarStyle.swift; sourceTree = "<group>"; };
+		0AA2806229A4E8C00064BBB6 /* DialogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogController.swift; sourceTree = "<group>"; };
+		0AA2806429A507620064BBB6 /* UITextFieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldStyle.swift; sourceTree = "<group>"; };
 		0AD5FB0A299BC3A90096FAF6 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		0AD5FB0C299BC3AA0096FAF6 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		0AD5FB0D299BC3AA0096FAF6 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
@@ -339,6 +343,7 @@
 				0A1FE8872997AC5E00DAEBC2 /* Info.plist */,
 				0A1FE88E2997B15500DAEBC2 /* Resources */,
 				0A1FE88D2997B13500DAEBC2 /* Application */,
+				0AA2806129A4E8A90064BBB6 /* Services */,
 				0ADE994329991A1D001EE33E /* Screens */,
 				0A0CB91F299FB8C00086AA9B /* Models */,
 				0A1FE8952997B61600DAEBC2 /* Library */,
@@ -539,6 +544,14 @@
 			path = InitialStart;
 			sourceTree = "<group>";
 		};
+		0AA2806129A4E8A90064BBB6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0AA2806229A4E8C00064BBB6 /* DialogController.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		0AD5FB09299BC3260096FAF6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,6 +674,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0BCFD629A1DF9E0082B2DD /* UIAlertController.swift */,
+				0AA2806429A507620064BBB6 /* UITextFieldStyle.swift */,
 				0A0CB90C299F8D400086AA9B /* UILabelStyle.swift */,
 				0AE35E3429A0FFEC00FEFD58 /* UIButtonStyle.swift */,
 				0AE437D029A37C7200B43A4B /* UICollectionViewFlowLayoutStyle.swift */,
@@ -893,6 +907,7 @@
 				0AE437CD29A3785100B43A4B /* InitialStartTapeUnitCellViewModel.swift in Sources */,
 				0A0CB92A299FBAF50086AA9B /* InitialStartTextCell.swift in Sources */,
 				0AE50D01299D208C001A67D8 /* ViewBgColor.swift in Sources */,
+				0AA2806529A507620064BBB6 /* UITextFieldStyle.swift in Sources */,
 				0AE35E2C29A0A44400FEFD58 /* ActivityLevel.swift in Sources */,
 				0A1FEA7C2997B61600DAEBC2 /* PreparableViewModel.swift in Sources */,
 				0AE35E2A29A0A1FE00FEFD58 /* UserData.swift in Sources */,
@@ -935,6 +950,7 @@
 				0A1FE9C22997B61600DAEBC2 /* NSObject+ClassName.swift in Sources */,
 				0AE50D0A299D2895001A67D8 /* InitialStartModule.swift in Sources */,
 				0AE35E1D29A084F600FEFD58 /* InitialStartDataCellViewModel.swift in Sources */,
+				0AA2806329A4E8C00064BBB6 /* DialogController.swift in Sources */,
 				0AE35E1F29A0850700FEFD58 /* InitialStartTitleCellViewModel.swift in Sources */,
 				0A33B42D29A23E3300F2685B /* ActivityLevelRouter.swift in Sources */,
 				0A1FE9E02997B61600DAEBC2 /* Stylable.swift in Sources */,

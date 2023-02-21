@@ -52,44 +52,6 @@ final class InitialStartPresenter: PropsProducer {
         alert.addAction(cancel)
     }
 
-    // MARK: - Commands
-
-    private lazy var onSegmentChanged = CommandWith<Int> { [weak self] value in
-        if let gender = Gender(rawValue: value) {
-            self?.userData.gender = gender
-        }
-    }
-
-    private lazy var onSelectDate = CommandWith<DateComponents?> { [weak self] value in
-        self?.setDate(value)
-    }
-
-    private lazy var onSelectParameter = CommandWith<TreckingParameter> { [weak self] value in
-        self?.setParameter(value)
-    }
-
-    private lazy var onTapBirthday = Command { [weak self] in
-        self?.makeCalendarVisible(true)
-    }
-
-    private lazy var onCalendarDone = Command { [weak self] in
-        self?.makeCalendarVisible(false)
-    }
-
-    private lazy var onTapTarget = Command { [weak self] in
-        guard let self else { return }
-        self.router.runActionSheet(with: self.targetActionSheet)
-    }
-
-    private lazy var onTapActivity = Command { [weak self] in
-        self?.router.runActivityLevelScreen()
-    }
-
-    private lazy var onTapEdit = Command { [weak self] in
-        guard let self else { return }
-        self.router.runActionSheet(with: self.targetActionSheet)
-    }
-
     // MARK: - Segue
 
     private lazy var personalInfoSegue = Command { [weak self] in
@@ -163,7 +125,11 @@ private extension InitialStartPresenter {
                         .segment(
                             InitialStartMapper.mapSegment(
                                 with: userData.gender,
-                                onSegmentChanged: onSegmentChanged
+                                onSegmentChanged: CommandWith<Int> { [weak self] value in
+                                    if let gender = Gender(rawValue: value) {
+                                        self?.userData.gender = gender
+                                    }
+                                }
                             )
                         ),
                         .title(
@@ -175,7 +141,9 @@ private extension InitialStartPresenter {
                             InitialStartMapper.mapData(
                                 title: makeStringDate(from: userData.birthday),
                                 isChevronHidden: true,
-                                onTap: onTapBirthday
+                                onTap: Command { [weak self] in
+                                    self?.makeCalendarVisible(true)
+                                }
                             )
                         ),
                         .title(
@@ -187,7 +155,10 @@ private extension InitialStartPresenter {
                             InitialStartMapper.mapData(
                                 title: userData.target.description,
                                 isChevronHidden: false,
-                                onTap: onTapTarget
+                                onTap: Command { [weak self] in
+                                    guard let self else { return }
+                                    self.router.runActionSheet(with: self.targetActionSheet)
+                                }
                             )
                         )
                     ]
@@ -201,8 +172,12 @@ private extension InitialStartPresenter {
             )
             $0.calendarProps = CalendarView.Props(
                 selectedDate: Calendar.current.dateComponents(in: .current, from: userData.birthday),
-                onSelect: onSelectDate,
-                onDone: onCalendarDone
+                onSelect: CommandWith<DateComponents?> { [weak self] value in
+                    self?.setDate(value)
+                },
+                onDone: Command { [weak self] in
+                    self?.makeCalendarVisible(false)
+                }
             )
         }
     }
@@ -226,7 +201,9 @@ private extension InitialStartPresenter {
                                 startValue: userData.height,
                                 measureType: .sm,
                                 interval: Range(50...250),
-                                onChanged: .empty
+                                onChanged: CommandWith<Double> { [weak self] value in
+                                    self?.setHeight(value)
+                                }
                             )
                         ),
                         .title(
@@ -239,7 +216,9 @@ private extension InitialStartPresenter {
                                 startValue: userData.weight,
                                 measureType: .kg,
                                 interval: Range(30...300),
-                                onChanged: .empty
+                                onChanged: CommandWith<Double> { [weak self] value in
+                                    self?.setWeight(value)
+                                }
                             )
                         ),
                         .title(
@@ -251,7 +230,9 @@ private extension InitialStartPresenter {
                             InitialStartMapper.mapData(
                                 title: userData.activityLevel.title,
                                 isChevronHidden: false,
-                                onTap: onTapActivity
+                                onTap: Command { [weak self] in
+                                    self?.router.runActivityLevelScreen()
+                                }
                             )
                         )
                     ]
@@ -320,7 +301,9 @@ private extension InitialStartPresenter {
                         .edit(
                             InitialStartMapper.mapEdit(
                                 text: String(userData.caloryIntake) + " " + Measure.kcal.rawValue,
-                                onTap: onTapEdit
+                                onTap: Command { [weak self] in
+                                    self?.showEditDialog()
+                                }
                             )
                         ),
                         .text(
@@ -374,13 +357,35 @@ private extension InitialStartPresenter {
         mapCaloryIntakePack()
     }
 
+    func setHeight(_ value: Double) {
+        userData.height = value
+        mapCaloryIntakePack()
+    }
+
+    func setWeight(_ value: Double) {
+        userData.weight = value
+        mapCaloryIntakePack()
+    }
+
     func makeStringDate(from date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = DateFormat.dateFullMonth.rawValue
         return formatter.string(from: date)
     }
 
-    func sortParameters(_ parameters: [InitialStartParameterCellViewModel]) -> [InitialStartParameterCellViewModel] {
-        parameters.sorted { $0.props.isSelected && !$1.props.isSelected }
+    func showEditDialog() {
+        let editDialog = with(DialogController()) {
+            $0.props = $0.props.mutate {
+                $0.title = R.string.localizable.finishAlertTitle()
+                $0.value = userData.caloryIntake
+                $0.measure = .kcal
+                $0.onSave = CommandWith { [weak self] value in
+                    guard let value = value else { return }
+                    self?.userData.caloryIntake = value
+                    self?.mapFinalPack()
+                }
+            }
+        }
+        router.showDialog(editDialog)
     }
 }

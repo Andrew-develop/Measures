@@ -13,7 +13,7 @@ extension StyleWrapper where Element == UICollectionViewFlowLayout {
     static var measures: StyleWrapper {
         return .wrap { layout, _ in
             layout.scrollDirection = .horizontal
-            layout.minimumInteritemSpacing = Grid.xs.offset
+            layout.minimumLineSpacing = Grid.xs.offset
         }
     }
 }

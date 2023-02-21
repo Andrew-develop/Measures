@@ -17,6 +17,15 @@ extension StyleWrapper where Element == UIButton {
         }
     }
 
+    static var alertContinueButton: StyleWrapper {
+        return .wrap { button, theme in
+            button.layer.cornerRadius = Grid.xs.offset
+            button.titleLabel?.font = theme.typography.body1
+            button.backgroundColor = theme.colorPalette.button
+            button.setTitleColor(theme.colorPalette.text, for: .normal)
+        }
+    }
+
     static var backButton: StyleWrapper {
         return .wrap { button, theme in
             button.layer.cornerRadius = Grid.s.offset

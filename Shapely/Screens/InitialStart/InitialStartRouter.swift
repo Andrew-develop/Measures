@@ -14,6 +14,7 @@ protocol InitialStartPublicRouter: AnyObject {
 protocol InitialStartInternalRouter: AnyObject {
     func runActionSheet(with controller: UIAlertController)
     func runActivityLevelScreen()
+    func showDialog(_ dialog: DialogController)
 }
 
 final class InitialStartRouter {
@@ -44,5 +45,9 @@ extension InitialStartRouter: InitialStartInternalRouter {
 
     func runActivityLevelScreen() {
         activityLevelRouter.runScreenFactory()
+    }
+
+    func showDialog(_ dialog: DialogController) {
+        appRouter.present(dialog, animated: true)
     }
 }

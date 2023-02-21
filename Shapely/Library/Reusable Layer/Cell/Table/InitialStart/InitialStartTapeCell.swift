@@ -64,7 +64,7 @@ final class InitialStartTapeCell: PreparableTableCell {
     private func makeConstraints() {
         collectionView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(90.0)
+            $0.height.equalTo(InitialStartTapeCell.cellHeight)
         }
 
         valueLabel.snp.makeConstraints {
@@ -85,72 +85,49 @@ final class InitialStartTapeCell: PreparableTableCell {
             collectionView.reloadData()
         }
 
-        if oldProps.startValue != newProps.startValue, let measure = newProps.measureType {
-            let valueText = NSMutableAttributedString(
-                string: String(newProps.startValue),
-                attributes: [
-                    NSAttributedString.Key.font: DefaultTypography.header1,
-                    NSAttributedString.Key.foregroundColor: DefaultColorPalette.button
-                ])
-            let space = NSAttributedString(string: " ")
-            let measureText = NSAttributedString(
-                string: measure.rawValue,
-                attributes: [
-                    NSAttributedString.Key.font: DefaultTypography.title4,
-                    NSAttributedString.Key.foregroundColor: DefaultColorPalette.textSecondary
-                ])
-            valueText.append(space)
-            valueText.append(measureText)
-            valueLabel.attributedText = valueText
+        if oldProps.startValue != newProps.startValue {
+            calculateStartPosition()
+            showCurrentValue(newProps.startValue, measure: newProps.measureType)
         }
     }
 }
 
 private extension InitialStartTapeCell {
-//    func aaa() {
-//        let cellWidth = 82
-//        let collectionWidth = collectionView.frame.width
-//        let contentWidth = collectionView.contentSize.width
-//
-//        let visibleCells = collectionView.visibleCells
-//    }
+    func calculatePosition() {
+        let markerPosition = collectionView.contentOffset.x + collectionView.frame.width / 2.0
+        let numberOfCell = Double(markerPosition / InitialStartTapeCell.unitWidth)
+        let correctInterval = Double(props.range.first ?? 0) - 0.9
+        let currentValue = numberOfCell + correctInterval
+        let valueToShow = round(Double(currentValue) * 10) / 10
 
-//    func scrollToCell() {
-//        var indexPath = IndexPath()
-//        var visibleCells = collectionView.visibleCells
-//
-//        /// Gets visible cells
-//        visibleCells = visibleCells.filter({ cell -> Bool in
-//            let cellRect = collectionView.convert(
-//                cell.frame,
-//                to: collectionView.superview
-//            )
-//            /// Calculate if at least 50% of the cell is in the boundaries we created
-//            let viewMidX = contentView.frame.midX
-//            let cellMidX = cellRect.midX
-//            let topBoundary = viewMidX + cellRect.width / 2
-//            let bottomBoundary = viewMidX - cellRect.width / 2
-//
-//            /// A print state representating what the return is calculating
-//            print("topboundary: \(topBoundary) > cellMidX: \(cellMidX) > Bottom Boundary: \(bottomBoundary)")
-//            return topBoundary > cellMidX && cellMidX > bottomBoundary
-//        })
-//
-//        /// Appends visible cell index to `cellIndexPath`
-//        visibleCells.forEach({
-//            if let selectedIndexPath = collectionView.indexPath(for: $0) {
-//                indexPath = selectedIndexPath
-//            }
-//        })
-//
-//        let row = indexPath.row
-//        // Disables animation on the first and last cell
-//        if row == 0 || row == props.items.count - 1 {
-//            self.select(row: row)
-//            return
-//        }
-//        self.select(row: row)
-//    }
+        props.onChanged.execute(with: valueToShow)
+    }
+
+    func calculateStartPosition() {
+        let correctInterval = props.startValue - Double(props.range.first ?? 0) - 1.0
+        let offset = correctInterval * InitialStartTapeCell.unitWidth - Grid.xs.offset
+        collectionView.layoutIfNeeded()
+        collectionView.setContentOffset(CGPoint(x: offset, y: 0.0), animated: false)
+    }
+
+    func showCurrentValue(_ value: Double, measure: Measure) {
+        let valueText = NSMutableAttributedString(
+            string: String(value),
+            attributes: [
+                NSAttributedString.Key.font: DefaultTypography.header1,
+                NSAttributedString.Key.foregroundColor: DefaultColorPalette.button
+            ])
+        let space = NSAttributedString(string: " ")
+        let measureText = NSAttributedString(
+            string: measure.rawValue,
+            attributes: [
+                NSAttributedString.Key.font: DefaultTypography.title4,
+                NSAttributedString.Key.foregroundColor: DefaultColorPalette.textSecondary
+            ])
+        valueText.append(space)
+        valueText.append(measureText)
+        valueLabel.attributedText = valueText
+    }
 }
 
 extension InitialStartTapeCell: UICollectionViewDataSource {
@@ -171,12 +148,12 @@ extension InitialStartTapeCell: UICollectionViewDataSource {
 extension InitialStartTapeCell: UICollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            print(#function, collectionView.visibleCells.count)
+            calculatePosition()
         }
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print(#function, collectionView.visibleCells.count)
+        calculatePosition()
     }
 }
 
@@ -189,15 +166,17 @@ extension InitialStartTapeCell: UICollectionViewDelegateFlowLayout {
 private extension InitialStartTapeCell {
     static let cellWidth = 82.0
     static let cellHeight = 90.0
+    static let unitWidth = cellWidth + Grid.xs.offset
 }
 
 extension InitialStartTapeCell {
     struct Props: Mutable {
         var startValue: Double
-        var measureType: Measure?
+        var measureType: Measure
+        var range: Range<Int>
         var items: [InitialStartTapeUnitCellViewModel]
         var onChanged: CommandWith<Double>
 
-        static let `default` = Props(startValue: 0, measureType: nil, items: [], onChanged: .empty)
+        static let `default` = Props(startValue: 0, measureType: .sm, range: Range(0...0), items: [], onChanged: .empty)
     }
 }
