@@ -91,6 +91,10 @@ final class InitialStartDataCell: PreparableTableCell {
             )
         }
 
+        if oldProps.isSelected != newProps.isSelected {
+            newProps.isSelected ? (backView.apply(.cellBorder)) : (backView.layer.borderWidth = 0)
+        }
+
         chevronImageView.isHidden = newProps.isChevronHidden
     }
 
@@ -103,8 +107,9 @@ extension InitialStartDataCell {
     struct Props: Mutable {
         var title: String
         var isChevronHidden: Bool
+        var isSelected: Bool
         var onTap: Command
 
-        static let `default` = Props(title: "", isChevronHidden: true, onTap: .empty)
+        static let `default` = Props(title: "", isChevronHidden: true, isSelected: false, onTap: .empty)
     }
 }

@@ -9,17 +9,24 @@ import UIKit
 extension StyleWrapper where Element == UISegmentedControl {
     static var gender: StyleWrapper {
         return .wrap { segment, theme in
-            segment.selectedSegmentIndex = 0
             segment.backgroundColor = theme.colorPalette.surface
             segment.layer.cornerRadius = Grid.sm.offset / 2
             segment.selectedSegmentTintColor = theme.colorPalette.button
-            segment.insertSegment(withTitle: Gender.male.description, at: Gender.male.rawValue, animated: false)
-            segment.insertSegment(withTitle: Gender.female.description, at: Gender.female.rawValue, animated: false)
-
-            segment.setTitleTextAttributes([
-                NSAttributedString.Key.font: theme.typography.body1,
-                NSAttributedString.Key.foregroundColor: theme.colorPalette.text
-            ], for: .normal)
+            segment.insertSegment(with: UIImage.textEmbededImage(
+                image: Gender.male.icon,
+                string: Gender.male.description,
+                color: DefaultColorPalette.text) ?? UIImage(), at: Gender.male.rawValue, animated: false)
+            segment.insertSegment(with: UIImage.textEmbededImage(
+                image: Gender.female.icon,
+                string: Gender.female.description,
+                color: DefaultColorPalette.text) ?? UIImage(), at: Gender.female.rawValue, animated: false)
+            segment.layoutIfNeeded()
+            segment.subviews.forEach { view in
+                guard let imageView = view as? UIImageView,
+                      !imageView.subviews.isEmpty,
+                      imageView.image != nil else { return }
+                imageView.alpha = 0
+            }
         }
     }
 }

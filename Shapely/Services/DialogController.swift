@@ -54,6 +54,7 @@ class DialogController: UIViewController {
         definesPresentationContext = true
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .crossDissolve
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
 
         backView.addSubview(textField)
         dialogView.addSubviews(titleDialog, backView, saveButton)

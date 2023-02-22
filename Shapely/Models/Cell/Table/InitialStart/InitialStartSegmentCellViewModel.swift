@@ -16,7 +16,7 @@ final class InitialStartSegmentCellViewModel: PreparableViewModel, Hashable {
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(-1)
+        hasher.combine(props.selectedSegmentIndex)
     }
 
     static func == (lhs: InitialStartSegmentCellViewModel, rhs: InitialStartSegmentCellViewModel) -> Bool {

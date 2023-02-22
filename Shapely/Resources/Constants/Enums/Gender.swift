@@ -28,4 +28,20 @@ enum Gender: Int, CustomStringConvertible {
             return R.image.female()
         }
     }
+
+    var baseCoef: Double {
+        self == .male ? 88.362 : 447.593
+    }
+
+    var weightCoef: Double {
+        self == .male ? 13.397 : 9.247
+    }
+
+    var heightCoef: Double {
+        self == .male ? 4.799 : 3.098
+    }
+
+    var ageCoef: Double {
+        self == .male ? 5.677 : 4.330
+    }
 }

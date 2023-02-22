@@ -19,6 +19,10 @@ private class InternalAppAssembly: Assembly {
             AppRouterImp(rootController: resolver.resolve(RootNavigationController.self)!)
         }
         .implements(AppRouter.self)
+
+        container.register(CalorieCalculator.self) { _ in
+            CalorieCalculator()
+        }
     }
 }
 

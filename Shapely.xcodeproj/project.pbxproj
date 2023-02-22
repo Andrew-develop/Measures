@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A04628029A637DF00E70D0B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04627F29A637DF00E70D0B /* UIImage.swift */; };
 		0A0BCFD729A1DF9E0082B2DD /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BCFD629A1DF9E0082B2DD /* UIAlertController.swift */; };
 		0A0CB909299F7E8A0086AA9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB908299F7E8A0086AA9B /* SceneDelegate.swift */; };
 		0A0CB90D299F8D400086AA9B /* UILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0CB90C299F8D400086AA9B /* UILabelStyle.swift */; };
@@ -114,10 +115,12 @@
 		0AE50D0F299D2895001A67D8 /* InitialStartServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE50D09299D2895001A67D8 /* InitialStartServiceProvider.swift */; };
 		0AE50D12299D2DCF001A67D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AE50D11299D2DCF001A67D8 /* Localizable.strings */; };
 		0AF2D06C299B731C0054CC0B /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF2D06B299B731C0054CC0B /* R.generated.swift */; };
+		0AF47FC729A5EC2E00BFD70D /* CalorieCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47FC629A5EC2E00BFD70D /* CalorieCalculator.swift */; };
 		C3F3A51DF5F91971266AA858 /* Pods_Shapely.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0492989F8B5795C3C4DCFE /* Pods_Shapely.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A04627F29A637DF00E70D0B /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		0A0BCFD629A1DF9E0082B2DD /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		0A0CB908299F7E8A0086AA9B /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0A0CB90C299F8D400086AA9B /* UILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelStyle.swift; sourceTree = "<group>"; };
@@ -227,6 +230,7 @@
 		0AE50D09299D2895001A67D8 /* InitialStartServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartServiceProvider.swift; sourceTree = "<group>"; };
 		0AE50D11299D2DCF001A67D8 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		0AF2D06B299B731C0054CC0B /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		0AF47FC629A5EC2E00BFD70D /* CalorieCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieCalculator.swift; sourceTree = "<group>"; };
 		1B0492989F8B5795C3C4DCFE /* Pods_Shapely.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shapely.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68243EA88468E329AB0F5E50 /* Pods-Shapely.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shapely.release.xcconfig"; path = "Target Support Files/Pods-Shapely/Pods-Shapely.release.xcconfig"; sourceTree = "<group>"; };
 		9CEFA55E26493E2C0D066303 /* Pods-Shapely.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shapely.debug.xcconfig"; path = "Target Support Files/Pods-Shapely/Pods-Shapely.debug.xcconfig"; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0CB916299F9AA10086AA9B /* UIView_addSubviews.swift */,
+				0A04627F29A637DF00E70D0B /* UIImage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 			isa = PBXGroup;
 			children = (
 				0AA2806229A4E8C00064BBB6 /* DialogController.swift */,
+				0AF47FC629A5EC2E00BFD70D /* CalorieCalculator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -953,7 +959,9 @@
 				0AA2806329A4E8C00064BBB6 /* DialogController.swift in Sources */,
 				0AE35E1F29A0850700FEFD58 /* InitialStartTitleCellViewModel.swift in Sources */,
 				0A33B42D29A23E3300F2685B /* ActivityLevelRouter.swift in Sources */,
+				0AF47FC729A5EC2E00BFD70D /* CalorieCalculator.swift in Sources */,
 				0A1FE9E02997B61600DAEBC2 /* Stylable.swift in Sources */,
+				0A04628029A637DF00E70D0B /* UIImage.swift in Sources */,
 				0A1FE9CA2997B61600DAEBC2 /* SwinjectExtensions.swift in Sources */,
 				0AE35E1529A0847700FEFD58 /* InitialStartSegmentCell.swift in Sources */,
 				0A0CB91A299FB5970086AA9B /* InitialStartTableAdapter.swift in Sources */,

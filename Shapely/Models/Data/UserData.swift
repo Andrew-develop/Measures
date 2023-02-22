@@ -15,5 +15,5 @@ struct UserData {
     var weight: Double
     var activityLevel: ActivityLevel
     var treckingParameters: Set<TreckingParameter>
-    var caloryIntake: Int
+    var calorieIntake: Int
 }

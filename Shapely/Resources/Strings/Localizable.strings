@@ -73,11 +73,11 @@
 "personalInfo.birthday" = "Дата рождения";
 "personalInfo.target" = "Цель";
 
-// MARK: - CaloryIntake
-"caloryIntake.title" = "Давай рассчитаем твою норму калорий";
-"caloryIntake.height" = "Рост";
-"caloryIntake.weight" = "Вес";
-"caloryIntake.activityLevel" = "Уровень активности";
+// MARK: - CalorieIntake
+"calorieIntake.title" = "Давай рассчитаем твою норму калорий";
+"calorieIntake.height" = "Рост";
+"calorieIntake.weight" = "Вес";
+"calorieIntake.activityLevel" = "Уровень активности";
 
 // MARK: - Parameters
 "parameters.title" = "Какие параметры хочешь отслеживать?";

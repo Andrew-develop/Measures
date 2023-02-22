@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum ActivityLevel: CaseIterable, CustomStringConvertible {
-    case bad
-    case sad
-    case good
-    case high
-    case sportsman
+enum ActivityLevel: Double, CaseIterable, CustomStringConvertible {
+    case bad = 1.2
+    case sad = 1.375
+    case good = 1.55
+    case high = 1.725
+    case sportsman = 1.9
 
     var title: String {
         switch self {

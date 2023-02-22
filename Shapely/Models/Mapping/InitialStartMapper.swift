@@ -52,11 +52,13 @@ enum InitialStartMapper {
 
     static func mapData(title: String,
                         isChevronHidden: Bool,
+                        isSelected: Bool = false,
                         onTap: Command) -> InitialStartDataCellViewModel {
         InitialStartDataCellViewModel(
             props: InitialStartDataCell.Props(
                 title: title,
                 isChevronHidden: isChevronHidden,
+                isSelected: isSelected,
                 onTap: onTap
             )
         )

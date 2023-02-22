@@ -14,6 +14,10 @@ final class InitialStartPictureCell: PreparableTableCell {
         $0.apply(.contentModeScaleToFill)
     }
 
+    private let gradientLayer = CAGradientLayer()
+
+    private let gradientView = UIView()
+
     var props: InitialStartPictureCell.Props = .default {
         didSet { render(oldProps: oldValue, newProps: props) }
     }
@@ -38,10 +42,16 @@ final class InitialStartPictureCell: PreparableTableCell {
         self.props = model.props
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame.size = gradientView.frame.size
+    }
+
     private func prepareView() {
         selectionStyle = .none
         contentView.apply(.backgroundColor)
         contentView.addSubview(pictureImageView)
+        contentView.addSubview(gradientView)
         makeConstraints()
     }
 
@@ -50,11 +60,23 @@ final class InitialStartPictureCell: PreparableTableCell {
             $0.top.equalToSuperview().offset(Grid.sm.offset)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+
+        gradientView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(Grid.ml.offset * 2)
+        }
     }
 
     private func render(oldProps: Props, newProps: Props) {
         if oldProps.picture != newProps.picture, let image = newProps.picture {
             pictureImageView.image = image
+
+            gradientLayer.colors = [
+              UIColor(red: 0.125, green: 0.122, blue: 0.118, alpha: 0).cgColor,
+              UIColor(red: 0.125, green: 0.122, blue: 0.118, alpha: 1).cgColor
+            ]
+            gradientView.layer.addSublayer(gradientLayer)
+            gradientView.layoutIfNeeded()
         }
     }
 }

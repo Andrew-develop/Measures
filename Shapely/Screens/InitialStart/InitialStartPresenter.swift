@@ -23,7 +23,7 @@ final class InitialStartPresenter: PropsProducer {
         weight: 60.0,
         activityLevel: .good,
         treckingParameters: [.chest, .biceps, .waist, .pelvis, .hip],
-        caloryIntake: 2200
+        calorieIntake: 2200
     )
 
     private let propsRelay = BehaviorRelay<Props>(value: .default)
@@ -58,8 +58,8 @@ final class InitialStartPresenter: PropsProducer {
         self?.mapPersonalInfoPack()
     }
 
-    private lazy var caloryIntakeSegue = Command { [weak self] in
-        self?.mapCaloryIntakePack()
+    private lazy var calorieIntakeSegue = Command { [weak self] in
+        self?.mapCalorieIntakePack()
     }
 
     private lazy var parametersSegue = Command { [weak self] in
@@ -113,7 +113,7 @@ private extension InitialStartPresenter {
         }
     }
 
-    func mapPersonalInfoPack() {
+    func mapPersonalInfoPack(birthdaySelected: Bool = false) {
         propsRelay.mutate {
             $0.pack = (
                 .personalInfo,
@@ -141,6 +141,7 @@ private extension InitialStartPresenter {
                             InitialStartMapper.mapData(
                                 title: makeStringDate(from: userData.birthday),
                                 isChevronHidden: true,
+                                isSelected: birthdaySelected,
                                 onTap: Command { [weak self] in
                                     self?.makeCalendarVisible(true)
                                 }
@@ -167,7 +168,7 @@ private extension InitialStartPresenter {
             $0.confirmProps = ConfirmView.Props(
                 state: .regular,
                 title: R.string.localizable.buttonContinue(),
-                onContinue: caloryIntakeSegue,
+                onContinue: calorieIntakeSegue,
                 onBack: .empty
             )
             $0.calendarProps = CalendarView.Props(
@@ -182,18 +183,18 @@ private extension InitialStartPresenter {
         }
     }
 
-    func mapCaloryIntakePack() {
+    func mapCalorieIntakePack() {
         propsRelay.mutate {
             $0.pack = (
-                .caloryIntake,
+                .calorieIntake,
                 InitialStartPack(
                     header: InitialStartMapper.mapHeader(
-                        with: R.string.localizable.caloryIntakeTitle()
+                        with: R.string.localizable.calorieIntakeTitle()
                     ),
                     viewModels: [
                         .title(
                             InitialStartMapper.mapTitle(
-                                with: R.string.localizable.caloryIntakeHeight()
+                                with: R.string.localizable.calorieIntakeHeight()
                             )
                         ),
                         .tape(
@@ -208,7 +209,7 @@ private extension InitialStartPresenter {
                         ),
                         .title(
                             InitialStartMapper.mapTitle(
-                                with: R.string.localizable.caloryIntakeWeight()
+                                with: R.string.localizable.calorieIntakeWeight()
                             )
                         ),
                         .tape(
@@ -223,7 +224,7 @@ private extension InitialStartPresenter {
                         ),
                         .title(
                             InitialStartMapper.mapTitle(
-                                with: R.string.localizable.caloryIntakeActivityLevel()
+                                with: R.string.localizable.calorieIntakeActivityLevel()
                             )
                         ),
                         .data(
@@ -238,6 +239,7 @@ private extension InitialStartPresenter {
                     ]
                 )
             )
+            $0.isNeedCalendar = false
             $0.confirmProps = ConfirmView.Props(
                 state: .full,
                 title: R.string.localizable.buttonContinue(),
@@ -279,12 +281,15 @@ private extension InitialStartPresenter {
                 state: .full,
                 title: R.string.localizable.buttonContinue(),
                 onContinue: finalSegue,
-                onBack: caloryIntakeSegue
+                onBack: calorieIntakeSegue
             )
         }
     }
 
-    func mapFinalPack() {
+    func mapFinalPack(with calculation: Bool = true) {
+        if calculation {
+            getCalorieIntake()
+        }
         propsRelay.mutate {
             $0.pack = (
                 .finish,
@@ -300,7 +305,7 @@ private extension InitialStartPresenter {
                         ),
                         .edit(
                             InitialStartMapper.mapEdit(
-                                text: String(userData.caloryIntake) + " " + Measure.kcal.rawValue,
+                                text: String(userData.calorieIntake) + " " + Measure.kcal.rawValue,
                                 onTap: Command { [weak self] in
                                     self?.showEditDialog()
                                 }
@@ -329,6 +334,7 @@ private extension InitialStartPresenter {
         propsRelay.mutate {
             $0.isNeedCalendar = value
         }
+        mapPersonalInfoPack(birthdaySelected: value)
     }
 
     func setTarget(_ target: UserTarget) {
@@ -340,7 +346,7 @@ private extension InitialStartPresenter {
         guard let value = value,
               let date = Calendar.current.date(from: value) else { return }
         userData.birthday = date
-        mapPersonalInfoPack()
+        mapPersonalInfoPack(birthdaySelected: true)
     }
 
     func setParameter(_ parameter: TreckingParameter) {
@@ -354,17 +360,17 @@ private extension InitialStartPresenter {
 
     func setActivityLevel(_ level: ActivityLevel) {
         userData.activityLevel = level
-        mapCaloryIntakePack()
+        mapCalorieIntakePack()
     }
 
     func setHeight(_ value: Double) {
         userData.height = value
-        mapCaloryIntakePack()
+        mapCalorieIntakePack()
     }
 
     func setWeight(_ value: Double) {
         userData.weight = value
-        mapCaloryIntakePack()
+        mapCalorieIntakePack()
     }
 
     func makeStringDate(from date: Date) -> String {
@@ -377,15 +383,23 @@ private extension InitialStartPresenter {
         let editDialog = with(DialogController()) {
             $0.props = $0.props.mutate {
                 $0.title = R.string.localizable.finishAlertTitle()
-                $0.value = userData.caloryIntake
+                $0.value = userData.calorieIntake
                 $0.measure = .kcal
                 $0.onSave = CommandWith { [weak self] value in
                     guard let value = value else { return }
-                    self?.userData.caloryIntake = value
-                    self?.mapFinalPack()
+                    self?.userData.calorieIntake = value
+                    self?.mapFinalPack(with: false)
                 }
             }
         }
         router.showDialog(editDialog)
+    }
+
+    func getCalorieIntake() {
+        service.calculateCalorieIntake(with: userData)
+            .bind { [weak self] value in
+                self?.userData.calorieIntake = value
+            }
+            .disposed(by: disposeBag)
     }
 }

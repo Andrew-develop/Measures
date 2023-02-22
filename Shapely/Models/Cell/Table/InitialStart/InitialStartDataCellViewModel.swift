@@ -21,6 +21,7 @@ final class InitialStartDataCellViewModel: PreparableViewModel, Hashable {
 
     static func == (lhs: InitialStartDataCellViewModel, rhs: InitialStartDataCellViewModel) -> Bool {
         lhs.props.title == rhs.props.title &&
-        lhs.props.isChevronHidden == rhs.props.isChevronHidden
+        lhs.props.isChevronHidden == rhs.props.isChevronHidden &&
+        lhs.props.isSelected == rhs.props.isSelected
     }
 }

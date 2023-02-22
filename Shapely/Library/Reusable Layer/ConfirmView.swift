@@ -45,11 +45,11 @@ private extension ConfirmView {
     }
 
     func makeConstraints() {
-        setRegularPosition()
         backButton.snp.makeConstraints {
             $0.top.bottom.leading.equalToSuperview()
             $0.width.equalTo(self.snp.height)
         }
+        setRegularPosition()
     }
 
     func render(oldProps: Props, newProps: Props) {
@@ -67,18 +67,26 @@ private extension ConfirmView {
     }
 
     func setRegularPosition() {
-        continueButton.snp.remakeConstraints {
-            $0.edges.equalToSuperview()
-        }
         backButton.isHidden = true
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.continueButton.snp.remakeConstraints {
+                $0.edges.equalToSuperview()
+            }
+            self?.layoutIfNeeded()
+        }
     }
 
     func setFullPosition() {
-        continueButton.snp.remakeConstraints {
-            $0.top.trailing.bottom.equalToSuperview()
-            $0.leading.equalTo(backButton.snp.trailing).offset(Grid.xs.offset)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            self.continueButton.snp.remakeConstraints {
+                $0.top.trailing.bottom.equalToSuperview()
+                $0.leading.equalTo(self.backButton.snp.trailing).offset(Grid.xs.offset)
+            }
+            self.layoutIfNeeded()
+        } completion: { [weak self] _ in
+            self?.backButton.isHidden = false
         }
-        backButton.isHidden = false
     }
 
     @objc func onContinue() {

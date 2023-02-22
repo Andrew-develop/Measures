@@ -65,6 +65,10 @@ private extension InitialStartViewController {
     func render(oldProps: Props, newProps: Props) {
         tableAdapter.item = newProps.pack
 
+        if oldProps.pack?.0 != newProps.pack?.0 {
+            showAnimation()
+        }
+
         if let confirmProps = newProps.confirmProps {
             confirmView.props = confirmProps
         }
@@ -96,23 +100,37 @@ private extension InitialStartViewController {
     }
 
     func hideCalendar() {
-        confirmView.snp.remakeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
-            $0.height.equalTo(56.0)
-        }
-
         calendarView.isHidden = true
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            self.confirmView.snp.remakeConstraints {
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
+                $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
+                $0.height.equalTo(56.0)
+            }
+            self.view.layoutIfNeeded()
+        }
     }
 
     func showCalendar() {
-        confirmView.snp.remakeConstraints {
-            $0.bottom.equalTo(calendarView.snp.top).offset(-Grid.sm.offset)
-            $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
-            $0.height.equalTo(56.0)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            self.confirmView.snp.remakeConstraints {
+                $0.bottom.equalTo(self.calendarView.snp.top).offset(-Grid.sm.offset)
+                $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
+                $0.height.equalTo(56.0)
+            }
+            self.view.layoutIfNeeded()
+        } completion: { [weak self] _ in
+            self?.calendarView.isHidden = false
         }
+    }
 
-        calendarView.isHidden = false
+    func showAnimation() {
+        view.alpha = 0
+        UIView.animate(withDuration: 0.1) { [weak self] in
+            self?.view.alpha = 1.0
+        }
     }
 }
 

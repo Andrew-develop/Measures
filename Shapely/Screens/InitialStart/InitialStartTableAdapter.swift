@@ -13,7 +13,7 @@ final class InitialStartTableAdapter: NSObject {
     enum Section: Int {
         case start
         case personalInfo
-        case caloryIntake
+        case calorieIntake
         case parameters
         case finish
     }

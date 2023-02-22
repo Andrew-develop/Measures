@@ -13,4 +13,11 @@ extension StyleWrapper where Element == UIView {
             button.layer.cornerRadius = value
         }
     }
+
+    static var cellBorder: StyleWrapper {
+        return .wrap { view, theme in
+            view.layer.borderWidth = 1.0
+            view.layer.borderColor = theme.colorPalette.button.cgColor
+        }
+    }
 }
