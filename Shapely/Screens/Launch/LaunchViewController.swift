@@ -10,6 +10,7 @@ import SnapKit
 import RxSwift
 
 final class LaunchViewController: UIViewController, PropsConsumer {
+    var disposeBag = DisposeBag()
     var props: Props = .default {
         didSet { render(oldProps: oldValue, newProps: props) }
     }

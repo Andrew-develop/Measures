@@ -31,25 +31,21 @@ final class ActivityLevelPresenter: PropsProducer {
 private extension ActivityLevelPresenter {
     func setup() {
         propsRelay.mutate {
-            $0.items = mapActivityModels()
+            $0.items = ActivityLevel.allCases.map { item in
+                ActivityLevelInfoCellViewModel(
+                    props: ActivityLevelInfoCell.Props(
+                        title: item.title,
+                        text: item.description,
+                        onTap: Command { [weak self] in
+                            self?.service.levelSelected(with: item)
+                            self?.router.dismiss()
+                        }
+                    )
+                )
+            }
             $0.onClose = Command { [weak self] in
                 self?.router.dismiss()
             }
-        }
-    }
-
-    func mapActivityModels() -> [ActivityLevelInfoCellViewModel] {
-        ActivityLevel.allCases.map { item in
-            ActivityLevelInfoCellViewModel(
-                props: ActivityLevelInfoCell.Props(
-                    title: item.title,
-                    text: item.description,
-                    onTap: Command { [weak self] in
-                        self?.service.levelSelected(with: item)
-                        self?.router.dismiss()
-                    }
-                )
-            )
         }
     }
 }

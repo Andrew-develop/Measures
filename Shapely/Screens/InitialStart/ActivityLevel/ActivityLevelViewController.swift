@@ -14,7 +14,6 @@ final class ActivityLevelViewController: UIViewController, PropsConsumer {
 
     private lazy var tableView = with(UITableView()) {
         $0.apply(.primary)
-        $0.dataSource = tableAdapter
         $0.register(ActivityLevelInfoCell.self, forCellReuseIdentifier: ActivityLevelInfoCell.className)
     }
 
@@ -22,6 +21,7 @@ final class ActivityLevelViewController: UIViewController, PropsConsumer {
         $0.apply(.closeButton)
     }
 
+    var disposeBag = DisposeBag()
     var props: Props = .default {
         didSet { render(oldProps: oldValue, newProps: props) }
     }
@@ -41,6 +41,8 @@ final class ActivityLevelViewController: UIViewController, PropsConsumer {
 
         closeButton.addTarget(self, action: #selector(onClose), for: .touchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
+
+        tableAdapter.makeDiffableDataSource(tableView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +68,6 @@ final class ActivityLevelViewController: UIViewController, PropsConsumer {
 
     private func render(oldProps: Props, newProps: Props) {
         tableAdapter.items = newProps.items
-        tableView.reloadData()
     }
 
     @objc private func onClose() {

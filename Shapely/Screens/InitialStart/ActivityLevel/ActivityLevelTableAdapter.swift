@@ -10,21 +10,31 @@ import UIKit
 final class ActivityLevelTableAdapter: NSObject {
     // MARK: - Properties
 
-    var items: [ActivityLevelInfoCellViewModel] = []
-}
-
-// MARK: - UITableViewDataSource
-
-extension ActivityLevelTableAdapter: UITableViewDataSource {
-    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
+    var items: [ActivityLevelInfoCellViewModel] = [] {
+        didSet {
+            updateSnapshot()
+        }
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: items[indexPath.row].cellId, for: indexPath)
-        if let reusableCell = cell as? PreparableTableCell {
-            reusableCell.prepare(withViewModel: items[indexPath.row])
+    private var diffableDataSource: UITableViewDiffableDataSource<Int, ActivityLevelInfoCellViewModel>?
+
+    func makeDiffableDataSource(_ table: UITableView) {
+        diffableDataSource = UITableViewDiffableDataSource<Int, ActivityLevelInfoCellViewModel>(tableView: table) {
+            tableView, indexPath, itemIdentifier in
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: itemIdentifier.cellId, for: indexPath)
+            if let reusableCell = cell as? PreparableTableCell {
+                reusableCell.prepare(withViewModel: itemIdentifier)
+            }
+            return cell
         }
-        return cell
+        updateSnapshot()
+    }
+
+    private func updateSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, ActivityLevelInfoCellViewModel>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(items, toSection: 0)
+        diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
 }

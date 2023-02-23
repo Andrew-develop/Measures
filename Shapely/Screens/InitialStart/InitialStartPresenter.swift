@@ -38,6 +38,9 @@ final class InitialStartPresenter: PropsProducer {
         setup()
     }
 
+    private let heightTape = InitialStartMapper.mapTape(range: Range(50...250))
+    private let weightTape = InitialStartMapper.mapTape(range: Range(30...300))
+
     private lazy var targetActionSheet = with(UIAlertController(
         title: R.string.localizable.userTargetSelect(), message: nil, preferredStyle: .actionSheet)
     ) { alert in
@@ -87,19 +90,15 @@ private extension InitialStartPresenter {
             $0.pack = (
                 .start,
                 InitialStartPack(
-                    header: InitialStartMapper.mapHeader(
-                        with: R.string.localizable.initialStartTitle()
+                    header: MainHeaderCellViewModel(
+                        props: .init(title: R.string.localizable.initialStartTitle())
                     ),
                     viewModels: [
-                        .text(
-                            InitialStartMapper.mapText(
-                                with: R.string.localizable.initialStartInfo()
-                            )
+                        .text(InitialStartTextCellViewModel(
+                            props: .init(title: R.string.localizable.initialStartInfo()))
                         ),
-                        .picture(
-                            InitialStartMapper.mapPicture(
-                                with: R.image.initialStart()
-                            )
+                        .picture(InitialStartPictureCellViewModel(
+                            props: .init(picture: R.image.initialStart()))
                         )
                     ]
                 )
@@ -118,27 +117,25 @@ private extension InitialStartPresenter {
             $0.pack = (
                 .personalInfo,
                 InitialStartPack(
-                    header: InitialStartMapper.mapHeader(
-                        with: R.string.localizable.personalInfoTitle()
+                    header: MainHeaderCellViewModel(
+                        props: .init(title: R.string.localizable.personalInfoTitle())
                     ),
                     viewModels: [
-                        .segment(
-                            InitialStartMapper.mapSegment(
-                                with: userData.gender,
+                        .segment(InitialStartSegmentCellViewModel(
+                            props: .init(
+                                selectedSegmentIndex: userData.gender.rawValue,
                                 onSegmentChanged: CommandWith<Int> { [weak self] value in
                                     if let gender = Gender(rawValue: value) {
                                         self?.userData.gender = gender
                                     }
                                 }
                             )
+                        )),
+                        .title(InitialStartTitleCellViewModel(
+                            props: .init(title: R.string.localizable.personalInfoBirthday()))
                         ),
-                        .title(
-                            InitialStartMapper.mapTitle(
-                                with: R.string.localizable.personalInfoBirthday()
-                            )
-                        ),
-                        .data(
-                            InitialStartMapper.mapData(
+                        .data(InitialStartDataCellViewModel(
+                            props: .init(
                                 title: makeStringDate(from: userData.birthday),
                                 isChevronHidden: true,
                                 isSelected: birthdaySelected,
@@ -146,22 +143,21 @@ private extension InitialStartPresenter {
                                     self?.makeCalendarVisible(true)
                                 }
                             )
+                        )),
+                        .title(InitialStartTitleCellViewModel(
+                            props: .init(title: R.string.localizable.personalInfoTarget()))
                         ),
-                        .title(
-                            InitialStartMapper.mapTitle(
-                                with: R.string.localizable.personalInfoTarget()
-                            )
-                        ),
-                        .data(
-                            InitialStartMapper.mapData(
+                        .data(InitialStartDataCellViewModel(
+                            props: .init(
                                 title: userData.target.description,
                                 isChevronHidden: false,
+                                isSelected: false,
                                 onTap: Command { [weak self] in
                                     guard let self else { return }
                                     self.router.runActionSheet(with: self.targetActionSheet)
                                 }
                             )
-                        )
+                        ))
                     ]
                 )
             )
@@ -188,54 +184,51 @@ private extension InitialStartPresenter {
             $0.pack = (
                 .calorieIntake,
                 InitialStartPack(
-                    header: InitialStartMapper.mapHeader(
-                        with: R.string.localizable.calorieIntakeTitle()
+                    header: MainHeaderCellViewModel(
+                        props: .init(title: R.string.localizable.calorieIntakeTitle())
                     ),
                     viewModels: [
-                        .title(
-                            InitialStartMapper.mapTitle(
-                                with: R.string.localizable.calorieIntakeHeight()
-                            )
+                        .title(InitialStartTitleCellViewModel(
+                            props: .init(title: R.string.localizable.calorieIntakeHeight()))
                         ),
-                        .tape(
-                            InitialStartMapper.mapTape(
+                        .tape(InitialStartTapeCellViewModel(
+                            props: .init(
                                 startValue: userData.height,
                                 measureType: .sm,
-                                interval: Range(50...250),
+                                range: Range(50...250),
+                                items: heightTape,
                                 onChanged: CommandWith<Double> { [weak self] value in
                                     self?.setHeight(value)
                                 }
                             )
+                        )),
+                        .title(InitialStartTitleCellViewModel(
+                            props: .init(title: R.string.localizable.calorieIntakeWeight()))
                         ),
-                        .title(
-                            InitialStartMapper.mapTitle(
-                                with: R.string.localizable.calorieIntakeWeight()
-                            )
-                        ),
-                        .tape(
-                            InitialStartMapper.mapTape(
+                        .tape(InitialStartTapeCellViewModel(
+                            props: .init(
                                 startValue: userData.weight,
                                 measureType: .kg,
-                                interval: Range(30...300),
+                                range: Range(30...300),
+                                items: weightTape,
                                 onChanged: CommandWith<Double> { [weak self] value in
                                     self?.setWeight(value)
                                 }
                             )
+                        )),
+                        .title(InitialStartTitleCellViewModel(
+                            props: .init(title: R.string.localizable.calorieIntakeActivityLevel()))
                         ),
-                        .title(
-                            InitialStartMapper.mapTitle(
-                                with: R.string.localizable.calorieIntakeActivityLevel()
-                            )
-                        ),
-                        .data(
-                            InitialStartMapper.mapData(
+                        .data(InitialStartDataCellViewModel(
+                            props: .init(
                                 title: userData.activityLevel.title,
                                 isChevronHidden: false,
+                                isSelected: false,
                                 onTap: Command { [weak self] in
                                     self?.router.runActivityLevelScreen()
                                 }
                             )
-                        )
+                        ))
                     ]
                 )
             )
@@ -254,8 +247,8 @@ private extension InitialStartPresenter {
             $0.pack = (
                 .parameters,
                 InitialStartPack(
-                    header: InitialStartMapper.mapHeader(
-                        with: R.string.localizable.parametersTitle()
+                    header: MainHeaderCellViewModel(
+                        props: .init(title: R.string.localizable.parametersTitle())
                     ),
                     viewModels:
                         TreckingParameter.allCases.sorted {
@@ -294,27 +287,23 @@ private extension InitialStartPresenter {
             $0.pack = (
                 .finish,
                 InitialStartPack(
-                    header: InitialStartMapper.mapHeader(
-                        with: R.string.localizable.finishTitle()
+                    header: MainHeaderCellViewModel(
+                        props: .init(title: R.string.localizable.finishTitle())
                     ),
                     viewModels: [
-                        .text(
-                            InitialStartMapper.mapText(
-                                with: R.string.localizable.finishFirstInfo()
-                            )
+                        .text(InitialStartTextCellViewModel(
+                            props: .init(title: R.string.localizable.finishFirstInfo()))
                         ),
-                        .edit(
-                            InitialStartMapper.mapEdit(
+                        .edit(InitialStartEditCellViewModel(
+                            props: .init(
                                 text: String(userData.calorieIntake) + " " + Measure.kcal.rawValue,
                                 onTap: Command { [weak self] in
                                     self?.showEditDialog()
                                 }
-                            )
+                            ))
                         ),
-                        .text(
-                            InitialStartMapper.mapText(
-                                with: R.string.localizable.finishSecondInfo()
-                            )
+                        .text(InitialStartTextCellViewModel(
+                            props: .init(title: R.string.localizable.finishSecondInfo()))
                         )
                     ]
                 )

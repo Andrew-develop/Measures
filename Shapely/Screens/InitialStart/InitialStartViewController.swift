@@ -33,6 +33,7 @@ final class InitialStartViewController: UIViewController, PropsConsumer {
 
     private let calendarView = CalendarView()
 
+    var disposeBag = DisposeBag()
     var props: Props = .default {
         didSet { render(oldProps: oldValue, newProps: props) }
     }
