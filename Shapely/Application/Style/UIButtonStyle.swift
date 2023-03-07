@@ -49,4 +49,26 @@ extension StyleWrapper where Element == UIButton {
             button.setTitleColor(theme.colorPalette.button, for: .normal)
         }
     }
+
+    static var controlButton: StyleWrapper {
+        return .wrap { button, theme in
+            button.backgroundColor = theme.colorPalette.background
+            button.setImage(R.image.control(), for: .normal)
+            button.setImage(R.image.controlActive(), for: .selected)
+        }
+    }
+
+    static var moveButton: StyleWrapper {
+        return .wrap { button, theme in
+            button.backgroundColor = theme.colorPalette.surface
+            button.setImage(R.image.move(), for: .normal)
+        }
+    }
+
+    static var deleteButton: StyleWrapper {
+        return .wrap { button, theme in
+            button.backgroundColor = theme.colorPalette.surface
+            button.setImage(R.image.trash(), for: .normal)
+        }
+    }
 }

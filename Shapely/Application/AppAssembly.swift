@@ -54,7 +54,8 @@ class AppAssembly: NSObject {
         // Modules list
         modules = [
             LaunchModule(),
-            InitialStartModule()
+            InitialStartModule(),
+            HomeModule()
         ]
 
         modules = modules.flatMap(AppAssembly.findSubmodules)

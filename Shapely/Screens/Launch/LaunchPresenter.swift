@@ -30,6 +30,6 @@ final class LaunchPresenter: PropsProducer {
 
 private extension LaunchPresenter {
     func setup() {
-        router.runInitialStartScreen()
+        router.runHomeScreen()
     }
 }

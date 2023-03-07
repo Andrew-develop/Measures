@@ -53,6 +53,23 @@
 		0A1FEA7D2997B61600DAEBC2 /* Preparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FE9A02997B61600DAEBC2 /* Preparable.swift */; };
 		0A1FEA7F2997B61600DAEBC2 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FE9A32997B61600DAEBC2 /* Command.swift */; };
 		0A1FEA802997B61600DAEBC2 /* Weakify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FE9A42997B61600DAEBC2 /* Weakify.swift */; };
+		0A20A0DD29B6F20F00CEA48E /* HomeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0D729B6F20F00CEA48E /* HomeModule.swift */; };
+		0A20A0DE29B6F20F00CEA48E /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0D829B6F20F00CEA48E /* HomePresenter.swift */; };
+		0A20A0DF29B6F20F00CEA48E /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0D929B6F20F00CEA48E /* HomeRouter.swift */; };
+		0A20A0E029B6F20F00CEA48E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0DA29B6F20F00CEA48E /* HomeViewController.swift */; };
+		0A20A0E129B6F20F00CEA48E /* HomeTableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0DB29B6F20F00CEA48E /* HomeTableAdapter.swift */; };
+		0A20A0E229B6F20F00CEA48E /* HomeServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0DC29B6F20F00CEA48E /* HomeServiceProvider.swift */; };
+		0A20A0E429B6F78B00CEA48E /* MainControlHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0E329B6F78B00CEA48E /* MainControlHeaderCell.swift */; };
+		0A20A0E629B6FC2400CEA48E /* MainControlHeaderCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0E529B6FC2400CEA48E /* MainControlHeaderCellViewModel.swift */; };
+		0A20A0EC29B733E900CEA48E /* CaloriesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0EB29B733E900CEA48E /* CaloriesCellViewModel.swift */; };
+		0A20A0EE29B733F900CEA48E /* CaloriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0ED29B733F900CEA48E /* CaloriesCell.swift */; };
+		0A20A0F029B738A600CEA48E /* EditingCellStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0EF29B738A600CEA48E /* EditingCellStack.swift */; };
+		0A20A0F229B73E5200CEA48E /* UIStackViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0F129B73E5200CEA48E /* UIStackViewStyle.swift */; };
+		0A20A0F429B7506500CEA48E /* PhotoProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0F329B7506500CEA48E /* PhotoProgressCell.swift */; };
+		0A20A0F629B7507200CEA48E /* PhotoProgressCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0F529B7507200CEA48E /* PhotoProgressCellViewModel.swift */; };
+		0A20A0F829B7508E00CEA48E /* AddWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0F729B7508E00CEA48E /* AddWidgetCell.swift */; };
+		0A20A0FA29B7509A00CEA48E /* AddWidgetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0F929B7509A00CEA48E /* AddWidgetCellViewModel.swift */; };
+		0A20A0FC29B77E5D00CEA48E /* WidgetInfoPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A20A0FB29B77E5D00CEA48E /* WidgetInfoPack.swift */; };
 		0A33B41F29A233B600F2685B /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B41E29A233B600F2685B /* DateFormat.swift */; };
 		0A33B42129A238F600F2685B /* InitialStartTapeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42029A238F600F2685B /* InitialStartTapeCell.swift */; };
 		0A33B42329A2390900F2685B /* InitialStartTapeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33B42229A2390900F2685B /* InitialStartTapeCellViewModel.swift */; };
@@ -168,6 +185,23 @@
 		0A1FE9A02997B61600DAEBC2 /* Preparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preparable.swift; sourceTree = "<group>"; };
 		0A1FE9A32997B61600DAEBC2 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		0A1FE9A42997B61600DAEBC2 /* Weakify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weakify.swift; sourceTree = "<group>"; };
+		0A20A0D729B6F20F00CEA48E /* HomeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModule.swift; sourceTree = "<group>"; };
+		0A20A0D829B6F20F00CEA48E /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		0A20A0D929B6F20F00CEA48E /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		0A20A0DA29B6F20F00CEA48E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		0A20A0DB29B6F20F00CEA48E /* HomeTableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableAdapter.swift; sourceTree = "<group>"; };
+		0A20A0DC29B6F20F00CEA48E /* HomeServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceProvider.swift; sourceTree = "<group>"; };
+		0A20A0E329B6F78B00CEA48E /* MainControlHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControlHeaderCell.swift; sourceTree = "<group>"; };
+		0A20A0E529B6FC2400CEA48E /* MainControlHeaderCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControlHeaderCellViewModel.swift; sourceTree = "<group>"; };
+		0A20A0EB29B733E900CEA48E /* CaloriesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesCellViewModel.swift; sourceTree = "<group>"; };
+		0A20A0ED29B733F900CEA48E /* CaloriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesCell.swift; sourceTree = "<group>"; };
+		0A20A0EF29B738A600CEA48E /* EditingCellStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingCellStack.swift; sourceTree = "<group>"; };
+		0A20A0F129B73E5200CEA48E /* UIStackViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewStyle.swift; sourceTree = "<group>"; };
+		0A20A0F329B7506500CEA48E /* PhotoProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoProgressCell.swift; sourceTree = "<group>"; };
+		0A20A0F529B7507200CEA48E /* PhotoProgressCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoProgressCellViewModel.swift; sourceTree = "<group>"; };
+		0A20A0F729B7508E00CEA48E /* AddWidgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWidgetCell.swift; sourceTree = "<group>"; };
+		0A20A0F929B7509A00CEA48E /* AddWidgetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWidgetCellViewModel.swift; sourceTree = "<group>"; };
+		0A20A0FB29B77E5D00CEA48E /* WidgetInfoPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetInfoPack.swift; sourceTree = "<group>"; };
 		0A33B41E29A233B600F2685B /* DateFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 		0A33B42029A238F600F2685B /* InitialStartTapeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartTapeCell.swift; sourceTree = "<group>"; };
 		0A33B42229A2390900F2685B /* InitialStartTapeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStartTapeCellViewModel.swift; sourceTree = "<group>"; };
@@ -254,6 +288,7 @@
 				0A0CB91D299FB8820086AA9B /* Cell */,
 				0A0CB911299F91CE0086AA9B /* ConfirmView.swift */,
 				0AE35E3129A0E9E000FEFD58 /* CalendarView.swift */,
+				0A20A0EF29B738A600CEA48E /* EditingCellStack.swift */,
 			);
 			path = "Reusable Layer";
 			sourceTree = "<group>";
@@ -279,9 +314,11 @@
 		0A0CB91E299FB8880086AA9B /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				0A20A0E729B71A6100CEA48E /* Home */,
 				0A33B43529A2401900F2685B /* InitialStart */,
 				0A33B43329A2400100F2685B /* ActivityLevelInfoCell.swift */,
 				0A0CB927299FB97A0086AA9B /* MainHeaderCell.swift */,
+				0A20A0E329B6F78B00CEA48E /* MainControlHeaderCell.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -308,9 +345,11 @@
 		0A0CB923299FB9520086AA9B /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				0A20A0E829B71A6700CEA48E /* Home */,
 				0A33B43129A23FB000F2685B /* InitialStart */,
 				0A0CB925299FB96B0086AA9B /* MainHeaderCellViewModel.swift */,
 				0A33B43629A2404800F2685B /* ActivityLevelInfoCellViewModel.swift */,
+				0A20A0E529B6FC2400CEA48E /* MainControlHeaderCellViewModel.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -320,6 +359,7 @@
 			children = (
 				0A0CB932299FC01D0086AA9B /* InitialStartPack.swift */,
 				0AE35E2929A0A1FE00FEFD58 /* UserData.swift */,
+				0A20A0FB29B77E5D00CEA48E /* WidgetInfoPack.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -506,6 +546,39 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		0A20A0D529B6F1F400CEA48E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0A20A0D729B6F20F00CEA48E /* HomeModule.swift */,
+				0A20A0D829B6F20F00CEA48E /* HomePresenter.swift */,
+				0A20A0D929B6F20F00CEA48E /* HomeRouter.swift */,
+				0A20A0DA29B6F20F00CEA48E /* HomeViewController.swift */,
+				0A20A0DB29B6F20F00CEA48E /* HomeTableAdapter.swift */,
+				0A20A0DC29B6F20F00CEA48E /* HomeServiceProvider.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0A20A0E729B71A6100CEA48E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0A20A0ED29B733F900CEA48E /* CaloriesCell.swift */,
+				0A20A0F329B7506500CEA48E /* PhotoProgressCell.swift */,
+				0A20A0F729B7508E00CEA48E /* AddWidgetCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0A20A0E829B71A6700CEA48E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0A20A0EB29B733E900CEA48E /* CaloriesCellViewModel.swift */,
+				0A20A0F529B7507200CEA48E /* PhotoProgressCellViewModel.swift */,
+				0A20A0F929B7509A00CEA48E /* AddWidgetCellViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		0A33B42429A23E1600F2685B /* ActivityLevel */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,6 +665,7 @@
 			isa = PBXGroup;
 			children = (
 				0AE50CFC299D1F8D001A67D8 /* Launch */,
+				0A20A0D529B6F1F400CEA48E /* Home */,
 				0AE50D03299D2814001A67D8 /* InitialStart */,
 			);
 			path = Screens;
@@ -691,6 +765,7 @@
 				0AE35E2029A08F3C00FEFD58 /* UISegmentedControlStyle.swift */,
 				0AE35E2F29A0D29800FEFD58 /* UICalendarViewStyle.swift */,
 				0AE35E3629A1051A00FEFD58 /* UIToolbarStyle.swift */,
+				0A20A0F129B73E5200CEA48E /* UIStackViewStyle.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -877,6 +952,8 @@
 				0ADE995629991DC7001EE33E /* LaunchPresenter.swift in Sources */,
 				0A0CB92E299FBC1E0086AA9B /* InitialStartPictureCell.swift in Sources */,
 				0AE437C129A35E7400B43A4B /* InitialStartEditCellViewModel.swift in Sources */,
+				0A20A0E029B6F20F00CEA48E /* HomeViewController.swift in Sources */,
+				0A20A0E629B6FC2400CEA48E /* MainControlHeaderCellViewModel.swift in Sources */,
 				0ADE9941299910F3001EE33E /* DefaultTheme.swift in Sources */,
 				0A33B42329A2390900F2685B /* InitialStartTapeCellViewModel.swift in Sources */,
 				0A0CB914299F964F0086AA9B /* UIViewStyle.swift in Sources */,
@@ -886,10 +963,12 @@
 				0A0CB912299F91CE0086AA9B /* ConfirmView.swift in Sources */,
 				0AE437D129A37C7200B43A4B /* UICollectionViewStyle.swift in Sources */,
 				0A0CB926299FB96B0086AA9B /* MainHeaderCellViewModel.swift in Sources */,
+				0A20A0FA29B7509A00CEA48E /* AddWidgetCellViewModel.swift in Sources */,
 				0A1FEA752997B61600DAEBC2 /* PreparableHeaderTableCell.swift in Sources */,
 				0A1FEA762997B61600DAEBC2 /* PreparableTableCell.swift in Sources */,
 				0AE35E2629A0A03800FEFD58 /* Gender.swift in Sources */,
 				0ADE9940299910F3001EE33E /* DefaultColorPalette.swift in Sources */,
+				0A20A0E129B6F20F00CEA48E /* HomeTableAdapter.swift in Sources */,
 				0AE35E1729A0848B00FEFD58 /* InitialStartSegmentCellViewModel.swift in Sources */,
 				0A33B43929A2534400F2685B /* UINavigationBarStyle.swift in Sources */,
 				0A1FE8912997B17900DAEBC2 /* MainCoordinator.swift in Sources */,
@@ -902,6 +981,7 @@
 				0AE437C329A3629000B43A4B /* Measure.swift in Sources */,
 				0AE35E3729A1051A00FEFD58 /* UIToolbarStyle.swift in Sources */,
 				0ADE995829991DC7001EE33E /* LaunchViewController.swift in Sources */,
+				0A20A0DD29B6F20F00CEA48E /* HomeModule.swift in Sources */,
 				0AE50D0D299D2895001A67D8 /* InitialStartViewController.swift in Sources */,
 				0A1FE9E22997B61600DAEBC2 /* Theme.swift in Sources */,
 				0AE50D0F299D2895001A67D8 /* InitialStartServiceProvider.swift in Sources */,
@@ -912,10 +992,13 @@
 				0A1FE9DD2997B61600DAEBC2 /* MainAppDelegate.swift in Sources */,
 				0AE437CD29A3785100B43A4B /* InitialStartTapeUnitCellViewModel.swift in Sources */,
 				0A0CB92A299FBAF50086AA9B /* InitialStartTextCell.swift in Sources */,
+				0A20A0F229B73E5200CEA48E /* UIStackViewStyle.swift in Sources */,
 				0AE50D01299D208C001A67D8 /* ViewBgColor.swift in Sources */,
 				0AA2806529A507620064BBB6 /* UITextFieldStyle.swift in Sources */,
 				0AE35E2C29A0A44400FEFD58 /* ActivityLevel.swift in Sources */,
+				0A20A0F629B7507200CEA48E /* PhotoProgressCellViewModel.swift in Sources */,
 				0A1FEA7C2997B61600DAEBC2 /* PreparableViewModel.swift in Sources */,
+				0A20A0DF29B6F20F00CEA48E /* HomeRouter.swift in Sources */,
 				0AE35E2A29A0A1FE00FEFD58 /* UserData.swift in Sources */,
 				0A0CB917299F9AA10086AA9B /* UIView_addSubviews.swift in Sources */,
 				0AE35E3529A0FFEC00FEFD58 /* UIButtonStyle.swift in Sources */,
@@ -923,14 +1006,20 @@
 				0A33B43029A23E3300F2685B /* ActivityLevelServiceProvider.swift in Sources */,
 				0A0CB930299FBC290086AA9B /* InitialStartPictureCellViewModel.swift in Sources */,
 				0A33B43729A2404800F2685B /* ActivityLevelInfoCellViewModel.swift in Sources */,
+				0A20A0E229B6F20F00CEA48E /* HomeServiceProvider.swift in Sources */,
 				0A0CB909299F7E8A0086AA9B /* SceneDelegate.swift in Sources */,
 				0A0CB90F299F8FC10086AA9B /* ImageViewContentMode.swift in Sources */,
 				0A1FE9C52997B61600DAEBC2 /* Functions.swift in Sources */,
 				0AE437BD29A3440500B43A4B /* InitialStartParameterCellViewModel.swift in Sources */,
 				0A1FEA772997B61600DAEBC2 /* AppModule.swift in Sources */,
+				0A20A0E429B6F78B00CEA48E /* MainControlHeaderCell.swift in Sources */,
 				0A1FEA7A2997B61600DAEBC2 /* AppRouterImp.swift in Sources */,
 				0A0CB92C299FBB0F0086AA9B /* InitialStartTextCellViewModel.swift in Sources */,
+				0A20A0EE29B733F900CEA48E /* CaloriesCell.swift in Sources */,
+				0A20A0F429B7506500CEA48E /* PhotoProgressCell.swift in Sources */,
+				0A20A0DE29B6F20F00CEA48E /* HomePresenter.swift in Sources */,
 				0AE35E2129A08F3C00FEFD58 /* UISegmentedControlStyle.swift in Sources */,
+				0A20A0FC29B77E5D00CEA48E /* WidgetInfoPack.swift in Sources */,
 				0A33B42B29A23E3300F2685B /* ActivityLevelModule.swift in Sources */,
 				0AE437D229A37C7200B43A4B /* UICollectionViewFlowLayoutStyle.swift in Sources */,
 				0A1FE9DE2997B61600DAEBC2 /* Grid.swift in Sources */,
@@ -938,13 +1027,16 @@
 				0A1FE8812997AC5D00DAEBC2 /* Shapely.xcdatamodeld in Sources */,
 				0A33B42129A238F600F2685B /* InitialStartTapeCell.swift in Sources */,
 				0AE50D00299D208C001A67D8 /* LabelFont.swift in Sources */,
+				0A20A0F029B738A600CEA48E /* EditingCellStack.swift in Sources */,
 				0A1FEA7D2997B61600DAEBC2 /* Preparable.swift in Sources */,
 				0AE437CB29A3783600B43A4B /* InitialStartTapeUnitCell.swift in Sources */,
 				0ADE9942299910F3001EE33E /* DefaultTypography.swift in Sources */,
+				0A20A0EC29B733E900CEA48E /* CaloriesCellViewModel.swift in Sources */,
 				0A1FEA782997B61600DAEBC2 /* RootNavigationController.swift in Sources */,
 				0A1FEA792997B61600DAEBC2 /* AppRouter.swift in Sources */,
 				0AE35E3B29A10E7200FEFD58 /* InitialStartMapper.swift in Sources */,
 				0AE35E3229A0E9E000FEFD58 /* CalendarView.swift in Sources */,
+				0A20A0F829B7508E00CEA48E /* AddWidgetCell.swift in Sources */,
 				0A1FEA7B2997B61600DAEBC2 /* AppRouter+Extension.swift in Sources */,
 				0AE437BB29A343F500B43A4B /* InitialStartParameterCell.swift in Sources */,
 				0A33B43429A2400100F2685B /* ActivityLevelInfoCell.swift in Sources */,
