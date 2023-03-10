@@ -311,7 +311,9 @@ private extension InitialStartPresenter {
             $0.confirmProps = ConfirmView.Props(
                 state: .full,
                 title: R.string.localizable.buttonReady(),
-                onContinue: .empty,
+                onContinue: Command { [weak self] in
+                    self?.finishSetup()
+                },
                 onBack: parametersSegue
             )
         }
@@ -390,5 +392,22 @@ private extension InitialStartPresenter {
                 self?.userData.calorieIntake = value
             }
             .disposed(by: disposeBag)
+    }
+
+    func finishSetup() {
+        service.addUser { [weak self] newUser in
+            guard let self else { return }
+            newUser.height = self.userData.height
+            newUser.weight = self.userData.weight
+            newUser.gender = self.userData.gender.description
+            newUser.target = self.userData.target.description
+            newUser.activityLevel = self.userData.activityLevel.title
+            newUser.birthday = self.userData.birthday
+            newUser.calorieIntake = Int64(self.userData.calorieIntake)
+            newUser.userParameter = []
+        }.bind { [weak self] in
+            self?.router.runHomeScreen()
+        }
+        .disposed(by: disposeBag)
     }
 }

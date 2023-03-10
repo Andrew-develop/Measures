@@ -17,6 +17,7 @@ final class HomeViewController: UIViewController, PropsConsumer {
         $0.delegate = tableAdapter
         $0.register(CaloriesCell.self, forCellReuseIdentifier: CaloriesCell.className)
         $0.register(AddWidgetCell.self, forCellReuseIdentifier: AddWidgetCell.className)
+        $0.register(PhotoProgressCell.self, forCellReuseIdentifier: PhotoProgressCell.className)
         $0.register(
             MainControlHeaderCell.self, forHeaderFooterViewReuseIdentifier: MainControlHeaderCell.className
         )

@@ -41,6 +41,13 @@ final class HomePresenter: PropsProducer {
 
 private extension HomePresenter {
     func setup() {
+        service.rx_getUserData
+            .bind { data in
+                guard let data = data, !data.isEmpty else { return }
+                print(data[0].birthday)
+            }
+            .disposed(by: disposeBag)
+
         propsRelay.mutate {
             $0.pack = (
                 .base,
@@ -52,7 +59,8 @@ private extension HomePresenter {
                         .calories(CaloriesCellViewModel(
                             props: .init(state: .base, calories: (0, userData.calorieIntake), nutritions: (0, 0, 0)))
                         ),
-                        .addWidget(AddWidgetCellViewModel(props: .init(onTap: .empty)))
+                        .addWidget(AddWidgetCellViewModel(props: .init(onTap: .empty))),
+                        .photoProgress(PhotoProgressCellViewModel(props: .init(onTap: .empty)))
                     ]
                 )
             )

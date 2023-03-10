@@ -64,6 +64,12 @@
 "treckingParameter.shin.info" = "Самая широкая часть";
 "treckingParameter.ankle.info" = "Самая широкая часть";
 
+// MARK: - Nutritions
+"nutritions.title" = "БЖУ";
+"nutritions.proteins" = "Белки";
+"nutritions.fat" = "Жиры";
+"nutritions.carbon" = "Углеводы";
+
 // MARK: - InitialStart
 "initialStart.title" = "Пришло время меняться";
 "initialStart.info" = "А Shapely поможет не терять духа и отслеживать свой прогресс на пути к изменениям";
@@ -90,5 +96,6 @@
 
 // MARK: - Home
 "home.title" = "Shapely";
+"home.addWidget" = "Добавить виджет";
 
 

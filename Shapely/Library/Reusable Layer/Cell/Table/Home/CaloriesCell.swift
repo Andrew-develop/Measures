@@ -23,11 +23,12 @@ final class CaloriesCell: PreparableTableCell {
     }
 
     private let nutritionLabel = with(UILabel()) {
-        $0.apply(.secondaryText)
+        $0.apply(.cellTitle)
+        $0.text = R.string.localizable.nutritionsTitle()
     }
 
-    private let nutritionButton = with(UILabel()) {
-        $0.apply(.secondaryText)
+    private let nutritionButton = with(UIButton()) {
+        $0.setImage(R.image.question(), for: .normal)
     }
 
     private let nutritionStackView = with(UIStackView()) {
@@ -74,7 +75,7 @@ final class CaloriesCell: PreparableTableCell {
         selectionStyle = .none
         contentView.apply(.backgroundColor)
 
-        backView.addSubviews(calorieLabel, calorieStackView, nutritionLabel,
+        backView.addSubviews(calorieLabel, calorieStackView, nutritionLabel, nutritionButton,
                              nutritionStackView, nutritionInfoStackView)
         contentView.addSubviews(backView, editingStackView)
 
@@ -82,32 +83,68 @@ final class CaloriesCell: PreparableTableCell {
     }
 
     private func makeConstraints() {
+        backView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(Grid.s.offset)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+
         calorieLabel.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().inset(Grid.s.offset)
         }
 
         calorieStackView.snp.makeConstraints {
             $0.top.equalTo(calorieLabel.snp.bottom).offset(Grid.xs.offset)
+            $0.height.equalTo(Grid.xs.offset)
             $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
         }
 
         nutritionLabel.snp.makeConstraints {
-            $0.top.equalTo(calorieStackView.snp.bottom).offset(-Grid.s.offset)
-            $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
+            $0.top.equalTo(calorieStackView.snp.bottom).offset(Grid.s.offset)
+            $0.leading.equalToSuperview().inset(Grid.s.offset)
+        }
+
+        nutritionButton.snp.makeConstraints {
+            $0.centerY.equalTo(nutritionLabel.snp.centerY)
+            $0.leading.equalTo(nutritionLabel.snp.trailing).offset(Grid.xs.offset / 2)
         }
 
         nutritionStackView.snp.makeConstraints {
             $0.top.equalTo(nutritionLabel.snp.bottom).offset(Grid.xs.offset)
+            $0.height.equalTo(Grid.xs.offset)
             $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
         }
 
         nutritionStackView.snp.makeConstraints {
             $0.top.equalTo(nutritionStackView.snp.bottom).offset(Grid.xs.offset)
+            $0.height.equalTo(14.0)
             $0.leading.trailing.bottom.equalToSuperview().inset(Grid.s.offset)
         }
     }
 
-    private func render(oldProps: Props, newProps: Props) {}
+    private func render(oldProps: Props, newProps: Props) {
+        if oldProps.calories != newProps.calories {
+            showCurrentValue(newProps.calories.value, from: newProps.calories.base)
+        }
+    }
+
+    private func showCurrentValue(_ value: Int, from base: Int) {
+        let valueText = NSMutableAttributedString(
+            string: String(value) + " " + Measure.kcal.rawValue,
+            attributes: [
+                NSAttributedString.Key.font: DefaultTypography.header2,
+                NSAttributedString.Key.foregroundColor: DefaultColorPalette.text
+            ])
+        let space = NSAttributedString(string: " ")
+        let measureText = NSAttributedString(
+            string: "из \(base)",
+            attributes: [
+                NSAttributedString.Key.font: DefaultTypography.body2,
+                NSAttributedString.Key.foregroundColor: DefaultColorPalette.textSecondary
+            ])
+        valueText.append(space)
+        valueText.append(measureText)
+        calorieLabel.attributedText = valueText
+    }
 }
 
 // swiftlint:disable large_tuple

@@ -12,17 +12,19 @@ final class AddWidgetCell: PreparableTableCell {
 
     private let titleLabel = with(UILabel()) {
         $0.apply(.cellTitle)
+        $0.text = R.string.localizable.homeAddWidget()
     }
 
     private let addImageView = with(UIImageView()) {
         $0.apply(.contentModeScaleToFill)
+        $0.image = R.image.addWidget()
     }
 
     private let stackView = with(UIStackView()) {
-        $0.apply(.calorie)
+        $0.apply(.addWidget)
     }
 
-    private let backView = with(UIView()) {
+    private let backView = with(DashedBorderView()) {
         $0.apply([.backgroundColor, .cornerRadius(Grid.s.offset)])
     }
 
@@ -67,22 +69,14 @@ final class AddWidgetCell: PreparableTableCell {
 
     private func makeConstraints() {
         backView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalToSuperview().offset(Grid.sm.offset)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
 
         stackView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.top.bottom.equalToSuperview().inset(Grid.m.offset)
         }
-    }
-
-    private func makeDashedBorder() {
-        var border = CAShapeLayer()
-        border.strokeColor = UIColor.black.cgColor
-        border.lineDashPattern = [2, 2]
-        border.frame = backView.bounds
-        border.fillColor = nil
-        border.path = UIBezierPath(rect: backView.bounds).cgPath
-        backView.layer.addSublayer(border)
     }
 
     private func render(oldProps: Props, newProps: Props) {}

@@ -34,6 +34,8 @@ final class HomeTableAdapter: NSObject {
                 model = caloriesModel
             case let .addWidget(addModel):
                 model = addModel
+            case let .photoProgress(photoModel):
+                model = photoModel
             }
 
             let cell = tableView.dequeueReusableCell(withIdentifier: model.cellId, for: indexPath)

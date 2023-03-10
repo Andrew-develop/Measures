@@ -23,6 +23,21 @@ private class InternalAppAssembly: Assembly {
         container.register(CalorieCalculator.self) { _ in
             CalorieCalculator()
         }
+
+        container.register(StorageService<User>.self) { _ in
+            StorageService<User>()
+        }
+        .inObjectScope(.container)
+
+        container.register(StorageService<Photo>.self) { _ in
+            StorageService<Photo>()
+        }
+        .inObjectScope(.container)
+
+        container.register(StorageService<Measurement>.self) { _ in
+            StorageService<Measurement>()
+        }
+        .inObjectScope(.container)
     }
 }
 

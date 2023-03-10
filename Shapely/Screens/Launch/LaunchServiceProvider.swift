@@ -7,13 +7,20 @@
 
 import RxSwift
 
-protocol LaunchServiceProvider: AnyObject {}
-
-final class LaunchServiceProviderImpl {
-//    private let service: <#Service#>
-
-//    init() {
-//    }
+protocol LaunchServiceProvider: AnyObject {
+    var rx_getUserData: Observable<[User]?> { get }
 }
 
-extension LaunchServiceProviderImpl: LaunchServiceProvider {}
+final class LaunchServiceProviderImpl {
+    private let userStorage: StorageService<User>
+
+    init(userStorage: StorageService<User>) {
+        self.userStorage = userStorage
+    }
+}
+
+extension LaunchServiceProviderImpl: LaunchServiceProvider {
+    var rx_getUserData: Observable<[User]?> {
+        userStorage.fetch().asObservable()
+    }
+}

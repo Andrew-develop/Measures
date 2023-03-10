@@ -41,4 +41,12 @@ extension StyleWrapper where Element == UIStackView {
             stack.distribution = .fill
         }
     }
+
+    static var addWidget: StyleWrapper {
+        return .wrap { stack, _ in
+            stack.axis = .horizontal
+            stack.distribution = .fill
+            stack.spacing = Grid.xs.offset
+        }
+    }
 }

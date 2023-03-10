@@ -133,6 +133,20 @@
 		0AE50D12299D2DCF001A67D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AE50D11299D2DCF001A67D8 /* Localizable.strings */; };
 		0AF2D06C299B731C0054CC0B /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF2D06B299B731C0054CC0B /* R.generated.swift */; };
 		0AF47FC729A5EC2E00BFD70D /* CalorieCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF47FC629A5EC2E00BFD70D /* CalorieCalculator.swift */; };
+		0AFAE4D229BAF94A001D92DF /* DashedBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE4D129BAF94A001D92DF /* DashedBorderView.swift */; };
+		0AFAE4D529BB47A7001D92DF /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE4D429BB47A7001D92DF /* StorageService.swift */; };
+		0AFAE51229BB4D84001D92DF /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50629BB4D83001D92DF /* Note+CoreDataProperties.swift */; };
+		0AFAE51329BB4D84001D92DF /* Parameter+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50729BB4D83001D92DF /* Parameter+CoreDataClass.swift */; };
+		0AFAE51429BB4D84001D92DF /* Parameter+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50829BB4D84001D92DF /* Parameter+CoreDataProperties.swift */; };
+		0AFAE51529BB4D84001D92DF /* Measurement+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50929BB4D84001D92DF /* Measurement+CoreDataProperties.swift */; };
+		0AFAE51629BB4D84001D92DF /* ParameterType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50A29BB4D84001D92DF /* ParameterType+CoreDataProperties.swift */; };
+		0AFAE51729BB4D84001D92DF /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50B29BB4D84001D92DF /* User+CoreDataClass.swift */; };
+		0AFAE51829BB4D84001D92DF /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50C29BB4D84001D92DF /* Photo+CoreDataClass.swift */; };
+		0AFAE51929BB4D84001D92DF /* Measurement+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50D29BB4D84001D92DF /* Measurement+CoreDataClass.swift */; };
+		0AFAE51A29BB4D84001D92DF /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50E29BB4D84001D92DF /* Photo+CoreDataProperties.swift */; };
+		0AFAE51B29BB4D84001D92DF /* ParameterType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE50F29BB4D84001D92DF /* ParameterType+CoreDataClass.swift */; };
+		0AFAE51C29BB4D84001D92DF /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE51029BB4D84001D92DF /* User+CoreDataProperties.swift */; };
+		0AFAE51D29BB4D84001D92DF /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAE51129BB4D84001D92DF /* Note+CoreDataClass.swift */; };
 		C3F3A51DF5F91971266AA858 /* Pods_Shapely.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0492989F8B5795C3C4DCFE /* Pods_Shapely.framework */; };
 /* End PBXBuildFile section */
 
@@ -265,6 +279,20 @@
 		0AE50D11299D2DCF001A67D8 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		0AF2D06B299B731C0054CC0B /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		0AF47FC629A5EC2E00BFD70D /* CalorieCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieCalculator.swift; sourceTree = "<group>"; };
+		0AFAE4D129BAF94A001D92DF /* DashedBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedBorderView.swift; sourceTree = "<group>"; };
+		0AFAE4D429BB47A7001D92DF /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		0AFAE50629BB4D83001D92DF /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0AFAE50729BB4D83001D92DF /* Parameter+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Parameter+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0AFAE50829BB4D84001D92DF /* Parameter+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Parameter+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0AFAE50929BB4D84001D92DF /* Measurement+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Measurement+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0AFAE50A29BB4D84001D92DF /* ParameterType+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ParameterType+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0AFAE50B29BB4D84001D92DF /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0AFAE50C29BB4D84001D92DF /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0AFAE50D29BB4D84001D92DF /* Measurement+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Measurement+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0AFAE50E29BB4D84001D92DF /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0AFAE50F29BB4D84001D92DF /* ParameterType+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ParameterType+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0AFAE51029BB4D84001D92DF /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0AFAE51129BB4D84001D92DF /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1B0492989F8B5795C3C4DCFE /* Pods_Shapely.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shapely.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68243EA88468E329AB0F5E50 /* Pods-Shapely.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shapely.release.xcconfig"; path = "Target Support Files/Pods-Shapely/Pods-Shapely.release.xcconfig"; sourceTree = "<group>"; };
 		9CEFA55E26493E2C0D066303 /* Pods-Shapely.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shapely.debug.xcconfig"; path = "Target Support Files/Pods-Shapely/Pods-Shapely.debug.xcconfig"; sourceTree = "<group>"; };
@@ -289,6 +317,7 @@
 				0A0CB911299F91CE0086AA9B /* ConfirmView.swift */,
 				0AE35E3129A0E9E000FEFD58 /* CalendarView.swift */,
 				0A20A0EF29B738A600CEA48E /* EditingCellStack.swift */,
+				0AFAE4D129BAF94A001D92DF /* DashedBorderView.swift */,
 			);
 			path = "Reusable Layer";
 			sourceTree = "<group>";
@@ -392,7 +421,7 @@
 				0ADE994329991A1D001EE33E /* Screens */,
 				0A0CB91F299FB8C00086AA9B /* Models */,
 				0A1FE8952997B61600DAEBC2 /* Library */,
-				0A1FE87F2997AC5D00DAEBC2 /* Shapely.xcdatamodeld */,
+				0AFAE4D329BB4676001D92DF /* CoreData */,
 			);
 			path = Shapely;
 			sourceTree = "<group>";
@@ -627,6 +656,7 @@
 			children = (
 				0AA2806229A4E8C00064BBB6 /* DialogController.swift */,
 				0AF47FC629A5EC2E00BFD70D /* CalorieCalculator.swift */,
+				0AFAE4D429BB47A7001D92DF /* StorageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -768,6 +798,26 @@
 				0A20A0F129B73E5200CEA48E /* UIStackViewStyle.swift */,
 			);
 			path = Style;
+			sourceTree = "<group>";
+		};
+		0AFAE4D329BB4676001D92DF /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				0AFAE50B29BB4D84001D92DF /* User+CoreDataClass.swift */,
+				0AFAE51029BB4D84001D92DF /* User+CoreDataProperties.swift */,
+				0AFAE50729BB4D83001D92DF /* Parameter+CoreDataClass.swift */,
+				0AFAE50829BB4D84001D92DF /* Parameter+CoreDataProperties.swift */,
+				0AFAE50F29BB4D84001D92DF /* ParameterType+CoreDataClass.swift */,
+				0AFAE50A29BB4D84001D92DF /* ParameterType+CoreDataProperties.swift */,
+				0AFAE50D29BB4D84001D92DF /* Measurement+CoreDataClass.swift */,
+				0AFAE50929BB4D84001D92DF /* Measurement+CoreDataProperties.swift */,
+				0AFAE50C29BB4D84001D92DF /* Photo+CoreDataClass.swift */,
+				0AFAE50E29BB4D84001D92DF /* Photo+CoreDataProperties.swift */,
+				0AFAE51129BB4D84001D92DF /* Note+CoreDataClass.swift */,
+				0AFAE50629BB4D83001D92DF /* Note+CoreDataProperties.swift */,
+				0A1FE87F2997AC5D00DAEBC2 /* Shapely.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		DE647B441E0E389B372550A6 /* Frameworks */ = {
@@ -950,8 +1000,10 @@
 				0A1FE8772997AC5D00DAEBC2 /* AppDelegate.swift in Sources */,
 				0AE35E1929A084CA00FEFD58 /* InitialStartTitleCell.swift in Sources */,
 				0ADE995629991DC7001EE33E /* LaunchPresenter.swift in Sources */,
+				0AFAE4D229BAF94A001D92DF /* DashedBorderView.swift in Sources */,
 				0A0CB92E299FBC1E0086AA9B /* InitialStartPictureCell.swift in Sources */,
 				0AE437C129A35E7400B43A4B /* InitialStartEditCellViewModel.swift in Sources */,
+				0AFAE51A29BB4D84001D92DF /* Photo+CoreDataProperties.swift in Sources */,
 				0A20A0E029B6F20F00CEA48E /* HomeViewController.swift in Sources */,
 				0A20A0E629B6FC2400CEA48E /* MainControlHeaderCellViewModel.swift in Sources */,
 				0ADE9941299910F3001EE33E /* DefaultTheme.swift in Sources */,
@@ -968,6 +1020,7 @@
 				0A1FEA762997B61600DAEBC2 /* PreparableTableCell.swift in Sources */,
 				0AE35E2629A0A03800FEFD58 /* Gender.swift in Sources */,
 				0ADE9940299910F3001EE33E /* DefaultColorPalette.swift in Sources */,
+				0AFAE51229BB4D84001D92DF /* Note+CoreDataProperties.swift in Sources */,
 				0A20A0E129B6F20F00CEA48E /* HomeTableAdapter.swift in Sources */,
 				0AE35E1729A0848B00FEFD58 /* InitialStartSegmentCellViewModel.swift in Sources */,
 				0A33B43929A2534400F2685B /* UINavigationBarStyle.swift in Sources */,
@@ -976,10 +1029,12 @@
 				0A1FE8942997B1D600DAEBC2 /* AppAssembly.swift in Sources */,
 				0A0CB933299FC01D0086AA9B /* InitialStartPack.swift in Sources */,
 				0A1FEA802997B61600DAEBC2 /* Weakify.swift in Sources */,
+				0AFAE51329BB4D84001D92DF /* Parameter+CoreDataClass.swift in Sources */,
 				0A33B41F29A233B600F2685B /* DateFormat.swift in Sources */,
 				0AF2D06C299B731C0054CC0B /* R.generated.swift in Sources */,
 				0AE437C329A3629000B43A4B /* Measure.swift in Sources */,
 				0AE35E3729A1051A00FEFD58 /* UIToolbarStyle.swift in Sources */,
+				0AFAE51929BB4D84001D92DF /* Measurement+CoreDataClass.swift in Sources */,
 				0ADE995829991DC7001EE33E /* LaunchViewController.swift in Sources */,
 				0A20A0DD29B6F20F00CEA48E /* HomeModule.swift in Sources */,
 				0AE50D0D299D2895001A67D8 /* InitialStartViewController.swift in Sources */,
@@ -990,6 +1045,7 @@
 				0A0CB928299FB97A0086AA9B /* MainHeaderCell.swift in Sources */,
 				0A0BCFD729A1DF9E0082B2DD /* UIAlertController.swift in Sources */,
 				0A1FE9DD2997B61600DAEBC2 /* MainAppDelegate.swift in Sources */,
+				0AFAE51429BB4D84001D92DF /* Parameter+CoreDataProperties.swift in Sources */,
 				0AE437CD29A3785100B43A4B /* InitialStartTapeUnitCellViewModel.swift in Sources */,
 				0A0CB92A299FBAF50086AA9B /* InitialStartTextCell.swift in Sources */,
 				0A20A0F229B73E5200CEA48E /* UIStackViewStyle.swift in Sources */,
@@ -998,15 +1054,19 @@
 				0AE35E2C29A0A44400FEFD58 /* ActivityLevel.swift in Sources */,
 				0A20A0F629B7507200CEA48E /* PhotoProgressCellViewModel.swift in Sources */,
 				0A1FEA7C2997B61600DAEBC2 /* PreparableViewModel.swift in Sources */,
+				0AFAE51D29BB4D84001D92DF /* Note+CoreDataClass.swift in Sources */,
 				0A20A0DF29B6F20F00CEA48E /* HomeRouter.swift in Sources */,
 				0AE35E2A29A0A1FE00FEFD58 /* UserData.swift in Sources */,
 				0A0CB917299F9AA10086AA9B /* UIView_addSubviews.swift in Sources */,
 				0AE35E3529A0FFEC00FEFD58 /* UIButtonStyle.swift in Sources */,
+				0AFAE51B29BB4D84001D92DF /* ParameterType+CoreDataClass.swift in Sources */,
 				0A33B42C29A23E3300F2685B /* ActivityLevelPresenter.swift in Sources */,
 				0A33B43029A23E3300F2685B /* ActivityLevelServiceProvider.swift in Sources */,
 				0A0CB930299FBC290086AA9B /* InitialStartPictureCellViewModel.swift in Sources */,
 				0A33B43729A2404800F2685B /* ActivityLevelInfoCellViewModel.swift in Sources */,
+				0AFAE51829BB4D84001D92DF /* Photo+CoreDataClass.swift in Sources */,
 				0A20A0E229B6F20F00CEA48E /* HomeServiceProvider.swift in Sources */,
+				0AFAE51629BB4D84001D92DF /* ParameterType+CoreDataProperties.swift in Sources */,
 				0A0CB909299F7E8A0086AA9B /* SceneDelegate.swift in Sources */,
 				0A0CB90F299F8FC10086AA9B /* ImageViewContentMode.swift in Sources */,
 				0A1FE9C52997B61600DAEBC2 /* Functions.swift in Sources */,
@@ -1031,6 +1091,7 @@
 				0A1FEA7D2997B61600DAEBC2 /* Preparable.swift in Sources */,
 				0AE437CB29A3783600B43A4B /* InitialStartTapeUnitCell.swift in Sources */,
 				0ADE9942299910F3001EE33E /* DefaultTypography.swift in Sources */,
+				0AFAE4D529BB47A7001D92DF /* StorageService.swift in Sources */,
 				0A20A0EC29B733E900CEA48E /* CaloriesCellViewModel.swift in Sources */,
 				0A1FEA782997B61600DAEBC2 /* RootNavigationController.swift in Sources */,
 				0A1FEA792997B61600DAEBC2 /* AppRouter.swift in Sources */,
@@ -1045,6 +1106,7 @@
 				0A1FEA732997B61600DAEBC2 /* PreparableHeaderCollectionCell.swift in Sources */,
 				0AE50D0C299D2895001A67D8 /* InitialStartRouter.swift in Sources */,
 				0A1FEA7F2997B61600DAEBC2 /* Command.swift in Sources */,
+				0AFAE51729BB4D84001D92DF /* User+CoreDataClass.swift in Sources */,
 				0A1FE9C22997B61600DAEBC2 /* NSObject+ClassName.swift in Sources */,
 				0AE50D0A299D2895001A67D8 /* InitialStartModule.swift in Sources */,
 				0AE35E1D29A084F600FEFD58 /* InitialStartDataCellViewModel.swift in Sources */,
@@ -1053,11 +1115,13 @@
 				0A33B42D29A23E3300F2685B /* ActivityLevelRouter.swift in Sources */,
 				0AF47FC729A5EC2E00BFD70D /* CalorieCalculator.swift in Sources */,
 				0A1FE9E02997B61600DAEBC2 /* Stylable.swift in Sources */,
+				0AFAE51C29BB4D84001D92DF /* User+CoreDataProperties.swift in Sources */,
 				0A04628029A637DF00E70D0B /* UIImage.swift in Sources */,
 				0A1FE9CA2997B61600DAEBC2 /* SwinjectExtensions.swift in Sources */,
 				0AE35E1529A0847700FEFD58 /* InitialStartSegmentCell.swift in Sources */,
 				0A0CB91A299FB5970086AA9B /* InitialStartTableAdapter.swift in Sources */,
 				0A0CB91C299FB7DD0086AA9B /* UITableViewStyle.swift in Sources */,
+				0AFAE51529BB4D84001D92DF /* Measurement+CoreDataProperties.swift in Sources */,
 				0AE35E2E29A0A56F00FEFD58 /* TreckingParameter.swift in Sources */,
 				0AE35E1B29A084E200FEFD58 /* InitialStartDataCell.swift in Sources */,
 				0A1FE9E12997B61600DAEBC2 /* ColorPalette.swift in Sources */,

@@ -7,13 +7,25 @@
 
 import RxSwift
 
-protocol HomeServiceProvider: AnyObject {}
+protocol HomeServiceProvider: AnyObject {
+    var rx_getUserData: Observable<[User]?> { get }
+    func addUser(_ body: @escaping (inout User) -> Void) -> Observable<Void>
+}
 
 final class HomeServiceProviderImpl {
-//    private let service: <#Service#>
+    private let userStorage: StorageService<User>
 
-    init() {
+    init(userStorage: StorageService<User>) {
+        self.userStorage = userStorage
     }
 }
 
-extension HomeServiceProviderImpl: HomeServiceProvider {}
+extension HomeServiceProviderImpl: HomeServiceProvider {
+    var rx_getUserData: Observable<[User]?> {
+        userStorage.fetch().asObservable()
+    }
+
+    func addUser(_ body: @escaping (inout User) -> Void) -> Observable<Void> {
+        userStorage.add(body).asObservable()
+    }
+}

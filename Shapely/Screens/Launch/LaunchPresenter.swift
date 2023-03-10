@@ -30,6 +30,14 @@ final class LaunchPresenter: PropsProducer {
 
 private extension LaunchPresenter {
     func setup() {
-        router.runHomeScreen()
+        service.rx_getUserData
+            .bind { [weak self] data in
+                guard let data, !data.isEmpty else {
+                    self?.router.runInitialStartScreen()
+                    return
+                }
+                self?.router.runHomeScreen()
+            }
+            .disposed(by: disposeBag)
     }
 }

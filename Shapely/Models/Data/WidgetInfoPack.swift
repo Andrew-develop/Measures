@@ -15,4 +15,5 @@ struct WidgetInfoPack: Hashable {
 enum WidgetInfoPackItem: Hashable {
     case calories(CaloriesCellViewModel)
     case addWidget(AddWidgetCellViewModel)
+    case photoProgress(PhotoProgressCellViewModel)
 }
