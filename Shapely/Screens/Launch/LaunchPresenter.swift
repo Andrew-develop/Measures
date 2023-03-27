@@ -36,7 +36,7 @@ private extension LaunchPresenter {
                     self?.router.runInitialStartScreen()
                     return
                 }
-                self?.router.runHomeScreen()
+                self?.router.runMainScreen()
             }
             .disposed(by: disposeBag)
     }

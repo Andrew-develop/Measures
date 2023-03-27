@@ -49,4 +49,12 @@ extension StyleWrapper where Element == UIStackView {
             stack.spacing = Grid.xs.offset
         }
     }
+
+    static var photoProgress: StyleWrapper {
+        return .wrap { stack, _ in
+            stack.axis = .horizontal
+            stack.distribution = .fillEqually
+            stack.spacing = Grid.xs.offset
+        }
+    }
 }

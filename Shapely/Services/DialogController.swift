@@ -108,13 +108,13 @@ class DialogController: UIViewController {
 
     @objc private func saveAction() {
         dismiss(animated: true) { [weak self] in
-            self?.props.onSave.execute(with: Int(self?.textField.text ?? ""))
+            self?.props.onSave.execute(with: Double(self?.textField.text ?? ""))
         }
     }
 
-    private func showCurrentValue(_ value: Int, measure: Measure) {
+    private func showCurrentValue(_ value: Double, measure: Measure) {
         let valueText = NSMutableAttributedString(
-            string: String(value),
+            string: measure == .kcal || measure == .gramm ? String(Int(value)) : String(value),
             attributes: [
                 NSAttributedString.Key.font: DefaultTypography.body2,
                 NSAttributedString.Key.foregroundColor: DefaultColorPalette.text
@@ -137,9 +137,9 @@ class DialogController: UIViewController {
 extension DialogController {
     public struct Props: Mutable {
         var title: String?
-        var value: Int
+        var value: Double
         var measure: Measure
-        var onSave: CommandWith<Int?>
+        var onSave: CommandWith<Double?>
 
         public static let `default` = Props(title: nil, value: 0, measure: .sm, onSave: .empty)
     }

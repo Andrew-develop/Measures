@@ -11,11 +11,13 @@ import SnapKit
 final class PhotoProgressCell: PreparableTableCell {
 
     private let firstImageView = with(UIImageView()) {
-        $0.apply(.contentModeScaleToFill)
+        $0.apply(.contentModeScaleAspectFit)
+        ($0 as UIView).apply([.backgroundColor, .cornerRadius(Grid.xs.offset)])
     }
 
     private let lastImageView = with(UIImageView()) {
-        $0.apply(.contentModeScaleToFill)
+        $0.apply(.contentModeScaleAspectFit)
+        ($0 as UIView).apply([.backgroundColor, .cornerRadius(Grid.xs.offset)])
     }
 
     private let iconImageView = with(UIImageView()) {
@@ -24,11 +26,11 @@ final class PhotoProgressCell: PreparableTableCell {
     }
 
     private let stackView = with(UIStackView()) {
-        $0.apply(.addWidget)
+        $0.apply(.photoProgress)
     }
 
     private let backView = with(UIView()) {
-        $0.apply([.backgroundColor, .cornerRadius(Grid.s.offset)])
+        $0.apply([.surfaceColor, .cornerRadius(Grid.s.offset)])
     }
 
     var props: PhotoProgressCell.Props = .default {
@@ -76,8 +78,15 @@ final class PhotoProgressCell: PreparableTableCell {
             $0.leading.trailing.bottom.equalToSuperview()
         }
 
+        let width = contentView.frame.width / 2 - Grid.sm.offset
+
         stackView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(Grid.xs.offset)
+            $0.height.equalTo(width * 1.5)
+        }
+
+        iconImageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 

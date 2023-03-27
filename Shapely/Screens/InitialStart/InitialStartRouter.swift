@@ -12,7 +12,7 @@ protocol InitialStartPublicRouter: AnyObject {
 }
 
 protocol InitialStartInternalRouter: AnyObject {
-    func runHomeScreen()
+    func runMainScreen()
     func runActionSheet(with controller: UIAlertController)
     func runActivityLevelScreen()
     func showDialog(_ dialog: DialogController)
@@ -21,16 +21,16 @@ protocol InitialStartInternalRouter: AnyObject {
 final class InitialStartRouter {
     private let factory: InitialStartViewFactory
     private let activityLevelRouter: ActivityLevelPublicRouter
-    private let homeRouter: HomePublicRouter
+    private let mainRouter: MainBarPublicRouter
     private let appRouter: AppRouter
 
     init(factory: InitialStartViewFactory,
          activityLevelRouter: ActivityLevelPublicRouter,
-         homeRouter: HomePublicRouter,
+         mainRouter: MainBarPublicRouter,
          appRouter: AppRouter) {
         self.factory = factory
         self.activityLevelRouter = activityLevelRouter
-        self.homeRouter = homeRouter
+        self.mainRouter = mainRouter
         self.appRouter = appRouter
     }
 }
@@ -43,8 +43,8 @@ extension InitialStartRouter: InitialStartPublicRouter {
 }
 
 extension InitialStartRouter: InitialStartInternalRouter {
-    func runHomeScreen() {
-        homeRouter.runScreenFactory()
+    func runMainScreen() {
+        mainRouter.runScreenFactory()
     }
 
     func runActionSheet(with controller: UIAlertController) {

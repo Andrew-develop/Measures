@@ -15,7 +15,6 @@ final class InitialStartViewController: UIViewController, PropsConsumer {
 
     private lazy var tableView = with(UITableView()) {
         $0.apply(.primary)
-        $0.delegate = tableAdapter
         $0.register(InitialStartTextCell.self, forCellReuseIdentifier: InitialStartTextCell.className)
         $0.register(InitialStartPictureCell.self, forCellReuseIdentifier: InitialStartPictureCell.className)
         $0.register(InitialStartTitleCell.self, forCellReuseIdentifier: InitialStartTitleCell.className)
@@ -24,9 +23,10 @@ final class InitialStartViewController: UIViewController, PropsConsumer {
         $0.register(InitialStartParameterCell.self, forCellReuseIdentifier: InitialStartParameterCell.className)
         $0.register(InitialStartEditCell.self, forCellReuseIdentifier: InitialStartEditCell.className)
         $0.register(InitialStartTapeCell.self, forCellReuseIdentifier: InitialStartTapeCell.className)
-        $0.register(
-            MainHeaderCell.self, forHeaderFooterViewReuseIdentifier: MainHeaderCell.className
-        )
+    }
+
+    private let titleLabel = with(UILabel()) {
+        $0.apply(.screenTitle)
     }
 
     private let confirmView = ConfirmView()
@@ -58,15 +58,27 @@ final class InitialStartViewController: UIViewController, PropsConsumer {
 private extension InitialStartViewController {
     func prepareView() {
         view.apply(.backgroundColor)
-        view.addSubviews(tableView, calendarView, confirmView)
+        view.addSubviews(titleLabel, tableView, calendarView, confirmView)
         makeConstraints()
         hideCalendar()
     }
 
     func render(oldProps: Props, newProps: Props) {
-        tableAdapter.item = newProps.pack
+        tableAdapter.pack = newProps.pack
 
-        if oldProps.pack?.0 != newProps.pack?.0 {
+        if oldProps.title != newProps.title {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineHeightMultiple = 1.03
+            titleLabel.attributedText = NSMutableAttributedString(
+                string: newProps.title,
+                attributes: [
+                    NSAttributedString.Key.kern: -0.41,
+                    NSAttributedString.Key.paragraphStyle: paragraphStyle
+                ]
+            )
+        }
+
+        if oldProps.pack.keys != newProps.pack.keys {
             showAnimation()
         }
 
@@ -88,8 +100,13 @@ private extension InitialStartViewController {
     }
 
     func makeConstraints() {
-        tableView.snp.makeConstraints {
+        titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
+        }
+
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
             $0.bottom.equalTo(confirmView.snp.top).offset(-Grid.s.offset)
         }
@@ -137,11 +154,13 @@ private extension InitialStartViewController {
 
 extension InitialStartViewController {
     struct Props: Mutable {
-        var pack: (InitialStartTableAdapter.Section, InitialStartPack)?
+        var title: String
+        var pack: [InitialStartSection: [AnyHashable]]
         var calendarProps: CalendarView.Props?
         var confirmProps: ConfirmView.Props?
         var isNeedCalendar: Bool
 
-        static var `default` = Props(pack: nil, calendarProps: nil, confirmProps: nil, isNeedCalendar: false)
+        static var `default` = Props(title: "", pack: [:], calendarProps: nil,
+                                     confirmProps: nil, isNeedCalendar: false)
     }
 }

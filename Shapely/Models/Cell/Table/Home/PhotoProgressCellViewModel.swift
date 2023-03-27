@@ -16,7 +16,7 @@ final class PhotoProgressCellViewModel: PreparableViewModel, Hashable {
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(props.firstImage)
+        hasher.combine(props.lastImage)
     }
 
     static func == (lhs: PhotoProgressCellViewModel, rhs: PhotoProgressCellViewModel) -> Bool {

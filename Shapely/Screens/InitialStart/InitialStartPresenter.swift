@@ -87,22 +87,17 @@ private extension InitialStartPresenter {
 
     func mapStartPack() {
         propsRelay.mutate {
-            $0.pack = (
-                .start,
-                InitialStartPack(
-                    header: MainHeaderCellViewModel(
-                        props: .init(title: R.string.localizable.initialStartTitle())
+            $0.title = R.string.localizable.initialStartTitle()
+            $0.pack = [
+                .start: [
+                    InitialStartTextCellViewModel(
+                        props: .init(title: R.string.localizable.initialStartInfo())
                     ),
-                    viewModels: [
-                        .text(InitialStartTextCellViewModel(
-                            props: .init(title: R.string.localizable.initialStartInfo()))
-                        ),
-                        .picture(InitialStartPictureCellViewModel(
-                            props: .init(picture: R.image.initialStart()))
-                        )
-                    ]
-                )
-            )
+                    InitialStartPictureCellViewModel(
+                        props: .init(picture: R.image.initialStart(), onTap: .empty)
+                    )
+                ]
+            ]
             $0.confirmProps = ConfirmView.Props(
                 state: .regular,
                 title: R.string.localizable.buttonStart(),
@@ -114,53 +109,48 @@ private extension InitialStartPresenter {
 
     func mapPersonalInfoPack(birthdaySelected: Bool = false) {
         propsRelay.mutate {
-            $0.pack = (
-                .personalInfo,
-                InitialStartPack(
-                    header: MainHeaderCellViewModel(
-                        props: .init(title: R.string.localizable.personalInfoTitle())
+            $0.title = R.string.localizable.personalInfoTitle()
+            $0.pack = [
+                .personalInfo: [
+                    InitialStartSegmentCellViewModel(
+                        props: .init(
+                            selectedSegmentIndex: userData.gender.rawValue,
+                            onSegmentChanged: CommandWith<Int> { [weak self] value in
+                                if let gender = Gender(rawValue: value) {
+                                    self?.userData.gender = gender
+                                }
+                            }
+                        )
                     ),
-                    viewModels: [
-                        .segment(InitialStartSegmentCellViewModel(
-                            props: .init(
-                                selectedSegmentIndex: userData.gender.rawValue,
-                                onSegmentChanged: CommandWith<Int> { [weak self] value in
-                                    if let gender = Gender(rawValue: value) {
-                                        self?.userData.gender = gender
-                                    }
-                                }
-                            )
-                        )),
-                        .title(InitialStartTitleCellViewModel(
-                            props: .init(title: R.string.localizable.personalInfoBirthday()))
-                        ),
-                        .data(InitialStartDataCellViewModel(
-                            props: .init(
-                                title: makeStringDate(from: userData.birthday),
-                                isChevronHidden: true,
-                                isSelected: birthdaySelected,
-                                onTap: Command { [weak self] in
-                                    self?.makeCalendarVisible(true)
-                                }
-                            )
-                        )),
-                        .title(InitialStartTitleCellViewModel(
-                            props: .init(title: R.string.localizable.personalInfoTarget()))
-                        ),
-                        .data(InitialStartDataCellViewModel(
-                            props: .init(
-                                title: userData.target.description,
-                                isChevronHidden: false,
-                                isSelected: false,
-                                onTap: Command { [weak self] in
-                                    guard let self else { return }
-                                    self.router.runActionSheet(with: self.targetActionSheet)
-                                }
-                            )
-                        ))
-                    ]
-                )
-            )
+                    InitialStartTitleCellViewModel(
+                        props: .init(title: R.string.localizable.personalInfoBirthday())
+                    ),
+                    InitialStartDataCellViewModel(
+                        props: .init(
+                            title: makeStringDate(from: userData.birthday),
+                            isChevronHidden: true,
+                            isSelected: birthdaySelected,
+                            onTap: Command { [weak self] in
+                                self?.makeCalendarVisible(true)
+                            }
+                        )
+                    ),
+                    InitialStartTitleCellViewModel(
+                        props: .init(title: R.string.localizable.personalInfoTarget())
+                    ),
+                    InitialStartDataCellViewModel(
+                        props: .init(
+                            title: userData.target.description,
+                            isChevronHidden: false,
+                            isSelected: false,
+                            onTap: Command { [weak self] in
+                                guard let self else { return }
+                                self.router.runActionSheet(with: self.targetActionSheet)
+                            }
+                        )
+                    )
+                ]
+            ]
             $0.confirmProps = ConfirmView.Props(
                 state: .regular,
                 title: R.string.localizable.buttonContinue(),
@@ -181,57 +171,52 @@ private extension InitialStartPresenter {
 
     func mapCalorieIntakePack() {
         propsRelay.mutate {
-            $0.pack = (
-                .calorieIntake,
-                InitialStartPack(
-                    header: MainHeaderCellViewModel(
-                        props: .init(title: R.string.localizable.calorieIntakeTitle())
+            $0.title = R.string.localizable.calorieIntakeTitle()
+            $0.pack = [
+                .calorieIntake: [
+                    InitialStartTitleCellViewModel(
+                        props: .init(title: R.string.localizable.calorieIntakeHeight())
                     ),
-                    viewModels: [
-                        .title(InitialStartTitleCellViewModel(
-                            props: .init(title: R.string.localizable.calorieIntakeHeight()))
-                        ),
-                        .tape(InitialStartTapeCellViewModel(
-                            props: .init(
-                                startValue: userData.height,
-                                measureType: .sm,
-                                range: Range(50...250),
-                                items: heightTape,
-                                onChanged: CommandWith<Double> { [weak self] value in
-                                    self?.setHeight(value)
-                                }
-                            )
-                        )),
-                        .title(InitialStartTitleCellViewModel(
-                            props: .init(title: R.string.localizable.calorieIntakeWeight()))
-                        ),
-                        .tape(InitialStartTapeCellViewModel(
-                            props: .init(
-                                startValue: userData.weight,
-                                measureType: .kg,
-                                range: Range(30...300),
-                                items: weightTape,
-                                onChanged: CommandWith<Double> { [weak self] value in
-                                    self?.setWeight(value)
-                                }
-                            )
-                        )),
-                        .title(InitialStartTitleCellViewModel(
-                            props: .init(title: R.string.localizable.calorieIntakeActivityLevel()))
-                        ),
-                        .data(InitialStartDataCellViewModel(
-                            props: .init(
-                                title: userData.activityLevel.title,
-                                isChevronHidden: false,
-                                isSelected: false,
-                                onTap: Command { [weak self] in
-                                    self?.router.runActivityLevelScreen()
-                                }
-                            )
-                        ))
-                    ]
-                )
-            )
+                    InitialStartTapeCellViewModel(
+                        props: .init(
+                            startValue: userData.height,
+                            measureType: .sm,
+                            range: Range(50...250),
+                            items: heightTape,
+                            onChanged: CommandWith<Double> { [weak self] value in
+                                self?.setHeight(value)
+                            }
+                        )
+                    ),
+                    InitialStartTitleCellViewModel(
+                        props: .init(title: R.string.localizable.calorieIntakeWeight())
+                    ),
+                    InitialStartTapeCellViewModel(
+                        props: .init(
+                            startValue: userData.weight,
+                            measureType: .kg,
+                            range: Range(30...300),
+                            items: weightTape,
+                            onChanged: CommandWith<Double> { [weak self] value in
+                                self?.setWeight(value)
+                            }
+                        )
+                    ),
+                    InitialStartTitleCellViewModel(
+                        props: .init(title: R.string.localizable.calorieIntakeActivityLevel())
+                    ),
+                    InitialStartDataCellViewModel(
+                        props: .init(
+                            title: userData.activityLevel.title,
+                            isChevronHidden: false,
+                            isSelected: false,
+                            onTap: Command { [weak self] in
+                                self?.router.runActivityLevelScreen()
+                            }
+                        )
+                    )
+                ]
+            ]
             $0.isNeedCalendar = false
             $0.confirmProps = ConfirmView.Props(
                 state: .full,
@@ -244,32 +229,24 @@ private extension InitialStartPresenter {
 
     func mapParametersPack() {
         propsRelay.mutate {
-            $0.pack = (
-                .parameters,
-                InitialStartPack(
-                    header: MainHeaderCellViewModel(
-                        props: .init(title: R.string.localizable.parametersTitle())
-                    ),
-                    viewModels:
-                        TreckingParameter.allCases.sorted {
-                            userData.treckingParameters.contains($0) &&
-                            !userData.treckingParameters.contains($1)
-                        }
-                        .map { parameter in
-                            .parameter(
-                                InitialStartParameterCellViewModel(
-                                    props: InitialStartParameterCell.Props(
-                                        parameter: parameter,
-                                        isSelected: userData.treckingParameters.contains(parameter),
-                                        onTap: Command { [weak self] in
-                                            self?.setParameter(parameter)
-                                        }
-                                    )
-                                )
-                            )
-                        }
-                )
-            )
+            $0.title = R.string.localizable.parametersTitle()
+            $0.pack = [
+                .parameters: TreckingParameter.allCases.sorted {
+                    userData.treckingParameters.contains($0) &&
+                    !userData.treckingParameters.contains($1)
+                }
+                .map { parameter in
+                    InitialStartParameterCellViewModel(
+                        props: InitialStartParameterCell.Props(
+                            parameter: parameter,
+                            isSelected: userData.treckingParameters.contains(parameter),
+                            onTap: Command { [weak self] in
+                                self?.setParameter(parameter)
+                            }
+                        )
+                    )
+                }
+            ]
             $0.confirmProps = ConfirmView.Props(
                 state: .full,
                 title: R.string.localizable.buttonContinue(),
@@ -284,30 +261,25 @@ private extension InitialStartPresenter {
             getCalorieIntake()
         }
         propsRelay.mutate {
-            $0.pack = (
-                .finish,
-                InitialStartPack(
-                    header: MainHeaderCellViewModel(
-                        props: .init(title: R.string.localizable.finishTitle())
+            $0.title = R.string.localizable.finishTitle()
+            $0.pack = [
+                .finish: [
+                    InitialStartTextCellViewModel(
+                        props: .init(title: R.string.localizable.finishFirstInfo())
                     ),
-                    viewModels: [
-                        .text(InitialStartTextCellViewModel(
-                            props: .init(title: R.string.localizable.finishFirstInfo()))
-                        ),
-                        .edit(InitialStartEditCellViewModel(
-                            props: .init(
-                                text: String(userData.calorieIntake) + " " + Measure.kcal.rawValue,
-                                onTap: Command { [weak self] in
-                                    self?.showEditDialog()
-                                }
-                            ))
-                        ),
-                        .text(InitialStartTextCellViewModel(
-                            props: .init(title: R.string.localizable.finishSecondInfo()))
+                    InitialStartEditCellViewModel(
+                        props: .init(
+                            text: String(userData.calorieIntake) + " " + Measure.kcal.rawValue,
+                            onTap: Command { [weak self] in
+                                self?.showEditDialog()
+                            }
                         )
-                    ]
-                )
-            )
+                    ),
+                    InitialStartTextCellViewModel(
+                        props: .init(title: R.string.localizable.finishSecondInfo())
+                    )
+                ]
+            ]
             $0.confirmProps = ConfirmView.Props(
                 state: .full,
                 title: R.string.localizable.buttonReady(),
@@ -374,11 +346,11 @@ private extension InitialStartPresenter {
         let editDialog = with(DialogController()) {
             $0.props = $0.props.mutate {
                 $0.title = R.string.localizable.finishAlertTitle()
-                $0.value = userData.calorieIntake
+                $0.value = Double(userData.calorieIntake)
                 $0.measure = .kcal
                 $0.onSave = CommandWith { [weak self] value in
                     guard let value = value else { return }
-                    self?.userData.calorieIntake = value
+                    self?.userData.calorieIntake = Int(value)
                     self?.mapFinalPack(with: false)
                 }
             }
@@ -395,6 +367,8 @@ private extension InitialStartPresenter {
     }
 
     func finishSetup() {
+        setParameterTypes()
+        setParameters()
         service.addUser { [weak self] newUser in
             guard let self else { return }
             newUser.height = self.userData.height
@@ -405,9 +379,70 @@ private extension InitialStartPresenter {
             newUser.birthday = self.userData.birthday
             newUser.calorieIntake = Int64(self.userData.calorieIntake)
             newUser.userParameter = []
-        }.bind { [weak self] in
-            self?.router.runHomeScreen()
+        }.bind { [weak self] _ in
+            self?.router.runMainScreen()
         }
         .disposed(by: disposeBag)
+    }
+
+    func setParameterTypes() {
+        Measure.allCases.forEach { [weak self] measure in
+            guard let self else { return }
+            self.service.addParameterType { type in
+                type.name = measure.rawValue
+                type.measure = measure.rawValue
+            }
+            .subscribe()
+            .disposed(by: disposeBag)
+        }
+    }
+
+    func setParameters() {
+        service.rx_parameterTypes
+            .bind { [weak self] types in
+                guard let self, let types else { return }
+                types.forEach { type in
+                    switch Measure(rawValue: type.name ?? "") {
+                    case .sm:
+                        self.userData.treckingParameters.forEach { param in
+                            self.service.addParameter { parameter in
+                                self.map(&parameter, name: param.title, info: param.description, type: type)
+                            }
+                            .subscribe()
+                            .disposed(by: self.disposeBag)
+                        }
+                    case .kg:
+                        self.service.addParameter { parameter in
+                            self.map(&parameter, name: Measure.kg.rawValue, type: type)
+                        }
+                        .subscribe()
+                        .disposed(by: self.disposeBag)
+                    case .kcal:
+                        self.service.addParameter { parameter in
+                            self.map(&parameter, name: Measure.kcal.rawValue, type: type)
+                        }
+                        .subscribe()
+                        .disposed(by: self.disposeBag)
+                    case .gramm:
+                        Nutritions.allCases.forEach { nutrition in
+                            self.service.addParameter { parameter in
+                                self.map(&parameter, name: nutrition.rawValue, type: type)
+                            }
+                            .subscribe()
+                            .disposed(by: self.disposeBag)
+                        }
+                    default:
+                        break
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+
+    func map(_ parameter: inout Parameter, name: String, info: String? = nil, type: ParameterType) {
+        parameter.name = name
+        parameter.info = info
+        parameter.parameterType = type
+        type.addToTypeParameter(parameter)
     }
 }

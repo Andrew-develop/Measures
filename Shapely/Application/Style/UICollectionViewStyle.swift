@@ -14,4 +14,12 @@ extension StyleWrapper where Element == UICollectionView {
             collection.showsHorizontalScrollIndicator = false
         }
     }
+
+    static var statistics: StyleWrapper {
+        return .wrap { collection, theme in
+            collection.backgroundColor = theme.colorPalette.surface
+            collection.layer.cornerRadius = Grid.s.offset
+            collection.showsHorizontalScrollIndicator = false
+        }
+    }
 }

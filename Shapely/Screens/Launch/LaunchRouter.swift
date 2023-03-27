@@ -9,20 +9,20 @@ protocol LaunchPublicRouter: AnyObject {}
 
 protocol LaunchInternalRouter: AnyObject {
     func runInitialStartScreen()
-    func runHomeScreen()
+    func runMainScreen()
 }
 
 final class LaunchRouter {
     private let factory: LaunchViewFactory
     private let initialStartRouter: InitialStartPublicRouter
-    private let homeRouter: HomePublicRouter
+    private let mainRouter: MainBarPublicRouter
 
     init(factory: LaunchViewFactory,
          initialStartRouter: InitialStartPublicRouter,
-         homeRouter: HomePublicRouter) {
+         mainRouter: MainBarPublicRouter) {
         self.factory = factory
         self.initialStartRouter = initialStartRouter
-        self.homeRouter = homeRouter
+        self.mainRouter = mainRouter
     }
 }
 
@@ -33,7 +33,7 @@ extension LaunchRouter: LaunchInternalRouter {
         initialStartRouter.runScreenFactory()
     }
 
-    func runHomeScreen() {
-        homeRouter.runScreenFactory()
+    func runMainScreen() {
+        mainRouter.runScreenFactory()
     }
 }

@@ -59,6 +59,15 @@ extension StyleWrapper where Element == UILabel {
         }
     }
 
+    static var footnoteText: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.textSecondary
+            label.font = theme.typography.footnote
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+        }
+    }
+
     static var measureValue: StyleWrapper {
         return .wrap { label, theme in
             label.textColor = theme.colorPalette.button
@@ -83,6 +92,20 @@ extension StyleWrapper where Element == UILabel {
     static var editCell: StyleWrapper {
         return .wrap { label, theme in
             label.textColor = theme.colorPalette.button
+            label.font = theme.typography.header2
+        }
+    }
+
+    static var statisticsPointTitle: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.textSecondary
+            label.font = theme.typography.body1
+        }
+    }
+
+    static var statisticsPoint: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.text
             label.font = theme.typography.header2
         }
     }

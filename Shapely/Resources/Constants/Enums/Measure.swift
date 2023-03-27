@@ -9,8 +9,9 @@ import Foundation
 
 // swiftlint:disable identifier_name
 
-enum Measure: String {
+enum Measure: String, CaseIterable {
     case kg = "кг"
     case kcal = "ккал"
     case sm = "см"
+    case gramm = "г"
 }

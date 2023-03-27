@@ -107,4 +107,33 @@ enum TreckingParameter: Int, CaseIterable, CustomStringConvertible {
             return R.image.ankle()
         }
     }
+
+    var positionPercent: Int {
+        switch self {
+        case .neck:
+            return 45
+        case .shoulders:
+            return 55
+        case .chest:
+            return 65
+        case .biceps:
+            return 70
+        case .waist:
+            return 70
+        case .forearm:
+            return 65
+        case .wrist:
+            return 65
+        case .stomach:
+            return 60
+        case .pelvis:
+            return 55
+        case .hip:
+            return 50
+        case .shin:
+            return 45
+        case .ankle:
+            return 45
+        }
+    }
 }

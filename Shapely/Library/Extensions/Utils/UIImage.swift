@@ -35,3 +35,60 @@ extension UIImage {
         return newImage
     }
 }
+
+extension UIImage {
+    class func imageFromColor(color: UIColor, size: CGSize = CGSize(width: 1, height: 1), scale: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        color.setFill()
+        UIRectFill(CGRect(origin: CGPoint.zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+
+    func resizedImage(for size: CGSize) -> UIImage? {
+            let image = self.cgImage
+            print(size)
+            let context = CGContext(data: nil,
+                                    width: Int(size.width),
+                                    height: Int(size.height),
+                                    bitsPerComponent: image!.bitsPerComponent,
+                                    bytesPerRow: Int(size.width),
+                                    space: image?.colorSpace ?? CGColorSpace(name: CGColorSpace.sRGB)!,
+                                    bitmapInfo: image!.bitmapInfo.rawValue)
+            context?.interpolationQuality = .high
+            context?.draw(image!, in: CGRect(origin: .zero, size: size))
+
+            guard let scaledImage = context?.makeImage() else { return nil }
+
+            return UIImage(cgImage: scaledImage)
+    }
+
+    func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
+        // Determine the scale factor that preserves aspect ratio
+        let widthRatio = targetSize.width / size.width
+        let heightRatio = targetSize.height / size.height
+
+        let scaleFactor = min(widthRatio, heightRatio)
+
+        // Compute the new image size that preserves aspect ratio
+        let scaledImageSize = CGSize(
+            width: size.width * scaleFactor,
+            height: size.height * scaleFactor
+        )
+
+        // Draw and return the resized UIImage
+        let renderer = UIGraphicsImageRenderer(
+            size: scaledImageSize
+        )
+
+        let scaledImage = renderer.image { _ in
+            self.draw(in: CGRect(
+                origin: .zero,
+                size: scaledImageSize
+            ))
+        }
+
+        return scaledImage
+    }
+}

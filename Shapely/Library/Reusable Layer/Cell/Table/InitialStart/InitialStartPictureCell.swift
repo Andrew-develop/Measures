@@ -49,6 +49,10 @@ final class InitialStartPictureCell: PreparableTableCell {
 
     private func prepareView() {
         selectionStyle = .none
+
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onTap))
+        contentView.addGestureRecognizer(recognizer)
+
         contentView.apply(.backgroundColor)
         contentView.addSubview(pictureImageView)
         contentView.addSubview(gradientView)
@@ -79,12 +83,17 @@ final class InitialStartPictureCell: PreparableTableCell {
             gradientView.layoutIfNeeded()
         }
     }
+
+    @objc private func onTap() {
+        props.onTap.execute()
+    }
 }
 
 extension InitialStartPictureCell {
     struct Props: Mutable {
         var picture: UIImage?
+        var onTap: Command
 
-        static let `default` = Props(picture: nil)
+        static let `default` = Props(picture: nil, onTap: .empty)
     }
 }

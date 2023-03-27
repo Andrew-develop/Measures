@@ -94,8 +94,21 @@
 "finish.second.info" = "Соблюдай её каждый день, если хочешь достичь результата и записывай свой прогресс, чтобы увидеть изменения";
 "finish.alert.title" = "Введи количество килокалорий";
 
+// MARK: - TabBar
+"tabBar.home" = "Главная";
+"tabBar.food" = "Еда";
+"tabBar.measurement" = "Замеры";
+"tabBar.photos" = "Фото";
+"tabBar.training" = "Тренировки";
+
 // MARK: - Home
 "home.title" = "Shapely";
 "home.addWidget" = "Добавить виджет";
+
+// MARK: - Measurement
+"measurement.empty" = "Не указано";
+
+// MARK: - PhotoCollage
+"photoCollage.title" = "Фотодневник";
 
 

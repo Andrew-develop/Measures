@@ -8,6 +8,7 @@
 import Foundation
 import Swinject
 import SwinjectAutoregistration
+import CoreData
 
 private class InternalAppAssembly: Assembly {
     func assemble(container: Container) {
@@ -24,20 +25,16 @@ private class InternalAppAssembly: Assembly {
             CalorieCalculator()
         }
 
-        container.register(StorageService<User>.self) { _ in
-            StorageService<User>()
+        container.register(MLService.self) { _ in
+            MLService()
         }
-        .inObjectScope(.container)
 
-        container.register(StorageService<Photo>.self) { _ in
-            StorageService<Photo>()
-        }
-        .inObjectScope(.container)
-
-        container.register(StorageService<Measurement>.self) { _ in
-            StorageService<Measurement>()
-        }
-        .inObjectScope(.container)
+        container.autoregister(StorageService<User>.self, initializer: StorageService<User>.init)
+        container.autoregister(StorageService<Photo>.self, initializer: StorageService<Photo>.init)
+        container.autoregister(StorageService<Measurement>.self, initializer: StorageService<Measurement>.init)
+        container.autoregister(StorageService<ParameterType>.self, initializer: StorageService<ParameterType>.init)
+        container.autoregister(StorageService<Parameter>.self, initializer: StorageService<Parameter>.init)
+        container.autoregister(StorageService<Note>.self, initializer: StorageService<Note>.init)
     }
 }
 
@@ -70,7 +67,7 @@ class AppAssembly: NSObject {
         modules = [
             LaunchModule(),
             InitialStartModule(),
-            HomeModule()
+            MainBarModule()
         ]
 
         modules = modules.flatMap(AppAssembly.findSubmodules)
@@ -87,6 +84,20 @@ class AppAssembly: NSObject {
             let mainCoordinator = MainCoordinator(resolver: resolver)
             return mainCoordinator.mainViewController()
         }
+
+        container.register(NSManagedObjectContext.self) { _ in
+            let persistentContainer = NSPersistentContainer(name: "Shapely")
+            persistentContainer.loadPersistentStores { _, error in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            }
+            let context = persistentContainer.viewContext
+            context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+
+            return context
+        }
+        .inObjectScope(.container)
     }
 
     func initializeModules() {
