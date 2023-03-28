@@ -181,7 +181,6 @@
 		0AF3A24129BC8DE400CA3087 /* PhotoCollageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF3A23B29BC8DE400CA3087 /* PhotoCollageViewController.swift */; };
 		0AF3A24229BC8DE400CA3087 /* PhotoCollageTableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF3A23C29BC8DE400CA3087 /* PhotoCollageTableAdapter.swift */; };
 		0AF3A24329BC8DE400CA3087 /* PhotoCollageServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF3A23D29BC8DE400CA3087 /* PhotoCollageServiceProvider.swift */; };
-		0AF3A24629BC919500CA3087 /* UITabBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF3A24529BC919500CA3087 /* UITabBarStyle.swift */; };
 		0AF3A24A29BCA23600CA3087 /* MeasurementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF3A24929BCA23600CA3087 /* MeasurementCell.swift */; };
 		0AF3A24C29BCA24B00CA3087 /* MeasurementCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF3A24B29BCA24B00CA3087 /* MeasurementCellViewModel.swift */; };
 		0AF3A24E29BCA29200CA3087 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF3A24D29BCA29200CA3087 /* MeasurementView.swift */; };
@@ -380,7 +379,6 @@
 		0AF3A23B29BC8DE400CA3087 /* PhotoCollageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollageViewController.swift; sourceTree = "<group>"; };
 		0AF3A23C29BC8DE400CA3087 /* PhotoCollageTableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollageTableAdapter.swift; sourceTree = "<group>"; };
 		0AF3A23D29BC8DE400CA3087 /* PhotoCollageServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollageServiceProvider.swift; sourceTree = "<group>"; };
-		0AF3A24529BC919500CA3087 /* UITabBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarStyle.swift; sourceTree = "<group>"; };
 		0AF3A24929BCA23600CA3087 /* MeasurementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementCell.swift; sourceTree = "<group>"; };
 		0AF3A24B29BCA24B00CA3087 /* MeasurementCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementCellViewModel.swift; sourceTree = "<group>"; };
 		0AF3A24D29BCA29200CA3087 /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
@@ -922,7 +920,6 @@
 				0AE35E2F29A0D29800FEFD58 /* UICalendarViewStyle.swift */,
 				0AE35E3629A1051A00FEFD58 /* UIToolbarStyle.swift */,
 				0A20A0F129B73E5200CEA48E /* UIStackViewStyle.swift */,
-				0AF3A24529BC919500CA3087 /* UITabBarStyle.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -1394,7 +1391,6 @@
 				0A1FE9E12997B61600DAEBC2 /* ColorPalette.swift in Sources */,
 				0A33B42F29A23E3300F2685B /* ActivityLevelTableAdapter.swift in Sources */,
 				0A1FE9DF2997B61600DAEBC2 /* Typography.swift in Sources */,
-				0AF3A24629BC919500CA3087 /* UITabBarStyle.swift in Sources */,
 				0A1FE9C82997B61600DAEBC2 /* PropsProducerConsumer.swift in Sources */,
 				0ADE995729991DC7001EE33E /* LaunchRouter.swift in Sources */,
 			);

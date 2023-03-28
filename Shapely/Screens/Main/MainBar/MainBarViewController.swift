@@ -51,11 +51,41 @@ final class MainBarViewController: UITabBarController {
 
     private func prepareView() {
         delegate = self
-        tabBar.apply(.main)
         view.apply(.backgroundColor)
         let tabs: [MainTabBarItem] = MainTabBarItem.allCases
         let viewControllers = tabs.map { factory.createViewControllerItem($0) }
         self.viewControllers = viewControllers
+        setTabBarAppearance()
+    }
+
+    private func setTabBarAppearance() {
+        let width = CGFloat(MainTabBarItem.allCases.count) * Grid.l.offset + Grid.m.offset
+        let height = Grid.xxl.offset
+
+        let roundLayer = CAShapeLayer()
+
+        let bezierPath = UIBezierPath(
+            roundedRect: CGRect(
+                x: (tabBar.bounds.width - width) / 2,
+                y: (tabBar.bounds.height - height) / 2,
+                width: width,
+                height: height
+            ),
+            cornerRadius: Grid.s.offset
+        )
+
+        roundLayer.path = bezierPath.cgPath
+
+        tabBar.layer.insertSublayer(roundLayer, at: 0)
+
+        tabBar.itemWidth = Grid.l.offset
+        tabBar.itemPositioning = .centered
+        tabBar.itemSpacing = Grid.xs.offset / 2
+
+        roundLayer.fillColor = DefaultColorPalette.button.cgColor
+
+        tabBar.tintColor = DefaultColorPalette.text
+        tabBar.unselectedItemTintColor = DefaultColorPalette.text
     }
 }
 
