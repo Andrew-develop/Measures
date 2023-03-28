@@ -67,10 +67,11 @@ private extension AddPhotoPresenter {
 
     func saveImage() {
         guard let data = propsRelay.value.image?.pngData() else { return }
-        service.addPhoto { photo in
+        service.create(Photo.self) { photo in
             photo.value = data
             photo.angel = Angel.front.description
-        }.bind { [weak self] _ in
+        }
+        .bind { [weak self] _ in
             self?.service.notify()
             self?.router.pop()
         }

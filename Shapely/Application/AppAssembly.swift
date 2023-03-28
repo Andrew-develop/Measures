@@ -29,12 +29,11 @@ private class InternalAppAssembly: Assembly {
             MLService()
         }
 
-        container.autoregister(StorageService<User>.self, initializer: StorageService<User>.init)
-        container.autoregister(StorageService<Photo>.self, initializer: StorageService<Photo>.init)
-        container.autoregister(StorageService<Measurement>.self, initializer: StorageService<Measurement>.init)
-        container.autoregister(StorageService<ParameterType>.self, initializer: StorageService<ParameterType>.init)
-        container.autoregister(StorageService<Parameter>.self, initializer: StorageService<Parameter>.init)
-        container.autoregister(StorageService<Note>.self, initializer: StorageService<Note>.init)
+        container.register(HapticService.self) { _ in
+            HapticService()
+        }
+
+        container.autoregister(StorageService.self, initializer: StorageService.init)
     }
 }
 

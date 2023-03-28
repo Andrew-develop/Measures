@@ -40,6 +40,9 @@ private extension HomePresenter {
     func setup() {
         propsRelay.mutate {
             $0.title = R.string.localizable.homeTitle()
+            $0.onTap = Command { [weak self] in
+                self?.service.playHaptic(intensity: 0.5, sharpness: 0.5)
+            }
         }
 
         service.rx_savedImage
@@ -65,14 +68,17 @@ private extension HomePresenter {
     }
 
     func configureCalorie() {
-        service.rx_getUserData
+        service.fetch(User.self)
             .bind { [weak self] data in
-                guard let data, !data.isEmpty else { return }
+                guard !data.isEmpty else { return }
                 self?.widgets[.calorie] = [
                     CaloriesCellViewModel(props: .init(
                         state: .base,
                         calories: (0, Int(data[0].calorieIntake)),
-                        nutritions: (0, 0, 0)
+                        nutritions: (0, 0, 0),
+                        nutritionInfo: Nutritions.allCases.map { element in
+                            NutritionView.Props(title: element.title, color: element.indicatorColor)
+                        }
                     ))
                 ]
             }
@@ -80,48 +86,54 @@ private extension HomePresenter {
     }
 
     func configureParameters() {
-        Observable.combineLatest(service.rx_getMeasurements, service.rx_getParameters)
+        Observable.combineLatest(service.fetch(Measurement.self),
+                                 service.fetch(Parameter.self))
             .bind { [weak self] measurements, parameters in
-                guard let self, let parameters, !parameters.isEmpty else { return }
+                guard let self, !parameters.isEmpty else { return }
 
-                if let measurements {
-                    self.widgets[.measurements] = [
-                        StatisticsCellViewModel(
-                            props: .init(
-                                id: UUID(),
-                                items: TreckingParameter.allCases.compactMap { parameter in
-                                    guard let param = parameters.first(where: { expectedParam in
-                                        expectedParam.name == parameter.title
-                                    }) else { return nil }
+                self.widgets[.measurements] = [
+                    StatisticsCellViewModel(
+                        props: .init(
+                            id: UUID(),
+                            items: TreckingParameter.allCases.compactMap { parameter in
+                                guard let param = parameters.first(where: { expectedParam in
+                                    expectedParam.name == parameter.title
+                                }) else { return nil }
 
-                                    let measurement = measurements.first {
-                                        $0.measureParameter?.name == parameter.title
-                                    }
-
-                                    let value = measurement?.value ?? -1
-
-                                    return StatisticsPointCellViewModel(
-                                        props: .init(
-                                            title: parameter.title,
-                                            value: value != -1 ? "\(value) см" : "",
-                                            diffrence: "",
-                                            onTap: .empty
-                                        )
-                                    )
+                                let measurementFirst = measurements.first {
+                                    $0.measureParameter?.name == parameter.title
                                 }
-                            )
+
+                                let measurementLast = measurements.last {
+                                    $0.measureParameter?.name == parameter.title
+                                }
+
+                                let firstValue = measurementFirst?.value ?? 0
+                                let lastValue = measurementLast?.value ?? 0
+
+                                return StatisticsPointCellViewModel(
+                                    props: .init(
+                                        title: parameter.title,
+                                        value: firstValue != 0 ? "\(firstValue) см" : "-",
+                                        diffrence: (firstValue != 0 && lastValue != 0) ? firstValue - lastValue : 0,
+                                        interval: "за месяц",
+                                        measure: .sm,
+                                        onTap: .empty
+                                    )
+                                )
+                            }
                         )
-                    ]
-                }
+                    )
+                ]
             }
             .disposed(by: disposeBag)
     }
 
     func configurePhotos() {
-        service.rx_getPhotos
+        service.fetch(Photo.self)
             .bind { [weak self] photos in
-                guard let first = photos?.first,
-                      let last = photos?.last else { return }
+                guard let first = photos.first,
+                      let last = photos.last else { return }
                 self?.widgets[.photo] = [
                     PhotoProgressCellViewModel(
                         props: .init(

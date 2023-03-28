@@ -369,7 +369,7 @@ private extension InitialStartPresenter {
     func finishSetup() {
         setParameterTypes()
         setParameters()
-        service.addUser { [weak self] newUser in
+        service.create(User.self) { [weak self] newUser in
             guard let self else { return }
             newUser.height = self.userData.height
             newUser.weight = self.userData.weight
@@ -379,7 +379,8 @@ private extension InitialStartPresenter {
             newUser.birthday = self.userData.birthday
             newUser.calorieIntake = Int64(self.userData.calorieIntake)
             newUser.userParameter = []
-        }.bind { [weak self] _ in
+        }
+        .bind { [weak self] _ in
             self?.router.runMainScreen()
         }
         .disposed(by: disposeBag)
@@ -388,7 +389,7 @@ private extension InitialStartPresenter {
     func setParameterTypes() {
         Measure.allCases.forEach { [weak self] measure in
             guard let self else { return }
-            self.service.addParameterType { type in
+            self.service.create(ParameterType.self) { type in
                 type.name = measure.rawValue
                 type.measure = measure.rawValue
             }
@@ -398,34 +399,34 @@ private extension InitialStartPresenter {
     }
 
     func setParameters() {
-        service.rx_parameterTypes
+        service.fetch(ParameterType.self)
             .bind { [weak self] types in
-                guard let self, let types else { return }
+                guard let self else { return }
                 types.forEach { type in
                     switch Measure(rawValue: type.name ?? "") {
                     case .sm:
                         self.userData.treckingParameters.forEach { param in
-                            self.service.addParameter { parameter in
+                            self.service.create(Parameter.self) { parameter in
                                 self.map(&parameter, name: param.title, info: param.description, type: type)
                             }
                             .subscribe()
                             .disposed(by: self.disposeBag)
                         }
                     case .kg:
-                        self.service.addParameter { parameter in
+                        self.service.create(Parameter.self) { parameter in
                             self.map(&parameter, name: Measure.kg.rawValue, type: type)
                         }
                         .subscribe()
                         .disposed(by: self.disposeBag)
                     case .kcal:
-                        self.service.addParameter { parameter in
+                        self.service.create(Parameter.self) { parameter in
                             self.map(&parameter, name: Measure.kcal.rawValue, type: type)
                         }
                         .subscribe()
                         .disposed(by: self.disposeBag)
                     case .gramm:
                         Nutritions.allCases.forEach { nutrition in
-                            self.service.addParameter { parameter in
+                            self.service.create(Parameter.self) { parameter in
                                 self.map(&parameter, name: nutrition.rawValue, type: type)
                             }
                             .subscribe()

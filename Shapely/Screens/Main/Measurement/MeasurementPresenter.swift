@@ -31,11 +31,12 @@ final class MeasurementPresenter: PropsProducer {
 private extension MeasurementPresenter {
     func setup() {
         let predicate = NSPredicate(format: "date >= %@", Calendar.current.startOfDay(for: Date()) as CVarArg)
-        Observable.combineLatest(service.rx_getNotes(predicate: predicate), service.rx_getParameters)
+        Observable.combineLatest(service.fetch(Note.self, predicate: predicate),
+                                 service.fetch(Parameter.self, predicate: nil))
             .bind { [weak self] notes, parameters in
-                guard let parameters, !parameters.isEmpty else { return } // suggest to add trecking parameters
+                guard !parameters.isEmpty else { return } // suggest to add trecking parameters
 
-                guard let note = notes?.first,
+                guard let note = notes.first,
                       let measurements = note.noteMeasure?.allObjects as? [Measurement]  else {
                     self?.createNote(parameters)
                     return
@@ -47,7 +48,7 @@ private extension MeasurementPresenter {
     }
 
     func createNote(_ parameters: [Parameter]) {
-        service.addNote { note in
+        service.create(Note.self) { note in
             note.date = Date()
         }
         .bind { [weak self] note in
@@ -57,7 +58,7 @@ private extension MeasurementPresenter {
     }
 
     func createMeasurement(_ note: Note, _ parameter: Parameter) {
-        service.addMeasurement { measurement in
+        service.create(Measurement.self) { measurement in
             measurement.value = 0
             measurement.time = Date()
             measurement.measureParameter = parameter

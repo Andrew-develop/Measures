@@ -30,9 +30,9 @@ final class LaunchPresenter: PropsProducer {
 
 private extension LaunchPresenter {
     func setup() {
-        service.rx_getUserData
+        service.fetch(User.self)
             .bind { [weak self] data in
-                guard let data, !data.isEmpty else {
+                guard !data.isEmpty else {
                     self?.router.runInitialStartScreen()
                     return
                 }

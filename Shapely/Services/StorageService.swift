@@ -1,33 +1,31 @@
 //
-//  StorageService.swift
+//  CoreDataService.swift
 //  Shapely
 //
-//  Created by Andrew on 10.03.2023.
+//  Created by Andrew on 28.03.2023.
 //
 
 import CoreData
 import RxSwift
 
-final class StorageService<Entity: NSManagedObject> {
+final class StorageService: NSObject {
     private let context: NSManagedObjectContext
 
     init(context: NSManagedObjectContext) {
         self.context = context
     }
 
-    func fetch(sortDescriptors: [NSSortDescriptor] = [],
-               predicate: NSPredicate? = nil) -> Observable<[Entity]?> {
-        return Observable<[Entity]?>.create { [weak self] observer in
+    func create<T: NSManagedObject>(_ entity: T.Type, _ body: @escaping (inout T) -> Void) -> Observable<T> {
+        return Observable<T>.create { [weak self] observer in
             guard let self else {
                 observer.onCompleted()
                 return Disposables.create()
             }
-            let request = Entity.fetchRequest()
-            request.sortDescriptors = sortDescriptors
-            request.predicate = predicate
+            var entity = T(context: self.context)
+            body(&entity)
             do {
-                let results = try self.context.fetch(request) as? [Entity]
-                observer.onNext(results)
+                try self.context.save()
+                observer.onNext(entity)
                 observer.onCompleted()
                 return Disposables.create()
             } catch {
@@ -37,17 +35,22 @@ final class StorageService<Entity: NSManagedObject> {
         }
     }
 
-    func add(_ body: @escaping (inout Entity) -> Void) -> Observable<Entity> {
-        return Observable<Entity>.create { [weak self] observer in
+    func fetch<T: NSManagedObject>(_ entity: T.Type,
+                                      sortDescriptors: [NSSortDescriptor] = [],
+                                      predicate: NSPredicate? = nil) -> Observable<[T]> {
+        return Observable<[T]>.create { [weak self] observer in
             guard let self else {
                 observer.onCompleted()
                 return Disposables.create()
             }
-            var entity = Entity(context: self.context)
-            body(&entity)
+
+            let request = NSFetchRequest<T>(entityName: String(describing: entity))
+            request.sortDescriptors = sortDescriptors
+            request.predicate = predicate
+
             do {
-                try self.context.save()
-                observer.onNext(entity)
+                let results = try self.context.fetch(request)
+                observer.onNext(results)
                 observer.onCompleted()
                 return Disposables.create()
             } catch {
@@ -75,14 +78,14 @@ final class StorageService<Entity: NSManagedObject> {
         }
     }
 
-    func delete(_ entity: Entity) -> Observable<Void> {
+    func delete(_ object: NSManagedObject) -> Observable<Void> {
         return Observable<Void>.create { [weak self] observer in
             guard let self else {
                 observer.onCompleted()
                 return Disposables.create()
             }
             do {
-                self.context.delete(entity)
+                self.context.delete(object)
                 try self.context.save()
                 observer.onNext(Void())
                 observer.onCompleted()

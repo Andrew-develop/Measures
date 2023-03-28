@@ -6,21 +6,22 @@
 //
 
 import RxSwift
+import CoreData
 
 protocol LaunchServiceProvider: AnyObject {
-    var rx_getUserData: Observable<[User]?> { get }
+    func fetch<T: NSManagedObject>(_ entity: T.Type) -> Observable<[T]>
 }
 
 final class LaunchServiceProviderImpl {
-    private let userStorage: StorageService<User>
+    private let storageService: StorageService
 
-    init(userStorage: StorageService<User>) {
-        self.userStorage = userStorage
+    init(storageService: StorageService) {
+        self.storageService = storageService
     }
 }
 
 extension LaunchServiceProviderImpl: LaunchServiceProvider {
-    var rx_getUserData: Observable<[User]?> {
-        userStorage.fetch().asObservable()
+    func fetch<T: NSManagedObject>(_ entity: T.Type) -> Observable<[T]> {
+        storageService.fetch(entity).asObservable()
     }
 }

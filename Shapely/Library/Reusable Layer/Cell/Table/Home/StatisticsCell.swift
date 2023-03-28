@@ -18,6 +18,7 @@ final class StatisticsCell: PreparableTableCell {
                                                                     collectionViewLayout: collectionLayout)) {
         $0.apply(.statistics)
         $0.dataSource = self
+        $0.delegate = self
         $0.register(StatisticsPointCell.self, forCellWithReuseIdentifier: StatisticsPointCell.className)
     }
 
@@ -57,7 +58,7 @@ final class StatisticsCell: PreparableTableCell {
         collectionView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Grid.s.offset)
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(StatisticsCell.cellHeight * 2 + Grid.ml.offset)
+            $0.height.equalTo(contentView.frame.width / 1.5)
         }
     }
 
@@ -83,9 +84,28 @@ extension StatisticsCell: UICollectionViewDataSource {
     }
 }
 
+extension StatisticsCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let paddingSpace = StatisticsCell.sectionInsets.left * (StatisticsCell.itemsPerRow + 1)
+        let availableWidth = contentView.frame.width - paddingSpace
+        let widthPerItem = availableWidth / StatisticsCell.itemsPerRow
+
+        return CGSize(width: widthPerItem, height: widthPerItem / 1.20)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        StatisticsCell.sectionInsets
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        StatisticsCell.sectionInsets.left
+    }
+}
+
 private extension StatisticsCell {
-    static let cellWidth = 86.0
-    static let cellHeight = 68.0
+    static let itemsPerRow: CGFloat = 3
+    static let sectionInsets = UIEdgeInsets(top: Grid.s.offset, left: Grid.s.offset,
+                                            bottom: Grid.s.offset, right: Grid.s.offset)
 }
 
 extension StatisticsCell {

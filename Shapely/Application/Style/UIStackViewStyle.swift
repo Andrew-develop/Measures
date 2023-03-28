@@ -38,7 +38,7 @@ extension StyleWrapper where Element == UIStackView {
         return .wrap { stack, theme in
             stack.backgroundColor = theme.colorPalette.surface
             stack.axis = .horizontal
-            stack.distribution = .fill
+            stack.distribution = .fillProportionally
         }
     }
 

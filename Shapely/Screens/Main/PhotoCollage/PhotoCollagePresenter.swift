@@ -52,10 +52,9 @@ private extension PhotoCollagePresenter {
     }
 
     func getPhotos() {
-        service.rx_getPhotos
+        service.fetch(Photo.self)
             .bind { [weak self] photos in
-                guard let self, let photos else { return }
-                self.mapPhotoCategories(photos.reversed())
+                self?.mapPhotoCategories(photos.reversed())
             }
             .disposed(by: disposeBag)
     }

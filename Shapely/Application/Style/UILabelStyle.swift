@@ -68,6 +68,13 @@ extension StyleWrapper where Element == UILabel {
         }
     }
 
+    static var footnoteNutrition: StyleWrapper {
+        return .wrap { label, theme in
+            label.textColor = theme.colorPalette.text
+            label.font = theme.typography.footnote
+        }
+    }
+
     static var measureValue: StyleWrapper {
         return .wrap { label, theme in
             label.textColor = theme.colorPalette.button
@@ -100,6 +107,8 @@ extension StyleWrapper where Element == UILabel {
         return .wrap { label, theme in
             label.textColor = theme.colorPalette.textSecondary
             label.font = theme.typography.body1
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
         }
     }
 

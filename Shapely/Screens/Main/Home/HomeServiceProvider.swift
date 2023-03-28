@@ -6,64 +6,43 @@
 //
 
 import RxSwift
+import CoreData
 
 protocol HomeServiceProvider: AnyObject {
-    var rx_getUserData: Observable<[User]?> { get }
-    var rx_getPhotos: Observable<[Photo]?> { get }
-    var rx_getMeasurements: Observable<[Measurement]?> { get }
-    var rx_getParameters: Observable<[Parameter]?> { get }
+    func create<T: NSManagedObject>(_ entity: T.Type,
+                                    _ body: @escaping (inout T) -> Void) -> Observable<T>
+
+    func fetch<T: NSManagedObject>(_ entity: T.Type) -> Observable<[T]>
     var rx_savedImage: Observable<Void> { get }
-    func rx_getNotes(predicate: NSPredicate?) -> Observable<[Note]?>
-    func addUser(_ body: @escaping (inout User) -> Void) -> Observable<User>
+    func playHaptic(intensity: Float, sharpness: Float)
 }
 
 final class HomeServiceProviderImpl {
-    private let userStorage: StorageService<User>
-    private let notesStorage: StorageService<Note>
-    private let photosStorage: StorageService<Photo>
-    private let measurementsStorage: StorageService<Measurement>
-    private let parametersStorage: StorageService<Parameter>
-
+    private let storageService: StorageService
     private let photoService: AddPhotoServiceProvider
+    private let hapticService: HapticService
 
-    init(userStorage: StorageService<User>,
-         notesStorage: StorageService<Note>,
-         photosStorage: StorageService<Photo>,
-         measurementsStorage: StorageService<Measurement>,
-         parametersStorage: StorageService<Parameter>,
-         photoService: AddPhotoServiceProvider) {
-        self.userStorage = userStorage
-        self.notesStorage = notesStorage
-        self.photosStorage = photosStorage
-        self.measurementsStorage = measurementsStorage
-        self.parametersStorage = parametersStorage
+    init(storageService: StorageService,
+         photoService: AddPhotoServiceProvider,
+         hapticService: HapticService) {
+        self.storageService = storageService
         self.photoService = photoService
+        self.hapticService = hapticService
     }
 }
 
 extension HomeServiceProviderImpl: HomeServiceProvider {
-    var rx_getUserData: Observable<[User]?> {
-        userStorage.fetch().asObservable()
+    func create<T: NSManagedObject>(_ entity: T.Type,
+                                    _ body: @escaping (inout T) -> Void) -> Observable<T> {
+        storageService.create(entity, body).asObservable()
     }
 
-    var rx_getPhotos: Observable<[Photo]?> {
-        photosStorage.fetch().asObservable()
+    func fetch<T: NSManagedObject>(_ entity: T.Type) -> Observable<[T]> {
+        storageService.fetch(entity).asObservable()
     }
 
-    var rx_getMeasurements: Observable<[Measurement]?> {
-        measurementsStorage.fetch().asObservable()
-    }
-
-    var rx_getParameters: Observable<[Parameter]?> {
-        parametersStorage.fetch().asObservable()
-    }
-
-    func rx_getNotes(predicate: NSPredicate?) -> Observable<[Note]?> {
-        notesStorage.fetch(predicate: predicate).asObservable()
-    }
-
-    func addUser(_ body: @escaping (inout User) -> Void) -> Observable<User> {
-        userStorage.add(body).asObservable()
+    func playHaptic(intensity: Float, sharpness: Float) {
+        hapticService.playHaptic(intensity: intensity, sharpness: sharpness)
     }
 
     var rx_savedImage: Observable<Void> {

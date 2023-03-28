@@ -110,13 +110,11 @@ final class CaloriesCell: PreparableTableCell {
 
         nutritionStackView.snp.makeConstraints {
             $0.top.equalTo(nutritionLabel.snp.bottom).offset(Grid.xs.offset)
-            $0.height.equalTo(Grid.xs.offset)
             $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
         }
 
-        nutritionStackView.snp.makeConstraints {
+        nutritionInfoStackView.snp.makeConstraints {
             $0.top.equalTo(nutritionStackView.snp.bottom).offset(Grid.xs.offset)
-            $0.height.equalTo(14.0)
             $0.leading.trailing.bottom.equalToSuperview().inset(Grid.s.offset)
         }
     }
@@ -124,6 +122,14 @@ final class CaloriesCell: PreparableTableCell {
     private func render(oldProps: Props, newProps: Props) {
         if oldProps.calories != newProps.calories {
             showCurrentValue(newProps.calories.value, from: newProps.calories.base)
+        }
+
+        if oldProps.nutritionInfo != newProps.nutritionInfo {
+            newProps.nutritionInfo.forEach { props in
+                let nutritionView = NutritionView()
+                nutritionView.props = props
+                nutritionInfoStackView.addArrangedSubview(nutritionView)
+            }
         }
     }
 
@@ -154,9 +160,10 @@ extension CaloriesCell {
         var state: State
         var calories: (value: Int, base: Int)
         var nutritions: (p: Int, f: Int, c: Int)
+        var nutritionInfo: [NutritionView.Props]
 
         static let `default` = Props(state: .base, calories: (value: 0, base: 0),
-        nutritions: (p: 0, f: 0, c: 0))
+        nutritions: (p: 0, f: 0, c: 0), nutritionInfo: [])
 
         enum State {
             case base

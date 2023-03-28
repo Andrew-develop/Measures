@@ -67,7 +67,7 @@ final class StatisticsPointCell: PreparableCollectionCell {
             $0.trailing.lessThanOrEqualToSuperview()
         }
 
-        titleLabel.snp.makeConstraints {
+        diffrenceLabel.snp.makeConstraints {
             $0.top.equalTo(valueLabel.snp.bottom).offset(Grid.xs.offset / 4)
             $0.leading.bottom.equalToSuperview()
             $0.trailing.lessThanOrEqualToSuperview()
@@ -84,7 +84,23 @@ final class StatisticsPointCell: PreparableCollectionCell {
         }
 
         if oldProps.diffrence != newProps.diffrence {
-            diffrenceLabel.text = newProps.diffrence
+            let valueText = NSMutableAttributedString(
+                string: "\(newProps.diffrence >= 0 ? "+" : "")\(newProps.diffrence) \(newProps.measure.rawValue)",
+                attributes: [
+                    NSAttributedString.Key.font: DefaultTypography.footnote,
+                    NSAttributedString.Key.foregroundColor: newProps.diffrence >= 0 ?
+                        .green : DefaultColorPalette.button
+                ])
+            let space = NSAttributedString(string: " ")
+            let measureText = NSAttributedString(
+                string: newProps.interval,
+                attributes: [
+                    NSAttributedString.Key.font: DefaultTypography.footnote,
+                    NSAttributedString.Key.foregroundColor: DefaultColorPalette.textSecondary
+                ])
+            valueText.append(space)
+            valueText.append(measureText)
+            diffrenceLabel.attributedText = valueText
         }
     }
 
@@ -97,9 +113,11 @@ extension StatisticsPointCell {
     struct Props: Mutable {
         var title: String
         var value: String
-        var diffrence: String
+        var diffrence: Double
+        var interval: String
+        var measure: Measure
         var onTap: Command
 
-        static let `default` = Props(title: "", value: "", diffrence: "", onTap: .empty)
+        static let `default` = Props(title: "", value: "", diffrence: -1, interval: "", measure: .sm, onTap: .empty)
     }
 }

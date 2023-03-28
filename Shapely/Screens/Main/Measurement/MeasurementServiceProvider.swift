@@ -6,48 +6,37 @@
 //
 
 import RxSwift
+import CoreData
 
 protocol MeasurementServiceProvider: AnyObject {
-    var rx_getParameters: Observable<[Parameter]?> { get }
-    func rx_getNotes(predicate: NSPredicate?) -> Observable<[Note]?>
+    func create<T: NSManagedObject>(_ entity: T.Type,
+                                    _ body: @escaping (inout T) -> Void) -> Observable<T>
 
-    func addNote(_ body: @escaping (inout Note) -> Void) -> Observable<Note>
-    func addMeasurement(_ body: @escaping (inout Measurement) -> Void) -> Observable<Measurement>
+    func fetch<T: NSManagedObject>(_ entity: T.Type,
+                                   predicate: NSPredicate?) -> Observable<[T]>
     func updateNote() -> Observable<Void>
 }
 
 final class MeasurementServiceProviderImpl {
-    private let notesStorage: StorageService<Note>
-    private let parametersStorage: StorageService<Parameter>
-    private let measurementsStorage: StorageService<Measurement>
+    private let storageService: StorageService
 
-    init(notesStorage: StorageService<Note>,
-         parametersStorage: StorageService<Parameter>,
-         measurementsStorage: StorageService<Measurement>) {
-        self.notesStorage = notesStorage
-        self.parametersStorage = parametersStorage
-        self.measurementsStorage = measurementsStorage
+    init(storageService: StorageService) {
+        self.storageService = storageService
     }
 }
 
 extension MeasurementServiceProviderImpl: MeasurementServiceProvider {
-    var rx_getParameters: Observable<[Parameter]?> {
-        parametersStorage.fetch().asObservable()
+    func create<T: NSManagedObject>(_ entity: T.Type,
+                                    _ body: @escaping (inout T) -> Void) -> Observable<T> {
+        storageService.create(entity, body).asObservable()
     }
 
-    func rx_getNotes(predicate: NSPredicate?) -> Observable<[Note]?> {
-        notesStorage.fetch(predicate: predicate).asObservable()
-    }
-
-    func addNote(_ body: @escaping (inout Note) -> Void) -> Observable<Note> {
-        notesStorage.add(body).asObservable()
-    }
-
-    func addMeasurement(_ body: @escaping (inout Measurement) -> Void) -> Observable<Measurement> {
-        measurementsStorage.add(body).asObservable()
+    func fetch<T: NSManagedObject>(_ entity: T.Type,
+                                   predicate: NSPredicate?) -> Observable<[T]> {
+        storageService.fetch(entity, predicate: predicate).asObservable()
     }
 
     func updateNote() -> Observable<Void> {
-        notesStorage.update().asObservable()
+        storageService.update().asObservable()
     }
 }

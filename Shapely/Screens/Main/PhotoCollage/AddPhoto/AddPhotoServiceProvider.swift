@@ -6,11 +6,13 @@
 //
 
 import RxSwift
+import CoreData
 
 protocol AddPhotoServiceProvider: AnyObject {
     func prepareImage(_ image: UIImage)
     func notify()
-    func addPhoto(_ body: @escaping (inout Photo) -> Void) -> Observable<Photo>
+    func create<T: NSManagedObject>(_ entity: T.Type,
+                                    _ body: @escaping (inout T) -> Void) -> Observable<T>
 
     var rx_maskedImage: Observable<UIImage> { get }
     var rx_savedImage: Observable<Void> { get }
@@ -18,14 +20,14 @@ protocol AddPhotoServiceProvider: AnyObject {
 
 final class AddPhotoServiceProviderImpl {
     private let mlService: MLService
-    private let photosStorage: StorageService<Photo>
+    private let storageService: StorageService
 
     private let savedImageSubject = PublishSubject<Void>()
 
     init(mlService: MLService,
-         photosStorage: StorageService<Photo>) {
+         storageService: StorageService) {
         self.mlService = mlService
-        self.photosStorage = photosStorage
+        self.storageService = storageService
     }
 }
 
@@ -34,8 +36,9 @@ extension AddPhotoServiceProviderImpl: AddPhotoServiceProvider {
         mlService.runVisionRequest(with: image)
     }
 
-    func addPhoto(_ body: @escaping (inout Photo) -> Void) -> Observable<Photo> {
-        photosStorage.add(body).asObservable()
+    func create<T: NSManagedObject>(_ entity: T.Type,
+                                    _ body: @escaping (inout T) -> Void) -> Observable<T> {
+        storageService.create(entity, body).asObservable()
     }
 
     func notify() {

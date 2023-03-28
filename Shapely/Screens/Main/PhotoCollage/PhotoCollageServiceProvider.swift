@@ -6,35 +6,28 @@
 //
 
 import RxSwift
+import CoreData
 
 protocol PhotoCollageServiceProvider: AnyObject {
-    var rx_getNotes: Observable<[Note]?> { get }
-    var rx_getPhotos: Observable<[Photo]?> { get }
+    func fetch<T: NSManagedObject>(_ entity: T.Type) -> Observable<[T]>
     var rx_savedImage: Observable<Void> { get }
 }
 
 final class PhotoCollageServiceProviderImpl {
-    private let notesStorage: StorageService<Note>
-    private let photosStorage: StorageService<Photo>
+    private let storageService: StorageService
 
     private let photoService: AddPhotoServiceProvider
 
-    init(notesStorage: StorageService<Note>,
-         photosStorage: StorageService<Photo>,
+    init(storageService: StorageService,
          photoService: AddPhotoServiceProvider) {
-        self.notesStorage = notesStorage
-        self.photosStorage = photosStorage
+        self.storageService = storageService
         self.photoService = photoService
     }
 }
 
 extension PhotoCollageServiceProviderImpl: PhotoCollageServiceProvider {
-    var rx_getNotes: Observable<[Note]?> {
-        notesStorage.fetch().asObservable()
-    }
-
-    var rx_getPhotos: Observable<[Photo]?> {
-        photosStorage.fetch().asObservable()
+    func fetch<T: NSManagedObject>(_ entity: T.Type) -> Observable<[T]> {
+        storageService.fetch(entity).asObservable()
     }
 
     var rx_savedImage: Observable<Void> {
