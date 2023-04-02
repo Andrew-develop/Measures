@@ -28,7 +28,7 @@ final class AddPhotoRouter {
 
 extension AddPhotoRouter: AddPhotoPublicRouter {
     func runScreenFactory() {
-        appRouter.push(factory.createViewController(), animated: true)
+        appRouter.push(factory.createViewController(), animated: false)
     }
 }
 

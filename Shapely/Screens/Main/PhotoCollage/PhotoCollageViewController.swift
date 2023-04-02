@@ -16,6 +16,7 @@ final class PhotoCollageViewController: UIViewController, PropsConsumer {
         $0.apply(.primary)
         $0.register(InitialStartTitleCell.self, forCellReuseIdentifier: InitialStartTitleCell.className)
         $0.register(PhotoTypesCell.self, forCellReuseIdentifier: PhotoTypesCell.className)
+        $0.register(AddWidgetCell.self, forCellReuseIdentifier: AddWidgetCell.className)
     }
 
     private let titleLabel = with(UILabel()) {

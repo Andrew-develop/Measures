@@ -20,7 +20,10 @@ final class CaloriesCell: PreparableTableCell {
 
     private let calorieView = with(UIView()) {
         $0.apply([.cornerRadius(Grid.xs.offset / 2)])
+        $0.backgroundColor = R.color.accentGreen()
     }
+
+    private let emptyView = UIView()
 
     private let nutritionLabel = with(UILabel()) {
         $0.apply(.cellTitle)
@@ -33,6 +36,18 @@ final class CaloriesCell: PreparableTableCell {
 
     private let nutritionStackView = with(UIStackView()) {
         $0.apply(.nutrition)
+    }
+
+    private let proteinView = with(UIView()) {
+        $0.backgroundColor = Nutritions.proteins.indicatorColor
+    }
+
+    private let fatView = with(UIView()) {
+        $0.backgroundColor = Nutritions.fat.indicatorColor
+    }
+
+    private let carbonView = with(UIView()) {
+        $0.backgroundColor = Nutritions.carbon.indicatorColor
     }
 
     private let nutritionInfoStackView = with(UIStackView()) {
@@ -75,6 +90,13 @@ final class CaloriesCell: PreparableTableCell {
         selectionStyle = .none
         contentView.apply(.backgroundColor)
 
+        calorieStackView.addArrangedSubview(calorieView)
+        calorieStackView.addArrangedSubview(emptyView)
+
+        nutritionStackView.addArrangedSubview(proteinView)
+        nutritionStackView.addArrangedSubview(fatView)
+        nutritionStackView.addArrangedSubview(carbonView)
+
         backView.addSubviews(calorieLabel, calorieStackView, nutritionLabel, nutritionButton,
                              nutritionStackView, nutritionInfoStackView)
         contentView.addSubviews(backView, editingStackView)
@@ -110,18 +132,21 @@ final class CaloriesCell: PreparableTableCell {
 
         nutritionStackView.snp.makeConstraints {
             $0.top.equalTo(nutritionLabel.snp.bottom).offset(Grid.xs.offset)
+            $0.height.equalTo(Grid.xs.offset)
             $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
         }
 
         nutritionInfoStackView.snp.makeConstraints {
             $0.top.equalTo(nutritionStackView.snp.bottom).offset(Grid.xs.offset)
+            $0.height.equalTo(Grid.s.offset)
             $0.leading.trailing.bottom.equalToSuperview().inset(Grid.s.offset)
         }
     }
 
     private func render(oldProps: Props, newProps: Props) {
         if oldProps.calories != newProps.calories {
-            showCurrentValue(newProps.calories.value, from: newProps.calories.base)
+            showCurrentValue(Int(newProps.calories.value), from: Int(newProps.calories.base))
+            setupCalorieLine()
         }
 
         if oldProps.nutritionInfo != newProps.nutritionInfo {
@@ -130,6 +155,10 @@ final class CaloriesCell: PreparableTableCell {
                 nutritionView.props = props
                 nutritionInfoStackView.addArrangedSubview(nutritionView)
             }
+        }
+
+        if oldProps.nutritions != newProps.nutritions {
+            setupNutritionsLines()
         }
     }
 
@@ -151,6 +180,37 @@ final class CaloriesCell: PreparableTableCell {
         valueText.append(measureText)
         calorieLabel.attributedText = valueText
     }
+
+    private func setupCalorieLine() {
+        let base = props.calories.value < props.calories.base ?
+        props.calories.value : props.calories.base
+        let empty = props.calories.value < props.calories.base ?
+        props.calories.base - props.calories.value : 0
+
+        remakeWidth(calorieView, base / props.calories.base)
+        remakeWidth(emptyView, empty / props.calories.base)
+    }
+
+    private func setupNutritionsLines() {
+        let sum = props.nutritions.p + props.nutritions.c + props.nutritions.f
+        Nutritions.allCases.forEach {
+            switch $0 {
+            case .proteins:
+                remakeWidth(proteinView, props.nutritions.p / sum)
+            case .carbon:
+                remakeWidth(carbonView, props.nutritions.c / sum)
+            case .fat:
+                remakeWidth(fatView, props.nutritions.f / sum)
+            }
+        }
+    }
+
+    private func remakeWidth(_ currentView: UIView, _ value: CGFloat) {
+        currentView.snp.remakeConstraints {
+            $0.height.equalTo(Grid.xs.offset)
+            $0.width.equalTo(nutritionStackView.snp.width).multipliedBy(value)
+        }
+    }
 }
 
 // swiftlint:disable large_tuple
@@ -158,8 +218,8 @@ final class CaloriesCell: PreparableTableCell {
 extension CaloriesCell {
     struct Props: Mutable {
         var state: State
-        var calories: (value: Int, base: Int)
-        var nutritions: (p: Int, f: Int, c: Int)
+        var calories: (value: Double, base: Double)
+        var nutritions: (p: Double, f: Double, c: Double)
         var nutritionInfo: [NutritionView.Props]
 
         static let `default` = Props(state: .base, calories: (value: 0, base: 0),

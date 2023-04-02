@@ -155,6 +155,10 @@ extension InitialStartTapeCell: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         calculatePosition()
     }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        props.onStartScroll.execute()
+    }
 }
 
 extension InitialStartTapeCell: UICollectionViewDelegateFlowLayout {
@@ -176,7 +180,9 @@ extension InitialStartTapeCell {
         var range: Range<Int>
         var items: [InitialStartTapeUnitCellViewModel]
         var onChanged: CommandWith<Double>
+        var onStartScroll: Command
 
-        static let `default` = Props(startValue: 0, measureType: .sm, range: Range(0...0), items: [], onChanged: .empty)
+        static let `default` = Props(startValue: 0, measureType: .sm, range: Range(0...0),
+                                     items: [], onChanged: .empty, onStartScroll: .empty)
     }
 }

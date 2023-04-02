@@ -20,8 +20,6 @@ extension StyleWrapper where Element == UICollectionViewFlowLayout {
     static var photoCollage: StyleWrapper {
         return .wrap { layout, _ in
             layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = Grid.xs.offset
-            layout.itemSize = CGSize(width: 120.0, height: 210.0)
         }
     }
 

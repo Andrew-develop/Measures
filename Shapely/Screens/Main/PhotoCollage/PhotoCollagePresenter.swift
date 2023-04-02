@@ -62,32 +62,28 @@ private extension PhotoCollagePresenter {
     func mapPhotoCategories(_ photos: [Photo]) {
         Angel.allCases.forEach { [weak self] angel in
             guard let self else { return }
-            self.categories[angel] = [
-                InitialStartTitleCellViewModel(props: .init(title: angel.description)),
-                PhotoTypesCellViewModel(
-                    props: .init(
-                        id: UUID(),
-                        items: self.mapPhotos(photos.filter { $0.angel == angel.description })
-                    )
+            let categoryPhotos = photos.filter { $0.angel == angel.description }
+            let title = InitialStartTitleCellViewModel(props: .init(title: angel.description))
+            let values = PhotoTypesCellViewModel(
+                props: .init(
+                    id: UUID(),
+                    items: self.mapPhotos(categoryPhotos)
                 )
-            ]
+            )
+            let addWidget = AddWidgetCellViewModel(
+                props: .init(
+                    title: R.string.localizable.photoCollageAddPhoto(),
+                    onTap: Command {
+                        self.router.runAddPhotoScreen()
+                    }
+                )
+            )
+            self.categories[angel] = !categoryPhotos.isEmpty ? [title, values, addWidget] : [title, addWidget]
         }
     }
 
     func mapPhotos(_ photos: [Photo]) -> [PhotoVariantCellViewModel] {
-        var viewModels: [PhotoVariantCellViewModel] = []
-
-        viewModels.append(PhotoVariantCellViewModel(
-            props: .init(
-                id: UUID(),
-                image: R.image.plus(),
-                onTap: Command { [weak self] in
-                    self?.router.runAddPhotoScreen()
-                }
-            )
-        ))
-
-        viewModels.append(contentsOf: photos.map { photo in
+        photos.map { photo in
             PhotoVariantCellViewModel(
                 props: .init(
                     id: UUID(),
@@ -95,8 +91,6 @@ private extension PhotoCollagePresenter {
                     onTap: .empty
                 )
             )
-        })
-
-        return viewModels
+        }
     }
 }

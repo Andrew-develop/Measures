@@ -12,25 +12,19 @@ protocol InitialStartPublicRouter: AnyObject {
 }
 
 protocol InitialStartInternalRouter: AnyObject {
-    func runMainScreen()
-    func runActionSheet(with controller: UIAlertController)
-    func runActivityLevelScreen()
-    func showDialog(_ dialog: DialogController)
+    func runPersonalInfoScreen()
 }
 
 final class InitialStartRouter {
     private let factory: InitialStartViewFactory
-    private let activityLevelRouter: ActivityLevelPublicRouter
-    private let mainRouter: MainBarPublicRouter
+    private let personalInfoRouter: PersonalInfoPublicRouter
     private let appRouter: AppRouter
 
     init(factory: InitialStartViewFactory,
-         activityLevelRouter: ActivityLevelPublicRouter,
-         mainRouter: MainBarPublicRouter,
+         personalInfoRouter: PersonalInfoPublicRouter,
          appRouter: AppRouter) {
         self.factory = factory
-        self.activityLevelRouter = activityLevelRouter
-        self.mainRouter = mainRouter
+        self.personalInfoRouter = personalInfoRouter
         self.appRouter = appRouter
     }
 }
@@ -38,24 +32,12 @@ final class InitialStartRouter {
 extension InitialStartRouter: InitialStartPublicRouter {
     func runScreenFactory() {
         let controller = factory.createViewController()
-        appRouter.setRootModule(controller, animated: true)
+        appRouter.setRootModule(controller, animated: false)
     }
 }
 
 extension InitialStartRouter: InitialStartInternalRouter {
-    func runMainScreen() {
-        mainRouter.runScreenFactory()
-    }
-
-    func runActionSheet(with controller: UIAlertController) {
-        appRouter.present(controller, animated: true)
-    }
-
-    func runActivityLevelScreen() {
-        activityLevelRouter.runScreenFactory()
-    }
-
-    func showDialog(_ dialog: DialogController) {
-        appRouter.present(dialog, animated: true)
+    func runPersonalInfoScreen() {
+        personalInfoRouter.runScreenFactory()
     }
 }

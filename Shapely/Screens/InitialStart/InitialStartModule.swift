@@ -16,7 +16,7 @@ final class InitialStartModule: AppModule, Assembly {
     private var resolver: Resolver!
 
     var submodules: [AppModule] = [
-        ActivityLevelModule()
+        PersonalInfoModule()
     ]
 
     func createAssembly() -> Assembly? {
@@ -28,9 +28,6 @@ final class InitialStartModule: AppModule, Assembly {
     }
 
     func assemble(container: Container) {
-        container.autoregister(InitialStartServiceProviderImpl.self, initializer: InitialStartServiceProviderImpl.init)
-            .implements(InitialStartServiceProvider.self)
-
         container.autoregister(InitialStartRouter.self, initializer: InitialStartRouter.init)
             .implements(InitialStartPublicRouter.self, InitialStartInternalRouter.self)
             .inObjectScope(.container)

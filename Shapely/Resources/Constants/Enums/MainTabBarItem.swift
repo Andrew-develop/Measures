@@ -14,7 +14,7 @@ enum MainTabBarItem: Int, CaseIterable {
     case training = 3
     case photos = 4
 
-    private var icon: UIImage? {
+    var icon: UIImage? {
         switch self {
         case .home:
             return UIImage()

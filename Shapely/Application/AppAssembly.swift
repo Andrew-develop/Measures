@@ -29,10 +29,6 @@ private class InternalAppAssembly: Assembly {
             MLService()
         }
 
-        container.register(HapticService.self) { _ in
-            HapticService()
-        }
-
         container.autoregister(StorageService.self, initializer: StorageService.init)
     }
 }

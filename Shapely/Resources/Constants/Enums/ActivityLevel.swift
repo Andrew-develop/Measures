@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum ActivityLevel: Double, CaseIterable, CustomStringConvertible {
-    case bad = 1.2
-    case sad = 1.375
-    case good = 1.55
-    case high = 1.725
-    case sportsman = 1.9
+enum ActivityLevel: Int, CaseIterable, CustomStringConvertible {
+    case bad
+    case sad
+    case good
+    case high
+    case sportsman
 
     var title: String {
         switch self {
@@ -41,6 +41,21 @@ enum ActivityLevel: Double, CaseIterable, CustomStringConvertible {
             return R.string.localizable.activityLevelHighInfo()
         case .sportsman:
             return R.string.localizable.activityLevelSportsmanInfo()
+        }
+    }
+
+    var coefficient: Double {
+        switch self {
+        case .bad:
+            return 1.2
+        case .sad:
+            return 1.375
+        case .good:
+            return 1.55
+        case .high:
+            return 1.725
+        case .sportsman:
+            return 1.9
         }
     }
 }

@@ -11,4 +11,5 @@ enum WidgetType: Int, CaseIterable {
     case calorie
     case measurements
     case photo
+    case addWidget
 }

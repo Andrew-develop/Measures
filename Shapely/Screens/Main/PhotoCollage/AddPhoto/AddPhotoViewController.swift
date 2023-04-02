@@ -39,6 +39,17 @@ final class AddPhotoViewController: UIViewController, PropsConsumer {
         prepareView()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            self?.view.alpha = 1.0
+            self?.confirmView.animate()
+            self?.confirmView.layoutIfNeeded()
+        } completion: { [weak self] _ in
+            self?.confirmView.prepareAfterAnimation()
+        }
+    }
+
     private func runAlert() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.apply(.primary)

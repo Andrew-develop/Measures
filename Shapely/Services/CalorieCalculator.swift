@@ -5,31 +5,22 @@
 //  Created by Andrew on 22.02.2023.
 //
 
-import RxSwift
-import RxCocoa
+import Foundation
 
-final class CalorieCalculator {
-    func calculateCalorieIntake(with userData: UserData) -> Observable<Int> {
-        return Observable<Int>.create { [weak self] observer in
-            guard let age = self?.calculateAge(from: userData.birthday) else {
-                observer.onCompleted()
-                return Disposables.create()
-            }
+struct CalorieCalculator {
+    static func calculateCalorieIntake() -> Int {
+        guard let age = calculateAge() else { return 2200 }
 
-            let gender = userData.gender
-            let value = gender.baseCoef + gender.weightCoef *
-            userData.weight + gender.heightCoef *
-            userData.height - gender.ageCoef * Double(age)
+        let gender = UserDefaultsHelper.gender
+        let value = gender.baseCoef + gender.weightCoef *
+        UserDefaultsHelper.weight + gender.heightCoef *
+        UserDefaultsHelper.height - gender.ageCoef * Double(age)
 
-            observer.onNext(Int(value))
-            observer.onCompleted()
-
-            return Disposables.create()
-        }
+        return Int(value)
     }
 
-    private func calculateAge(from birthday: Date) -> Int? {
-        let ageComponents = Calendar.current.dateComponents([.year], from: birthday, to: .now)
+    static func calculateAge() -> Int? {
+        let ageComponents = Calendar.current.dateComponents([.year], from: UserDefaultsHelper.birthday, to: .now)
         return ageComponents.year
     }
 }

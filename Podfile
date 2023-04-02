@@ -22,4 +22,6 @@ target 'Shapely' do
   # UI
   pod 'SnapKit', '5.6.0'
 
+  pod 'Charts'
+
 end

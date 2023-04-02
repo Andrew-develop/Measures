@@ -16,7 +16,7 @@ final class PhotoVariantCell: PreparableCollectionCell {
     }
 
     private let backView = with(UIView()) {
-        $0.apply([.surfaceColor, .cornerRadius(Grid.xs.offset)])
+        $0.apply([.backgroundColor, .cornerRadius(Grid.xs.offset)])
     }
 
     var props: PhotoVariantCell.Props = .default {
@@ -44,7 +44,7 @@ final class PhotoVariantCell: PreparableCollectionCell {
     }
 
     private func prepareView() {
-        contentView.apply(.backgroundColor)
+        contentView.apply(.surfaceColor)
 
         backView.addSubview(imageView)
         contentView.addSubview(backView)
@@ -57,7 +57,7 @@ final class PhotoVariantCell: PreparableCollectionCell {
 
     private func makeConstraints() {
         backView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalToSuperview().inset(Grid.xs.offset)
         }
 
         imageView.snp.makeConstraints {
@@ -67,7 +67,7 @@ final class PhotoVariantCell: PreparableCollectionCell {
 
     private func render(oldProps: Props, newProps: Props) {
         if oldProps.image != newProps.image {
-            imageView.image = newProps.image?.scalePreservingAspectRatio(targetSize: CGSize(width: 70.0, height: 210.0))
+            imageView.image = newProps.image
         }
     }
 

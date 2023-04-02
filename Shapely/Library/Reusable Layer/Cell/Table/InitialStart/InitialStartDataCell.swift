@@ -99,7 +99,7 @@ final class InitialStartDataCell: PreparableTableCell {
     }
 
     @objc private func onTap() {
-        props.onTap.execute()
+        props.onTap.execute(with: props.isSelected)
     }
 }
 
@@ -108,7 +108,7 @@ extension InitialStartDataCell {
         var title: String
         var isChevronHidden: Bool
         var isSelected: Bool
-        var onTap: Command
+        var onTap: CommandWith<Bool>
 
         static let `default` = Props(title: "", isChevronHidden: true, isSelected: false, onTap: .empty)
     }

@@ -30,6 +30,24 @@ final class ConfirmView: UIView {
     required init(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func animate() {
+        switch props.state {
+        case .regular:
+            setRegularPosition()
+        case .full:
+            setFullPosition()
+        }
+    }
+
+    func prepareAfterAnimation() {
+        switch props.state {
+        case .full:
+            backButton.isHidden = false
+        default:
+            break
+        }
+    }
 }
 
 private extension ConfirmView {
@@ -40,6 +58,8 @@ private extension ConfirmView {
         continueButton.addTarget(self, action: #selector(onContinue), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(onBack), for: .touchUpInside)
 
+        backButton.isHidden = true
+
         addSubviews(continueButton, backButton)
         makeConstraints()
     }
@@ -49,43 +69,26 @@ private extension ConfirmView {
             $0.top.bottom.leading.equalToSuperview()
             $0.width.equalTo(self.snp.height)
         }
-        setRegularPosition()
     }
 
     func render(oldProps: Props, newProps: Props) {
         if oldProps.title != newProps.title {
             continueButton.setTitle(newProps.title, for: .normal)
         }
-        if oldProps.state != newProps.state {
-            switch newProps.state {
-            case .regular:
-                setRegularPosition()
-            case .full:
-                setFullPosition()
-            }
-        }
     }
 
     func setRegularPosition() {
         backButton.isHidden = true
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.continueButton.snp.remakeConstraints {
-                $0.edges.equalToSuperview()
-            }
-            self?.layoutIfNeeded()
+
+        continueButton.snp.remakeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 
     func setFullPosition() {
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            guard let self else { return }
-            self.continueButton.snp.remakeConstraints {
-                $0.top.trailing.bottom.equalToSuperview()
-                $0.leading.equalTo(self.backButton.snp.trailing).offset(Grid.xs.offset)
-            }
-            self.layoutIfNeeded()
-        } completion: { [weak self] _ in
-            self?.backButton.isHidden = false
+        continueButton.snp.remakeConstraints {
+            $0.top.trailing.bottom.equalToSuperview()
+            $0.leading.equalTo(self.backButton.snp.trailing).offset(Grid.xs.offset)
         }
     }
 

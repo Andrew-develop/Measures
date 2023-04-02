@@ -40,9 +40,6 @@ private extension HomePresenter {
     func setup() {
         propsRelay.mutate {
             $0.title = R.string.localizable.homeTitle()
-            $0.onTap = Command { [weak self] in
-                self?.service.playHaptic(intensity: 0.5, sharpness: 0.5)
-            }
         }
 
         service.rx_savedImage
@@ -64,25 +61,22 @@ private extension HomePresenter {
             configureParameters()
         case .photo:
             configurePhotos()
+        case .addWidget:
+            configureAddWidget()
         }
     }
 
     func configureCalorie() {
-        service.fetch(User.self)
-            .bind { [weak self] data in
-                guard !data.isEmpty else { return }
-                self?.widgets[.calorie] = [
-                    CaloriesCellViewModel(props: .init(
-                        state: .base,
-                        calories: (0, Int(data[0].calorieIntake)),
-                        nutritions: (0, 0, 0),
-                        nutritionInfo: Nutritions.allCases.map { element in
-                            NutritionView.Props(title: element.title, color: element.indicatorColor)
-                        }
-                    ))
-                ]
-            }
-            .disposed(by: disposeBag)
+        widgets[.calorie] = [
+            CaloriesCellViewModel(props: .init(
+                state: .base,
+                calories: (10, Double(UserDefaultsHelper.calorieIntake)),
+                nutritions: (100, 4, 3),
+                nutritionInfo: Nutritions.allCases.map { element in
+                    NutritionView.Props(title: element.title, color: element.indicatorColor)
+                }
+            ))
+        ]
     }
 
     func configureParameters() {
@@ -96,7 +90,7 @@ private extension HomePresenter {
                         props: .init(
                             id: UUID(),
                             items: TreckingParameter.allCases.compactMap { parameter in
-                                guard let param = parameters.first(where: { expectedParam in
+                                guard parameters.contains(where: { expectedParam in
                                     expectedParam.name == parameter.title
                                 }) else { return nil }
 
@@ -145,5 +139,11 @@ private extension HomePresenter {
                 ]
             }
             .disposed(by: disposeBag)
+    }
+
+    func configureAddWidget() {
+        widgets[.addWidget] = [
+            AddWidgetCellViewModel(props: .init(title: R.string.localizable.homeAddWidget(), onTap: .empty))
+        ]
     }
 }

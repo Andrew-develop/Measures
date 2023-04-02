@@ -12,7 +12,6 @@ final class AddWidgetCell: PreparableTableCell {
 
     private let titleLabel = with(UILabel()) {
         $0.apply(.cellTitle)
-        $0.text = R.string.localizable.homeAddWidget()
     }
 
     private let addImageView = with(UIImageView()) {
@@ -79,7 +78,11 @@ final class AddWidgetCell: PreparableTableCell {
         }
     }
 
-    private func render(oldProps: Props, newProps: Props) {}
+    private func render(oldProps: Props, newProps: Props) {
+        if oldProps.title != newProps.title {
+            titleLabel.text = newProps.title
+        }
+    }
 
     @objc private func onTap() {
         props.onTap.execute()
@@ -88,8 +91,9 @@ final class AddWidgetCell: PreparableTableCell {
 
 extension AddWidgetCell {
     struct Props: Mutable {
+        var title: String
         var onTap: Command
 
-        static let `default` = Props(onTap: .empty)
+        static let `default` = Props(title: "", onTap: .empty)
     }
 }

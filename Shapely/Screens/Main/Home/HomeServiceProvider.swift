@@ -14,20 +14,16 @@ protocol HomeServiceProvider: AnyObject {
 
     func fetch<T: NSManagedObject>(_ entity: T.Type) -> Observable<[T]>
     var rx_savedImage: Observable<Void> { get }
-    func playHaptic(intensity: Float, sharpness: Float)
 }
 
 final class HomeServiceProviderImpl {
     private let storageService: StorageService
     private let photoService: AddPhotoServiceProvider
-    private let hapticService: HapticService
 
     init(storageService: StorageService,
-         photoService: AddPhotoServiceProvider,
-         hapticService: HapticService) {
+         photoService: AddPhotoServiceProvider) {
         self.storageService = storageService
         self.photoService = photoService
-        self.hapticService = hapticService
     }
 }
 
@@ -39,10 +35,6 @@ extension HomeServiceProviderImpl: HomeServiceProvider {
 
     func fetch<T: NSManagedObject>(_ entity: T.Type) -> Observable<[T]> {
         storageService.fetch(entity).asObservable()
-    }
-
-    func playHaptic(intensity: Float, sharpness: Float) {
-        hapticService.playHaptic(intensity: intensity, sharpness: sharpness)
     }
 
     var rx_savedImage: Observable<Void> {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UserTarget: CaseIterable, CustomStringConvertible {
+enum UserTarget: Int, CaseIterable, CustomStringConvertible {
     case loseWeight
     case saveWeight
     case gainWeight

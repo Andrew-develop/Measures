@@ -110,5 +110,6 @@
 
 // MARK: - PhotoCollage
 "photoCollage.title" = "Фотодневник";
+"photoCollage.addPhoto" = "Добавить фото";
 
 

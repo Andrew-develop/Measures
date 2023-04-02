@@ -22,6 +22,7 @@ extension StyleWrapper where Element == UIStackView {
             stack.axis = .horizontal
             stack.distribution = .fill
             stack.layer.cornerRadius = Grid.xs.offset / 2
+            stack.clipsToBounds = true
         }
     }
 
@@ -31,6 +32,7 @@ extension StyleWrapper where Element == UIStackView {
             stack.axis = .horizontal
             stack.distribution = .fillProportionally
             stack.layer.cornerRadius = Grid.xs.offset / 2
+            stack.clipsToBounds = true
         }
     }
 

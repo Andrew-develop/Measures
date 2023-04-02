@@ -89,7 +89,7 @@ final class StatisticsPointCell: PreparableCollectionCell {
                 attributes: [
                     NSAttributedString.Key.font: DefaultTypography.footnote,
                     NSAttributedString.Key.foregroundColor: newProps.diffrence >= 0 ?
-                        .green : DefaultColorPalette.button
+                    R.color.accentGreen() : DefaultColorPalette.button
                 ])
             let space = NSAttributedString(string: " ")
             let measureText = NSAttributedString(

@@ -12,16 +12,16 @@ final class InitialStartTableAdapter: NSObject {
 
     // MARK: - Properties
 
-    private var diffableDataSource: UITableViewDiffableDataSource<InitialStartSection, AnyHashable>?
+    private var diffableDataSource: UITableViewDiffableDataSource<InitialStartSection.Start, AnyHashable>?
 
-    var pack: [InitialStartSection: [AnyHashable]] = [:] {
+    var pack: [InitialStartSection.Start: [AnyHashable]] = [:] {
         didSet {
             updateSnapshot()
         }
     }
 
     func makeDiffableDataSource(_ table: UITableView) {
-        diffableDataSource = UITableViewDiffableDataSource<InitialStartSection, AnyHashable>(tableView: table) {
+        diffableDataSource = UITableViewDiffableDataSource<InitialStartSection.Start, AnyHashable>(tableView: table) {
             tableView, indexPath, itemIdentifier in
 
             guard let model = itemIdentifier as? PreparableViewModel else { return UITableViewCell() }
@@ -36,8 +36,8 @@ final class InitialStartTableAdapter: NSObject {
     }
 
     private func updateSnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<InitialStartSection, AnyHashable>()
-        snapshot.appendSections(InitialStartSection.allCases)
+        var snapshot = NSDiffableDataSourceSnapshot<InitialStartSection.Start, AnyHashable>()
+        snapshot.appendSections(InitialStartSection.Start.allCases)
         pack.forEach {
             snapshot.appendItems($0.value, toSection: $0.key)
         }

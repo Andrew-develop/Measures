@@ -16,8 +16,9 @@ final class PhotoTypesCell: PreparableTableCell {
 
     private lazy var collectionView = with(UICollectionView(frame: .zero,
                                                                     collectionViewLayout: collectionLayout)) {
-        $0.apply(.measures)
+        $0.apply(.statistics)
         $0.dataSource = self
+        $0.delegate = self
         $0.register(PhotoVariantCell.self, forCellWithReuseIdentifier: PhotoVariantCell.className)
     }
 
@@ -83,9 +84,23 @@ extension PhotoTypesCell: UICollectionViewDataSource {
     }
 }
 
+extension PhotoTypesCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: PhotoTypesCell.cellWidth, height: PhotoTypesCell.cellHeight)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        0
+    }
+}
+
 private extension PhotoTypesCell {
-    static let cellWidth = 70.0
-    static let cellHeight = 210.0
+    static let cellWidth = 150.0
+    static let cellHeight = 270.0
 }
 
 extension PhotoTypesCell {
