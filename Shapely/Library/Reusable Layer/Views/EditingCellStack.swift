@@ -17,7 +17,7 @@ final class EditingCellStack: UIView {
     }
 
     private let stackView = with(UIStackView()) {
-        $0.apply(.editingCell)
+        $0.apply(.control)
     }
 
     var props: Props = .default {

@@ -9,16 +9,21 @@ protocol HomePublicRouter: AnyObject {
     func runScreenFactory()
 }
 
-protocol HomeInternalRouter: AnyObject {}
+protocol HomeInternalRouter: AnyObject {
+    func runChartScreen()
+}
 
 final class HomeRouter {
     private let factory: HomeViewFactory
     private let appRouter: AppRouter
+    private let chartRouter: ChartPublicRouter
 
     init(factory: HomeViewFactory,
-         appRouter: AppRouter) {
+         appRouter: AppRouter,
+         chartRouter: ChartPublicRouter) {
         self.factory = factory
         self.appRouter = appRouter
+        self.chartRouter = chartRouter
     }
 }
 
@@ -29,4 +34,8 @@ extension HomeRouter: HomePublicRouter {
     }
 }
 
-extension HomeRouter: HomeInternalRouter {}
+extension HomeRouter: HomeInternalRouter {
+    func runChartScreen() {
+        chartRouter.runScreenFactory()
+    }
+}

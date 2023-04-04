@@ -15,6 +15,9 @@ final class ChartViewController: UIViewController, PropsConsumer {
 
     private let chartView = with(LineChartView()) {
         $0.isHidden = false
+        $0.xAxis.axisMinimum = 1
+        $0.xAxis.axisMaximum = 5
+        $0.xAxis.granularity = 1
     }
 
     var disposeBag = DisposeBag()
@@ -39,18 +42,29 @@ final class ChartViewController: UIViewController, PropsConsumer {
 
 private extension ChartViewController {
     func prepareView() {
+        view.apply(.backgroundColor)
+        view.addSubview(chartView)
         makeConstraints()
     }
 
-    func makeConstraints() {}
+    func makeConstraints() {
+        chartView.snp.makeConstraints {
+            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview().inset(Grid.s.offset)
+        }
+    }
 
-    func render(oldProps: Props, newProps: Props) {}
+    func render(oldProps: Props, newProps: Props) {
+        if oldProps.data != newProps.data, let data = newProps.data {
+            chartView.data = data
+        }
+    }
 }
 
 extension ChartViewController {
     struct Props: Mutable {
-        // var <#name#>: <#type#>
+        var data: ChartData?
 
-        static var `default` = Props()
+        static var `default` = Props(data: nil)
     }
 }

@@ -7,11 +7,39 @@
 
 import UIKit
 
+final class HomeDiffableDataSource: UITableViewDiffableDataSource<WidgetType, AnyHashable> {
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard let sectionFrom = sectionIdentifier(for: sourceIndexPath.section),
+              let itemFrom = itemIdentifier(for: sourceIndexPath),
+              let sectionTo = sectionIdentifier(for: destinationIndexPath.section),
+              sourceIndexPath != destinationIndexPath else { return }
+
+        var snap = snapshot()
+        snap.deleteSections([sectionFrom])
+
+        let isAfter = destinationIndexPath.section > sourceIndexPath.section
+
+        if isAfter {
+            snap.insertSections([sectionFrom], afterSection: sectionTo)
+        } else {
+            snap.insertSections([sectionFrom], beforeSection: sectionTo)
+        }
+
+        snap.appendItems([itemFrom], toSection: sectionFrom)
+
+        apply(snap, animatingDifferences: false)
+    }
+}
+
 final class HomeTableAdapter: NSObject {
 
     // MARK: - Properties
 
-    private var diffableDataSource: UITableViewDiffableDataSource<WidgetType, AnyHashable>?
+    private var diffableDataSource: HomeDiffableDataSource?
 
     var widgets: [WidgetType: [AnyHashable]] = [:] {
         didSet {
@@ -20,7 +48,7 @@ final class HomeTableAdapter: NSObject {
     }
 
     func makeDiffableDataSource(_ table: UITableView) {
-        diffableDataSource = UITableViewDiffableDataSource<WidgetType, AnyHashable>(tableView: table) {
+        diffableDataSource = HomeDiffableDataSource(tableView: table) {
             tableView, indexPath, itemIdentifier in
 
             guard let model = itemIdentifier as? PreparableViewModel else { return UITableViewCell() }
@@ -41,5 +69,26 @@ final class HomeTableAdapter: NSObject {
             snapshot.appendItems($0.value, toSection: $0.key)
         }
         diffableDataSource?.apply(snapshot, animatingDifferences: false)
+    }
+}
+
+extension HomeTableAdapter: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        IndexPath(row: 0, section: proposedDestinationIndexPath.section)
+    }
+}
+
+extension HomeTableAdapter: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        []
+    }
+}
+
+extension HomeTableAdapter: UITableViewDropDelegate {
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+    }
+
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
     }
 }

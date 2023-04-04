@@ -8,14 +8,6 @@
 import UIKit
 
 extension StyleWrapper where Element == UIStackView {
-    static var editingCell: StyleWrapper {
-        return .wrap { stack, theme in
-            stack.backgroundColor = theme.colorPalette.surface
-            stack.axis = .vertical
-            stack.distribution = .fill
-        }
-    }
-
     static var calorie: StyleWrapper {
         return .wrap { stack, theme in
             stack.backgroundColor = theme.colorPalette.surfaceSecondary
@@ -57,6 +49,16 @@ extension StyleWrapper where Element == UIStackView {
             stack.axis = .horizontal
             stack.distribution = .fillEqually
             stack.spacing = Grid.xs.offset
+        }
+    }
+
+    static var control: StyleWrapper {
+        return .wrap { stack, _ in
+            stack.axis = .vertical
+            stack.distribution = .fillEqually
+            stack.spacing = 1
+            stack.layer.cornerRadius = Grid.xs.offset
+            stack.clipsToBounds = true
         }
     }
 }

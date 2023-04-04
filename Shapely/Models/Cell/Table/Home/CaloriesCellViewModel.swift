@@ -21,6 +21,7 @@ final class CaloriesCellViewModel: PreparableViewModel, Hashable {
 
     static func == (lhs: CaloriesCellViewModel, rhs: CaloriesCellViewModel) -> Bool {
         lhs.props.calories.value == rhs.props.calories.value &&
-        lhs.props.nutritions == rhs.props.nutritions
+        lhs.props.nutritions == rhs.props.nutritions &&
+        lhs.props.state == rhs.props.state
     }
 }

@@ -24,7 +24,8 @@ final class MainBarModule: AppModule, Assembly {
         FoodModule(),
         MeasurementModule(),
         TrainingModule(),
-        PhotoCollageModule()
+        PhotoCollageModule(),
+        ChartModule()
     ]
 
     func createAssembly() -> Assembly? {

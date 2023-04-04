@@ -14,6 +14,9 @@ final class HomeViewController: UIViewController, PropsConsumer {
 
     private lazy var tableView = with(UITableView()) {
         $0.apply(.primary)
+        $0.delegate = tableAdapter
+        $0.dragDelegate = tableAdapter
+        $0.dropDelegate = tableAdapter
         $0.register(CaloriesCell.self, forCellReuseIdentifier: CaloriesCell.className)
         $0.register(AddWidgetCell.self, forCellReuseIdentifier: AddWidgetCell.className)
         $0.register(PhotoProgressCell.self, forCellReuseIdentifier: PhotoProgressCell.className)
@@ -95,6 +98,7 @@ final class HomeViewController: UIViewController, PropsConsumer {
     }
 
     @objc private func onTap() {
+        tableView.dragInteractionEnabled = true
         props.onTap.execute()
     }
 }

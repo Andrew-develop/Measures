@@ -28,6 +28,14 @@ final class HomePresenter: PropsProducer {
         }
     }
 
+    private var isControl: Bool = false {
+        didSet {
+            WidgetType.allCases.forEach {
+                configure($0)
+            }
+        }
+    }
+
     init(service: HomeServiceProvider, router: HomeInternalRouter) {
         self.service = service
         self.router = router
@@ -40,6 +48,10 @@ private extension HomePresenter {
     func setup() {
         propsRelay.mutate {
             $0.title = R.string.localizable.homeTitle()
+            $0.onTap = Command { [weak self] in
+                guard let self else { return }
+                self.isControl = !self.isControl
+            }
         }
 
         service.rx_savedImage
@@ -69,12 +81,13 @@ private extension HomePresenter {
     func configureCalorie() {
         widgets[.calorie] = [
             CaloriesCellViewModel(props: .init(
-                state: .base,
-                calories: (10, Double(UserDefaultsHelper.calorieIntake)),
-                nutritions: (100, 4, 3),
+                state: isControl ? .control : .base,
+                calories: (700, Double(UserDefaultsHelper.calorieIntake)),
+                nutritions: (100, 50, 20),
                 nutritionInfo: Nutritions.allCases.map { element in
                     NutritionView.Props(title: element.title, color: element.indicatorColor)
-                }
+                },
+                onDelete: .empty
             ))
         ]
     }

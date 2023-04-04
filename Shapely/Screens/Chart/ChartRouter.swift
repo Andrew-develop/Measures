@@ -24,7 +24,7 @@ final class ChartRouter {
 extension ChartRouter: ChartPublicRouter {
     func runScreenFactory() {
         let controller = factory.createViewController()
-        appRouter.setRootModule(controller, animated: true)
+        appRouter.push(controller, animated: true)
     }
 }
 

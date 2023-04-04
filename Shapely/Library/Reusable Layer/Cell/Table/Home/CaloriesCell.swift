@@ -102,14 +102,10 @@ final class CaloriesCell: PreparableTableCell {
         contentView.addSubviews(backView, editingStackView)
 
         makeConstraints()
+        setBasePosition()
     }
 
     private func makeConstraints() {
-        backView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Grid.s.offset)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-
         calorieLabel.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().inset(Grid.s.offset)
         }
@@ -141,6 +137,12 @@ final class CaloriesCell: PreparableTableCell {
             $0.height.equalTo(Grid.s.offset)
             $0.leading.trailing.bottom.equalToSuperview().inset(Grid.s.offset)
         }
+
+        editingStackView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.width.equalTo(Grid.m.offset)
+            $0.trailing.equalToSuperview().offset(-Grid.xs.offset)
+        }
     }
 
     private func render(oldProps: Props, newProps: Props) {
@@ -158,6 +160,16 @@ final class CaloriesCell: PreparableTableCell {
         }
 
         if oldProps.nutritions != newProps.nutritions {
+            setupNutritionsLines()
+        }
+
+        if oldProps.state != newProps.state {
+            if newProps.state == .base {
+                setBasePosition()
+            } else {
+                setControlPosition()
+            }
+            setupCalorieLine()
             setupNutritionsLines()
         }
     }
@@ -211,6 +223,25 @@ final class CaloriesCell: PreparableTableCell {
             $0.width.equalTo(nutritionStackView.snp.width).multipliedBy(value)
         }
     }
+
+    private func setBasePosition() {
+        backView.snp.remakeConstraints {
+            $0.top.equalToSuperview().offset(Grid.s.offset)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+
+        editingStackView.isHidden = true
+    }
+
+    private func setControlPosition() {
+        backView.snp.remakeConstraints {
+            $0.top.equalToSuperview().offset(Grid.s.offset)
+            $0.leading.bottom.equalToSuperview()
+            $0.trailing.equalTo(editingStackView.snp.leading).offset(-Grid.xs.offset)
+        }
+
+        editingStackView.isHidden = false
+    }
 }
 
 // swiftlint:disable large_tuple
@@ -221,13 +252,14 @@ extension CaloriesCell {
         var calories: (value: Double, base: Double)
         var nutritions: (p: Double, f: Double, c: Double)
         var nutritionInfo: [NutritionView.Props]
+        var onDelete: Command
 
         static let `default` = Props(state: .base, calories: (value: 0, base: 0),
-        nutritions: (p: 0, f: 0, c: 0), nutritionInfo: [])
+                                     nutritions: (p: 0, f: 0, c: 0), nutritionInfo: [], onDelete: .empty)
 
         enum State {
             case base
-            case editing
+            case control
         }
     }
 }
