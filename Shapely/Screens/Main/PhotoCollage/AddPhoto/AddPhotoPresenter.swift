@@ -21,6 +21,7 @@ final class AddPhotoPresenter: PropsProducer {
     }
 
     private let image: UIImage
+    private let angel: Angel
     private var note: Note?
 
     private var editableImage: UIImage = UIImage() {
@@ -33,10 +34,12 @@ final class AddPhotoPresenter: PropsProducer {
 
     init(service: AddPhotoServiceProvider,
          router: AddPhotoInternalRouter,
-         image: UIImage) {
+         image: UIImage,
+         angel: Angel) {
         self.service = service
         self.router = router
         self.image = image
+        self.angel = angel
 
         setup()
     }
@@ -65,8 +68,19 @@ private extension AddPhotoPresenter {
             $0.state = .ready(image)
             $0.onAction = CommandWith<Int> { [weak self] value in
                 guard let self, let action = PhotoEditItem(rawValue: value) else { return }
-                self.propsRelay.mutate {
-                    $0.editItem = action
+                switch action {
+                case .crop, .rotate:
+                    self.propsRelay.mutate {
+                        $0.state = .cropping(self.image)
+                    }
+                case .text:
+                    self.propsRelay.mutate {
+                        $0.state = .text
+                    }
+                case .draw:
+                    self.propsRelay.mutate {
+                        $0.state = .drawing
+                    }
                 }
             }
             $0.onRemoveBack = Command { [weak self] in
@@ -102,7 +116,7 @@ private extension AddPhotoPresenter {
         service.create(Photo.self) { [weak self] photo in
             guard let self else { return }
             photo.value = data
-            photo.angel = Angel.front.description
+            photo.angel = self.angel.description
             photo.photoNote = self.note
         }
         .bind { [weak self] _ in

@@ -145,7 +145,7 @@ final class PhotoCollageViewController: UIViewController, PropsConsumer {
     }
 
     @objc private func onTap() {
-        props.onTap.execute()
+        props.onTap.execute(with: controlButton)
     }
 }
 
@@ -167,7 +167,7 @@ extension PhotoCollageViewController {
         var category: [Angel: [AnyHashable]]
         var days: [AnyHashable]
         var isNeedShowPicker: Bool
-        var onTap: Command
+        var onTap: CommandWith<UIView>
         var onSelectImage: CommandWith<UIImage?>
 
         static var `default` = Props(title: "", byDays: nil, category: [:], days: [], isNeedShowPicker: false,

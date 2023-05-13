@@ -42,7 +42,8 @@ final class AddPhotoModule: AppModule, Assembly {
             AddPhotoPresenter(
                 service: resolver.resolve(),
                 router: resolver.resolve(),
-                image: image
+                image: image,
+                angel: .front
             )
         }
 

@@ -20,7 +20,7 @@ final class PhotoCollagePresenter: PropsProducer {
         propsRelay.asDriver()
     }
 
-    private var byDays: Bool = true
+    private var byDays: Bool = false
 
     private var categories: [Angel: [AnyHashable]] = [:] {
         didSet {
@@ -61,6 +61,11 @@ private extension PhotoCollagePresenter {
                 guard let image else { return }
                 self?.changePickerValue(false)
                 self?.router.runAddPhotoScreen(image)
+            }
+            $0.onTap = CommandWith<UIView> { [weak self] view in
+                guard let self else { return }
+                let doc = self.service.getPDF()
+                self.router.shareArchive([doc], source: view, date: "22.10.2001")
             }
         }
 

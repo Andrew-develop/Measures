@@ -30,6 +30,8 @@ private class InternalAppAssembly: Assembly {
         }
 
         container.autoregister(StorageService.self, initializer: StorageService.init)
+
+        container.autoregister(PDFService.self, initializer: PDFService.init)
     }
 }
 
