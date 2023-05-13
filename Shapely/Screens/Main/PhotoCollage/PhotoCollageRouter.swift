@@ -5,10 +5,12 @@
 //  Created by Andrew on 11.03.2023.
 //
 
+import UIKit
+
 protocol PhotoCollagePublicRouter: AnyObject {}
 
 protocol PhotoCollageInternalRouter: AnyObject {
-    func runAddPhotoScreen()
+    func runAddPhotoScreen(_ image: UIImage)
 }
 
 final class PhotoCollageRouter {
@@ -25,7 +27,7 @@ final class PhotoCollageRouter {
 extension PhotoCollageRouter: PhotoCollagePublicRouter {}
 
 extension PhotoCollageRouter: PhotoCollageInternalRouter {
-    func runAddPhotoScreen() {
-        addPhotoRouter.runScreenFactory()
+    func runAddPhotoScreen(_ image: UIImage) {
+        addPhotoRouter.runScreenFactory(image)
     }
 }

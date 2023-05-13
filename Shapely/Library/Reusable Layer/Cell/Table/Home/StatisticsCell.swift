@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class StatisticsCell: PreparableTableCell {
+final class StatisticsCell: EditableCell {
 
     private let collectionLayout = with(UICollectionViewFlowLayout()) {
         $0.apply(.statistics)
@@ -44,12 +44,11 @@ final class StatisticsCell: PreparableTableCell {
             return
         }
         self.props = model.props
+        self.editProps = model.editProps
     }
 
     private func prepareView() {
-        selectionStyle = .none
-        contentView.apply(.backgroundColor)
-        contentView.addSubview(collectionView)
+        backView.addSubview(collectionView)
 
         makeConstraints()
     }
@@ -87,7 +86,8 @@ extension StatisticsCell: UICollectionViewDataSource {
 extension StatisticsCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = StatisticsCell.sectionInsets.left * (StatisticsCell.itemsPerRow + 1)
-        let availableWidth = contentView.frame.width - paddingSpace
+        let additionalOffset = !editProps.isEditable ? 0 : Grid.ml.offset
+        let availableWidth = contentView.frame.width - paddingSpace - additionalOffset
         let widthPerItem = availableWidth / StatisticsCell.itemsPerRow
 
         return CGSize(width: widthPerItem, height: widthPerItem / 1.20)

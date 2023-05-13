@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class PhotoProgressCell: PreparableTableCell {
+final class PhotoProgressCell: EditableCell {
 
     private let firstImageView = with(UIImageView()) {
         $0.apply(.contentModeScaleAspectFit)
@@ -27,10 +27,6 @@ final class PhotoProgressCell: PreparableTableCell {
 
     private let stackView = with(UIStackView()) {
         $0.apply(.photoProgress)
-    }
-
-    private let backView = with(UIView()) {
-        $0.apply([.surfaceColor, .cornerRadius(Grid.s.offset)])
     }
 
     var props: PhotoProgressCell.Props = .default {
@@ -55,29 +51,21 @@ final class PhotoProgressCell: PreparableTableCell {
             return
         }
         self.props = model.props
+        self.editProps = model.editProps
     }
 
     private func prepareView() {
-        selectionStyle = .none
-        contentView.apply(.backgroundColor)
-
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(onTap))
         contentView.addGestureRecognizer(recognizer)
 
         stackView.addArrangedSubview(firstImageView)
         stackView.addArrangedSubview(lastImageView)
         backView.addSubviews(stackView, iconImageView)
-        contentView.addSubviews(backView)
 
         makeConstraints()
     }
 
     private func makeConstraints() {
-        backView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Grid.sm.offset)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-
         let width = contentView.frame.width / 2 - Grid.sm.offset
 
         stackView.snp.makeConstraints {

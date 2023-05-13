@@ -29,10 +29,6 @@ final class CalorieIntakeModule: AppModule, Assembly {
     }
 
     func assemble(container: Container) {
-        container.autoregister(CalorieIntakeServiceProviderImpl.self,
-                               initializer: CalorieIntakeServiceProviderImpl.init)
-            .implements(CalorieIntakeServiceProvider.self)
-
         container.autoregister(CalorieIntakeRouter.self, initializer: CalorieIntakeRouter.init)
             .implements(CalorieIntakePublicRouter.self, CalorieIntakeInternalRouter.self)
             .inObjectScope(.container)

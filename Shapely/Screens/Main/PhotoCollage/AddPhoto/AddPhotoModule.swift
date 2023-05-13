@@ -9,7 +9,7 @@ import Swinject
 import SwinjectAutoregistration
 
 protocol AddPhotoViewFactory {
-    func createViewController() -> AddPhotoViewController
+    func createViewController(_ image: UIImage) -> AddPhotoViewController
 }
 
 final class AddPhotoModule: AppModule, Assembly {
@@ -32,13 +32,19 @@ final class AddPhotoModule: AppModule, Assembly {
             .implements(AddPhotoPublicRouter.self, AddPhotoInternalRouter.self)
             .inObjectScope(.container)
 
-        container.register(AddPhotoViewController.self) { resolver in
+        container.register(AddPhotoViewController.self) { (resolver, image: UIImage) in
             let viewController = AddPhotoViewController()
-            viewController.bind(to: resolver.resolve(AddPhotoPresenter.self)!)
+            viewController.bind(to: resolver.resolve(AddPhotoPresenter.self, argument: image)!)
             return viewController
         }
 
-        container.autoregister(AddPhotoPresenter.self, initializer: AddPhotoPresenter.init)
+        container.register(AddPhotoPresenter.self) { (resolver, image: UIImage) in
+            AddPhotoPresenter(
+                service: resolver.resolve(),
+                router: resolver.resolve(),
+                image: image
+            )
+        }
 
         container.register(AddPhotoViewFactory.self) { _ in
             return self
@@ -47,7 +53,7 @@ final class AddPhotoModule: AppModule, Assembly {
 }
 
 extension AddPhotoModule: AddPhotoViewFactory {
-    func createViewController() -> AddPhotoViewController {
-        return resolver.resolve(AddPhotoViewController.self)!
+    func createViewController(_ image: UIImage) -> AddPhotoViewController {
+        return resolver.resolve(AddPhotoViewController.self, argument: image)!
     }
 }

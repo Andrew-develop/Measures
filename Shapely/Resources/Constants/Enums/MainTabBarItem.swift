@@ -17,7 +17,7 @@ enum MainTabBarItem: Int, CaseIterable {
     var icon: UIImage? {
         switch self {
         case .home:
-            return UIImage()
+            return R.image.tabHome()
         case .food:
             return R.image.tabFood()
         case .measurement:

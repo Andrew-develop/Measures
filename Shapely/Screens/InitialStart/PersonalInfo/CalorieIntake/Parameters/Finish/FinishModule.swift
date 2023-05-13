@@ -24,9 +24,6 @@ final class FinishModule: AppModule, Assembly {
     }
 
     func assemble(container: Container) {
-        container.autoregister(FinishServiceProviderImpl.self, initializer: FinishServiceProviderImpl.init)
-            .implements(FinishServiceProvider.self)
-
         container.autoregister(FinishRouter.self, initializer: FinishRouter.init)
             .implements(FinishPublicRouter.self, FinishInternalRouter.self)
             .inObjectScope(.container)

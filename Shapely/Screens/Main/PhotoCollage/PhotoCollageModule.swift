@@ -36,9 +36,11 @@ final class PhotoCollageModule: AppModule, Assembly {
             .inObjectScope(.container)
 
         container.autoregister(PhotoCollageTableAdapter.self, initializer: PhotoCollageTableAdapter.init)
+        container.autoregister(PhotoCollageDaysTableAdapter.self, initializer: PhotoCollageDaysTableAdapter.init)
 
         container.register(PhotoCollageViewController.self) { resolver in
-            let viewController = PhotoCollageViewController(tableAdapter: resolver.resolve())
+            let viewController = PhotoCollageViewController(tableAdapter: resolver.resolve(),
+                                                            daysTableAdapter: resolver.resolve())
             viewController.bind(to: resolver.resolve(PhotoCollagePresenter.self)!)
             return viewController
         }

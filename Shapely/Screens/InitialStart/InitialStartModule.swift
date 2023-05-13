@@ -28,6 +28,9 @@ final class InitialStartModule: AppModule, Assembly {
     }
 
     func assemble(container: Container) {
+        container.autoregister(InitialStartServiceProviderImpl.self, initializer: InitialStartServiceProviderImpl.init)
+            .implements(InitialStartServiceProvider.self)
+
         container.autoregister(InitialStartRouter.self, initializer: InitialStartRouter.init)
             .implements(InitialStartPublicRouter.self, InitialStartInternalRouter.self)
             .inObjectScope(.container)

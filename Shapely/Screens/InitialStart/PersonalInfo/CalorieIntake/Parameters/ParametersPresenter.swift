@@ -11,6 +11,7 @@ import RxCocoa
 final class ParametersPresenter: PropsProducer {
     typealias Props = ParametersViewController.Props
 
+    private let service: InitialStartServiceProvider
     private let router: ParametersInternalRouter
     private let disposeBag = DisposeBag()
 
@@ -27,7 +28,8 @@ final class ParametersPresenter: PropsProducer {
         }
     }
 
-    init(router: ParametersInternalRouter) {
+    init(service: InitialStartServiceProvider, router: ParametersInternalRouter) {
+        self.service = service
         self.router = router
 
         setup()

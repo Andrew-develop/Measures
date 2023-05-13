@@ -31,10 +31,8 @@ final class ChartModule: AppModule, Assembly {
             .implements(ChartPublicRouter.self, ChartInternalRouter.self)
             .inObjectScope(.container)
 
-        container.autoregister(ChartTableAdapter.self, initializer: ChartTableAdapter.init)
-
         container.register(ChartViewController.self) { resolver in
-            let viewController = ChartViewController(tableAdapter: resolver.resolve())
+            let viewController = ChartViewController()
             viewController.bind(to: resolver.resolve(ChartPresenter.self)!)
             return viewController
         }

@@ -20,10 +20,20 @@ final class PhotoCollagePresenter: PropsProducer {
         propsRelay.asDriver()
     }
 
+    private var byDays: Bool = true
+
     private var categories: [Angel: [AnyHashable]] = [:] {
         didSet {
             propsRelay.mutate {
                 $0.category = categories
+            }
+        }
+    }
+
+    private var days: [AnyHashable] = [] {
+        didSet {
+            propsRelay.mutate {
+                $0.days = days
             }
         }
     }
@@ -38,15 +48,33 @@ final class PhotoCollagePresenter: PropsProducer {
 
 private extension PhotoCollagePresenter {
     func setup() {
-        getPhotos()
+        if byDays {
+            getNotes()
+        } else {
+            getPhotos()
+        }
 
         propsRelay.mutate {
             $0.title = R.string.localizable.photoCollageTitle()
+            $0.byDays = byDays
+            $0.onSelectImage = CommandWith<UIImage?> { [weak self] image in
+                guard let image else { return }
+                self?.changePickerValue(false)
+                self?.router.runAddPhotoScreen(image)
+            }
         }
 
         service.rx_savedImage
             .bind { [weak self] in
                 self?.getPhotos()
+            }
+            .disposed(by: disposeBag)
+    }
+
+    func getNotes() {
+        service.fetch(Note.self)
+            .bind { [weak self] notes in
+                self?.mapNotes(notes.reversed())
             }
             .disposed(by: disposeBag)
     }
@@ -57,6 +85,31 @@ private extension PhotoCollagePresenter {
                 self?.mapPhotoCategories(photos.reversed())
             }
             .disposed(by: disposeBag)
+    }
+
+    func mapNotes(_ notes: [Note]) {
+        days = notes.compactMap { note in
+            guard let photos = note.notePhoto?.allObjects as? [Photo], !photos.isEmpty else { return nil }
+
+            let firstImage = photos.first { photo in
+                photo.angel == Angel.front.description
+            }
+            let secondImage = photos.first { photo in
+                photo.angel == Angel.side.description
+            }
+            let thirdImage = photos.first { photo in
+                photo.angel == Angel.back.description
+            }
+
+            return DayPhotosCellViewModel(
+                props: .init(
+                    firstImage: UIImage(data: firstImage?.value ?? Data()),
+                    secondImage: UIImage(data: secondImage?.value ?? Data()),
+                    thirdImage: UIImage(data: thirdImage?.value ?? Data()),
+                    onTap: .empty
+                )
+            )
+        }
     }
 
     func mapPhotoCategories(_ photos: [Photo]) {
@@ -73,12 +126,12 @@ private extension PhotoCollagePresenter {
             let addWidget = AddWidgetCellViewModel(
                 props: .init(
                     title: R.string.localizable.photoCollageAddPhoto(),
-                    onTap: Command {
-                        self.router.runAddPhotoScreen()
+                    onTap: Command { [weak self] in
+                        self?.changePickerValue(true)
                     }
                 )
             )
-            self.categories[angel] = !categoryPhotos.isEmpty ? [title, values, addWidget] : [title, addWidget]
+            self.categories[angel] = !categoryPhotos.isEmpty ? [title, values] : [title, addWidget]
         }
     }
 
@@ -91,6 +144,12 @@ private extension PhotoCollagePresenter {
                     onTap: .empty
                 )
             )
+        }
+    }
+
+    func changePickerValue(_ value: Bool) {
+        propsRelay.mutate {
+            $0.isNeedShowPicker = value
         }
     }
 }

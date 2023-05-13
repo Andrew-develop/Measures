@@ -95,20 +95,31 @@ final class HomeViewController: UIViewController, PropsConsumer {
                 ]
             )
         }
+
+        if oldProps.isMenu != newProps.isMenu {
+            controlButton.isSelected = !newProps.isMenu
+        }
+
+        if oldProps.isControl != newProps.isControl {
+            tableAdapter.canMoveRow = newProps.isControl
+            tableView.dragInteractionEnabled = newProps.isControl
+        }
     }
 
     @objc private func onTap() {
-        tableView.dragInteractionEnabled = true
-        props.onTap.execute()
+//        tableView.dragInteractionEnabled = true
+        props.onTap.execute(with: controlButton)
     }
 }
 
 extension HomeViewController {
     struct Props: Mutable {
         var title: String
+        var isControl: Bool
+        var isMenu: Bool
         var widgets: [WidgetType: [AnyHashable]]
-        var onTap: Command
+        var onTap: CommandWith<UIView>
 
-        static var `default` = Props(title: "", widgets: [:], onTap: .empty)
+        static var `default` = Props(title: "", isControl: false, isMenu: false, widgets: [:], onTap: .empty)
     }
 }

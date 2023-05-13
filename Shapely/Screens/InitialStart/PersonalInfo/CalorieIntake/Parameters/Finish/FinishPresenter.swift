@@ -11,7 +11,7 @@ import RxCocoa
 final class FinishPresenter: PropsProducer {
     typealias Props = FinishViewController.Props
 
-    private let service: FinishServiceProvider
+    private let service: InitialStartServiceProvider
     private let router: FinishInternalRouter
     private let disposeBag = DisposeBag()
 
@@ -28,7 +28,7 @@ final class FinishPresenter: PropsProducer {
         }
     }
 
-    init(service: FinishServiceProvider, router: FinishInternalRouter) {
+    init(service: InitialStartServiceProvider, router: FinishInternalRouter) {
         self.service = service
         self.router = router
 

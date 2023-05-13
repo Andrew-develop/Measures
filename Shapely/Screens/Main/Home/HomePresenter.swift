@@ -30,8 +30,20 @@ final class HomePresenter: PropsProducer {
 
     private var isControl: Bool = false {
         didSet {
+            propsRelay.mutate {
+                $0.isControl = isControl
+            }
+            widgets = [:]
             WidgetType.allCases.forEach {
                 configure($0)
+            }
+        }
+    }
+
+    private var isMenu: Bool = false {
+        didSet {
+            propsRelay.mutate {
+                $0.isMenu = isMenu
             }
         }
     }
@@ -48,9 +60,21 @@ private extension HomePresenter {
     func setup() {
         propsRelay.mutate {
             $0.title = R.string.localizable.homeTitle()
-            $0.onTap = Command { [weak self] in
+            $0.onTap = CommandWith<UIView> { [weak self] sourceView in
                 guard let self else { return }
-                self.isControl = !self.isControl
+                self.isMenu = !self.isMenu
+                self.router.presentAlert(
+                    .init(items: [[
+                        .init(title: "Изменить виджеты", image: R.image.controlEdit()) {
+                            self.isControl = !self.isControl
+                        },
+                        .init(title: "Настройки", image: R.image.gear()) {
+                            self.router.runChartScreen()
+                        }
+                    ]]),
+                    sourceView: sourceView,
+                    place: .topRightToBottomLeft
+                )
             }
         }
 
@@ -74,21 +98,27 @@ private extension HomePresenter {
         case .photo:
             configurePhotos()
         case .addWidget:
-            configureAddWidget()
+            if isControl {
+                configureAddWidget()
+            }
         }
     }
 
     func configureCalorie() {
         widgets[.calorie] = [
-            CaloriesCellViewModel(props: .init(
-                state: isControl ? .control : .base,
-                calories: (700, Double(UserDefaultsHelper.calorieIntake)),
-                nutritions: (100, 50, 20),
-                nutritionInfo: Nutritions.allCases.map { element in
-                    NutritionView.Props(title: element.title, color: element.indicatorColor)
-                },
-                onDelete: .empty
-            ))
+            CaloriesCellViewModel(
+                editProps: .init(
+                    isEditable: isControl,
+                    onDelete: .empty
+                ),
+                props: .init(
+                    calories: (700, Double(UserDefaultsHelper.calorieIntake)),
+                    nutritions: (100, 50, 20),
+                    nutritionInfo: Nutritions.allCases.map { element in
+                        NutritionView.Props(title: element.title, color: element.indicatorColor)
+                    }
+                )
+            )
         ]
     }
 
@@ -100,6 +130,10 @@ private extension HomePresenter {
 
                 self.widgets[.measurements] = [
                     StatisticsCellViewModel(
+                        editProps: .init(
+                            isEditable: self.isControl,
+                            onDelete: .empty
+                        ),
                         props: .init(
                             id: UUID(),
                             items: TreckingParameter.allCases.compactMap { parameter in
@@ -139,10 +173,15 @@ private extension HomePresenter {
     func configurePhotos() {
         service.fetch(Photo.self)
             .bind { [weak self] photos in
-                guard let first = photos.first,
+                guard let self,
+                      let first = photos.first,
                       let last = photos.last else { return }
-                self?.widgets[.photo] = [
+                self.widgets[.photo] = [
                     PhotoProgressCellViewModel(
+                        editProps: .init(
+                            isEditable: self.isControl,
+                            onDelete: .empty
+                        ),
                         props: .init(
                             firstImage: UIImage(data: first.value ?? Data()),
                             lastImage: UIImage(data: last.value ?? Data()),

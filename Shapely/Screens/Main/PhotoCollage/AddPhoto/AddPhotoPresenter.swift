@@ -20,9 +20,23 @@ final class AddPhotoPresenter: PropsProducer {
         propsRelay.asDriver()
     }
 
-    init(service: AddPhotoServiceProvider, router: AddPhotoInternalRouter) {
+    private let image: UIImage
+    private var note: Note?
+
+    private var editableImage: UIImage = UIImage() {
+        didSet {
+            propsRelay.mutate {
+                $0.state = .ready(editableImage)
+            }
+        }
+    }
+
+    init(service: AddPhotoServiceProvider,
+         router: AddPhotoInternalRouter,
+         image: UIImage) {
         self.service = service
         self.router = router
+        self.image = image
 
         setup()
     }
@@ -31,15 +45,37 @@ final class AddPhotoPresenter: PropsProducer {
 private extension AddPhotoPresenter {
     func setup() {
         service.rx_maskedImage
-            .bind { [weak self] image in
-                self?.propsRelay.mutate {
-                    $0.image = image
+            .bind { [weak self] fixedImage in
+                self?.editableImage = fixedImage
+            }
+            .disposed(by: disposeBag)
+
+        let predicate = NSPredicate(format: "date >= %@", Calendar.current.startOfDay(for: Date()) as CVarArg)
+        service.fetch(Note.self, predicate: predicate)
+            .bind { [weak self] notes in
+                guard let currentNote = notes.first else {
+                    self?.createNote()
+                    return
                 }
+                self?.note = currentNote
             }
             .disposed(by: disposeBag)
 
         propsRelay.mutate {
-            $0.image = R.image.plus()
+            $0.state = .ready(image)
+            $0.onAction = CommandWith<Int> { [weak self] value in
+                guard let self, let action = PhotoEditItem(rawValue: value) else { return }
+                self.propsRelay.mutate {
+                    $0.editItem = action
+                }
+            }
+            $0.onRemoveBack = Command { [weak self] in
+                guard let self else { return }
+                self.propsRelay.mutate {
+                    $0.state = .loading
+                }
+                self.service.prepareImage(self.image)
+            }
             $0.confirmProps = ConfirmView.Props(
                 state: .regular,
                 title: R.string.localizable.buttonSave(),
@@ -48,28 +84,26 @@ private extension AddPhotoPresenter {
                 },
                 onBack: .empty
             )
-            $0.onTap = Command { [weak self] in
-                self?.changePickerValue(true)
-            }
-            $0.onSelectImage = CommandWith<UIImage?> { [weak self] image in
-                guard let image else { return }
-                self?.changePickerValue(false)
-                self?.service.prepareImage(image)
-            }
         }
     }
 
-    func changePickerValue(_ value: Bool) {
-        propsRelay.mutate {
-            $0.isNeedShowPicker = value
+    func createNote() {
+        service.create(Note.self) { note in
+            note.date = Date()
         }
+        .bind { [weak self] currentNote in
+            self?.note = currentNote
+        }
+        .disposed(by: disposeBag)
     }
 
     func saveImage() {
-        guard let data = propsRelay.value.image?.pngData() else { return }
-        service.create(Photo.self) { photo in
+        guard let data = editableImage.pngData() else { return }
+        service.create(Photo.self) { [weak self] photo in
+            guard let self else { return }
             photo.value = data
             photo.angel = Angel.front.description
+            photo.photoNote = self.note
         }
         .bind { [weak self] _ in
             self?.service.notify()

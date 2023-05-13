@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class CaloriesCell: PreparableTableCell {
+final class CaloriesCell: EditableCell {
 
     private let calorieLabel = with(UILabel()) {
         $0.apply(.cellTitle)
@@ -54,14 +54,6 @@ final class CaloriesCell: PreparableTableCell {
         $0.apply(.nutritionInfo)
     }
 
-    private let backView = with(UIView()) {
-        $0.apply([.surfaceColor, .cornerRadius(Grid.xs.offset)])
-    }
-
-    private let editingStackView = with(EditingCellStack()) {
-        ($0 as UIView).apply(.cornerRadius(Grid.xs.offset))
-    }
-
     var props: CaloriesCell.Props = .default {
         didSet { render(oldProps: oldValue, newProps: props) }
     }
@@ -84,12 +76,10 @@ final class CaloriesCell: PreparableTableCell {
             return
         }
         self.props = model.props
+        self.editProps = model.editProps
     }
 
     private func prepareView() {
-        selectionStyle = .none
-        contentView.apply(.backgroundColor)
-
         calorieStackView.addArrangedSubview(calorieView)
         calorieStackView.addArrangedSubview(emptyView)
 
@@ -99,10 +89,8 @@ final class CaloriesCell: PreparableTableCell {
 
         backView.addSubviews(calorieLabel, calorieStackView, nutritionLabel, nutritionButton,
                              nutritionStackView, nutritionInfoStackView)
-        contentView.addSubviews(backView, editingStackView)
 
         makeConstraints()
-        setBasePosition()
     }
 
     private func makeConstraints() {
@@ -137,12 +125,6 @@ final class CaloriesCell: PreparableTableCell {
             $0.height.equalTo(Grid.s.offset)
             $0.leading.trailing.bottom.equalToSuperview().inset(Grid.s.offset)
         }
-
-        editingStackView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.width.equalTo(Grid.m.offset)
-            $0.trailing.equalToSuperview().offset(-Grid.xs.offset)
-        }
     }
 
     private func render(oldProps: Props, newProps: Props) {
@@ -160,16 +142,6 @@ final class CaloriesCell: PreparableTableCell {
         }
 
         if oldProps.nutritions != newProps.nutritions {
-            setupNutritionsLines()
-        }
-
-        if oldProps.state != newProps.state {
-            if newProps.state == .base {
-                setBasePosition()
-            } else {
-                setControlPosition()
-            }
-            setupCalorieLine()
             setupNutritionsLines()
         }
     }
@@ -224,23 +196,9 @@ final class CaloriesCell: PreparableTableCell {
         }
     }
 
-    private func setBasePosition() {
-        backView.snp.remakeConstraints {
-            $0.top.equalToSuperview().offset(Grid.s.offset)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-
-        editingStackView.isHidden = true
-    }
-
-    private func setControlPosition() {
-        backView.snp.remakeConstraints {
-            $0.top.equalToSuperview().offset(Grid.s.offset)
-            $0.leading.bottom.equalToSuperview()
-            $0.trailing.equalTo(editingStackView.snp.leading).offset(-Grid.xs.offset)
-        }
-
-        editingStackView.isHidden = false
+    override func setupSubviews() {
+        setupCalorieLine()
+        setupNutritionsLines()
     }
 }
 
@@ -248,18 +206,11 @@ final class CaloriesCell: PreparableTableCell {
 
 extension CaloriesCell {
     struct Props: Mutable {
-        var state: State
         var calories: (value: Double, base: Double)
         var nutritions: (p: Double, f: Double, c: Double)
         var nutritionInfo: [NutritionView.Props]
-        var onDelete: Command
 
-        static let `default` = Props(state: .base, calories: (value: 0, base: 0),
-                                     nutritions: (p: 0, f: 0, c: 0), nutritionInfo: [], onDelete: .empty)
-
-        enum State {
-            case base
-            case control
-        }
+        static let `default` = Props(calories: (value: 0, base: 0),
+                                     nutritions: (p: 0, f: 0, c: 0), nutritionInfo: [])
     }
 }

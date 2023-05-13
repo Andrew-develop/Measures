@@ -29,4 +29,15 @@ extension StyleWrapper where Element == UISegmentedControl {
             }
         }
     }
+
+    static var interval: StyleWrapper {
+        return .wrap { segment, theme in
+            segment.backgroundColor = theme.colorPalette.surface
+            segment.layer.cornerRadius = Grid.sm.offset / 2
+            segment.selectedSegmentTintColor = theme.colorPalette.button
+            StatInterval.allCases.forEach { value in
+                segment.insertSegment(withTitle: value.description, at: value.rawValue, animated: false)
+            }
+        }
+    }
 }

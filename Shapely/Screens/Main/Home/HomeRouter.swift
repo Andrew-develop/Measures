@@ -5,12 +5,15 @@
 //  Created by Andrew on 07.03.2023.
 //
 
+import UIKit
+
 protocol HomePublicRouter: AnyObject {
     func runScreenFactory()
 }
 
 protocol HomeInternalRouter: AnyObject {
     func runChartScreen()
+    func presentAlert(_ props: CustomActionSheet.Props, sourceView: UIView, place: CustomActionSheetController.Place)
 }
 
 final class HomeRouter {
@@ -37,5 +40,11 @@ extension HomeRouter: HomePublicRouter {
 extension HomeRouter: HomeInternalRouter {
     func runChartScreen() {
         chartRouter.runScreenFactory()
+    }
+
+    func presentAlert(_ props: CustomActionSheet.Props, sourceView: UIView, place: CustomActionSheetController.Place) {
+        let alert = CustomActionSheetController()
+        alert.createView(props: props, sourceView: sourceView, place: place)
+        appRouter.present(alert, animated: false)
     }
 }

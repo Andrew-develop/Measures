@@ -11,7 +11,7 @@ import RxCocoa
 final class CalorieIntakePresenter: PropsProducer {
     typealias Props = CalorieIntakeViewController.Props
 
-    private let service: CalorieIntakeServiceProvider
+    private let service: InitialStartServiceProvider
     private let router: CalorieIntakeInternalRouter
     private let disposeBag = DisposeBag()
 
@@ -33,7 +33,7 @@ final class CalorieIntakePresenter: PropsProducer {
     private let heightTape = InitialStartMapper.mapTape(range: CalorieIntakePresenter.heightRange)
     private let weightTape = InitialStartMapper.mapTape(range: CalorieIntakePresenter.weightRange)
 
-    init(service: CalorieIntakeServiceProvider, router: CalorieIntakeInternalRouter) {
+    init(service: InitialStartServiceProvider, router: CalorieIntakeInternalRouter) {
         self.service = service
         self.router = router
 

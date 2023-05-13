@@ -9,7 +9,9 @@ protocol ChartPublicRouter: AnyObject {
     func runScreenFactory()
 }
 
-protocol ChartInternalRouter: AnyObject {}
+protocol ChartInternalRouter: AnyObject {
+    func pop()
+}
 
 final class ChartRouter {
     private let factory: ChartViewFactory
@@ -28,4 +30,8 @@ extension ChartRouter: ChartPublicRouter {
     }
 }
 
-extension ChartRouter: ChartInternalRouter {}
+extension ChartRouter: ChartInternalRouter {
+    func pop() {
+        appRouter.popModule()
+    }
+}

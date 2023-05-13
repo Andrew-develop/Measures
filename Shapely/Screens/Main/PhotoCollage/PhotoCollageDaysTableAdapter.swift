@@ -1,19 +1,19 @@
 //
-//  ChartTableAdapter.swift
+//  PhotoCollageDaysTableAdapter.swift
 //  Shapely
 //
-//  Created by Andrew on 01.04.2023.
+//  Created by Andrew on 13.05.2023.
 //
 
 import UIKit
 
-final class ChartTableAdapter: NSObject {
+final class PhotoCollageDaysTableAdapter: NSObject {
 
     // MARK: - Properties
 
     private var diffableDataSource: UITableViewDiffableDataSource<Int, AnyHashable>?
 
-    var pack: [Int: [AnyHashable]] = [:] {
+    var category: [AnyHashable] = [] {
         didSet {
             updateSnapshot()
         }
@@ -37,9 +37,7 @@ final class ChartTableAdapter: NSObject {
     private func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, AnyHashable>()
         snapshot.appendSections([0])
-        pack.forEach {
-            snapshot.appendItems($0.value, toSection: $0.key)
-        }
+        snapshot.appendItems(category, toSection: 0)
         diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
 }

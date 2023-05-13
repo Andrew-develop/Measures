@@ -8,8 +8,11 @@
 import UIKit
 
 final class HomeDiffableDataSource: UITableViewDiffableDataSource<WidgetType, AnyHashable> {
+
+    var canMoveRow = false
+
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        true
+        canMoveRow
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -40,6 +43,12 @@ final class HomeTableAdapter: NSObject {
     // MARK: - Properties
 
     private var diffableDataSource: HomeDiffableDataSource?
+
+    var canMoveRow = false {
+        didSet {
+            diffableDataSource?.canMoveRow = canMoveRow
+        }
+    }
 
     var widgets: [WidgetType: [AnyHashable]] = [:] {
         didSet {

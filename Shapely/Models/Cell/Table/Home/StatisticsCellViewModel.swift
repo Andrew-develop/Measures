@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class StatisticsCellViewModel: PreparableViewModel, Hashable {
-    let cellId: String = StatisticsCell.className
+final class StatisticsCellViewModel: EditableCellViewModel, Hashable {
     let props: StatisticsCell.Props
 
-    init(props: StatisticsCell.Props) {
+    init(editProps: EditableCell.Props, props: StatisticsCell.Props) {
         self.props = props
+        super.init(cellId: StatisticsCell.className, editProps: editProps)
     }
 
     func hash(into hasher: inout Hasher) {
@@ -20,6 +20,7 @@ final class StatisticsCellViewModel: PreparableViewModel, Hashable {
     }
 
     static func == (lhs: StatisticsCellViewModel, rhs: StatisticsCellViewModel) -> Bool {
-        lhs.props.id == rhs.props.id
+        lhs.props.id == rhs.props.id &&
+        lhs.editProps == rhs.editProps
     }
 }

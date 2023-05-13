@@ -13,6 +13,8 @@ protocol AddPhotoServiceProvider: AnyObject {
     func notify()
     func create<T: NSManagedObject>(_ entity: T.Type,
                                     _ body: @escaping (inout T) -> Void) -> Observable<T>
+    func fetch<T: NSManagedObject>(_ entity: T.Type,
+                                   predicate: NSPredicate?) -> Observable<[T]>
 
     var rx_maskedImage: Observable<UIImage> { get }
     var rx_savedImage: Observable<Void> { get }
@@ -39,6 +41,11 @@ extension AddPhotoServiceProviderImpl: AddPhotoServiceProvider {
     func create<T: NSManagedObject>(_ entity: T.Type,
                                     _ body: @escaping (inout T) -> Void) -> Observable<T> {
         storageService.create(entity, body).asObservable()
+    }
+
+    func fetch<T: NSManagedObject>(_ entity: T.Type,
+                                   predicate: NSPredicate?) -> Observable<[T]> {
+        storageService.fetch(entity, predicate: predicate).asObservable()
     }
 
     func notify() {

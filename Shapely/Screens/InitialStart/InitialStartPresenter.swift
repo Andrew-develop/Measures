@@ -11,6 +11,7 @@ import RxCocoa
 final class InitialStartPresenter: PropsProducer {
     typealias Props = InitialStartViewController.Props
 
+    private let service: InitialStartServiceProvider
     private let router: InitialStartInternalRouter
     private let disposeBag = DisposeBag()
 
@@ -19,7 +20,8 @@ final class InitialStartPresenter: PropsProducer {
         propsRelay.asDriver()
     }
 
-    init(router: InitialStartInternalRouter) {
+    init(service: InitialStartServiceProvider, router: InitialStartInternalRouter) {
+        self.service = service
         self.router = router
 
         setup()
@@ -28,6 +30,14 @@ final class InitialStartPresenter: PropsProducer {
 
 private extension InitialStartPresenter {
     func setup() {
+        service.fetch(User.self)
+            .bind { [weak self] user in
+                if user.isEmpty {
+                    self?.addUser()
+                }
+            }
+            .disposed(by: disposeBag)
+
         propsRelay.mutate {
             $0.title = R.string.localizable.initialStartTitle()
             $0.pack = [
@@ -47,5 +57,20 @@ private extension InitialStartPresenter {
                 onBack: .empty
             )
         }
+    }
+
+    private func addUser() {
+        service.create(User.self) { newUser in
+            newUser.height = 170.0
+            newUser.weight = 60.0
+            newUser.gender = Gender.male.description
+            newUser.target = UserTarget.loseWeight.description
+            newUser.activityLevel = ActivityLevel.good.title
+            newUser.birthday = Date()
+            newUser.calorieIntake = 2200
+            newUser.userParameter = []
+        }
+        .subscribe()
+        .disposed(by: disposeBag)
     }
 }

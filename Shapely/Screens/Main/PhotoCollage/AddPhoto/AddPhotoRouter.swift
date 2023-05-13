@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddPhotoPublicRouter: AnyObject {
-    func runScreenFactory()
+    func runScreenFactory(_ image: UIImage)
 }
 
 protocol AddPhotoInternalRouter: AnyObject {
@@ -27,8 +27,9 @@ final class AddPhotoRouter {
 }
 
 extension AddPhotoRouter: AddPhotoPublicRouter {
-    func runScreenFactory() {
-        appRouter.push(factory.createViewController(), animated: false)
+    func runScreenFactory(_ image: UIImage) {
+        let controller = factory.createViewController(image)
+        appRouter.push(controller, animated: false)
     }
 }
 
