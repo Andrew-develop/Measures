@@ -12,4 +12,5 @@ public protocol ColorPalette {
     static var button: UIColor { get }
     static var text: UIColor { get }
     static var textSecondary: UIColor { get }
+    static var border: UIColor { get }
 }

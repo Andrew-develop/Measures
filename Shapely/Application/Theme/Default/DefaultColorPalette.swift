@@ -9,4 +9,5 @@ struct DefaultColorPalette: ColorPalette {
     static var button: UIColor = R.color.button()!
     static var text: UIColor = R.color.text()!
     static var textSecondary: UIColor = R.color.textSecondary()!
+    static var border: UIColor = R.color.border()!
 }

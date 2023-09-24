@@ -7,16 +7,25 @@
 
 protocol LaunchPublicRouter: AnyObject {}
 
-protocol LaunchInternalRouter: AnyObject {}
+protocol LaunchInternalRouter: AnyObject {
+    func runInitialStartScreen()
+}
 
 final class LaunchRouter {
     private let factory: LaunchViewFactory
+    private let initialStartRouter: InitialStartPublicRouter
 
-    init(factory: LaunchViewFactory) {
+    init(factory: LaunchViewFactory,
+         initialStartRouter: InitialStartPublicRouter) {
         self.factory = factory
+        self.initialStartRouter = initialStartRouter
     }
 }
 
 extension LaunchRouter: LaunchPublicRouter {}
 
-extension LaunchRouter: LaunchInternalRouter {}
+extension LaunchRouter: LaunchInternalRouter {
+    func runInitialStartScreen() {
+        initialStartRouter.runScreenFactory()
+    }
+}

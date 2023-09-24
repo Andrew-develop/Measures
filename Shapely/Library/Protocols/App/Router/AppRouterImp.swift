@@ -4,7 +4,7 @@ import SafariServices
 import UIKit
 
 final class AppRouterImp: NSObject, AppRouter {
-    private var rootController: UINavigationController?
+    private var rootController: UINavigationController
 
     init(rootController: UINavigationController) {
         self.rootController = rootController
@@ -21,7 +21,7 @@ final class AppRouterImp: NSObject, AppRouter {
     func present(_ module: Presentable?, animated: Bool) {
         guard let controller = module?.toPresent() else { return }
 
-        if let popoverController = controller.popoverPresentationController, let view = rootController?.view {
+        if let popoverController = controller.popoverPresentationController, let view = rootController.view {
             popoverController.sourceView = view
             popoverController.sourceRect = CGRect(x: view.bounds.midX,
                                                   y: view.bounds.midY,
@@ -29,19 +29,19 @@ final class AppRouterImp: NSObject, AppRouter {
             popoverController.permittedArrowDirections = []
         }
 
-        rootController?.presentAnyway(controller, animated: animated)
+        rootController.presentAnyway(controller, animated: animated)
     }
 
     func dismissModule(animated: Bool, completion: (() -> Void)?) {
-        rootController?.dismiss(animated: animated, completion: completion)
+        rootController.dismiss(animated: animated, completion: completion)
     }
 
     func dismissFrontModule(animated: Bool, completion: (() -> Void)?) {
-        if rootController == rootController?.latestPresented {
+        if rootController == rootController.latestPresented {
             completion?()
             return
         }
-        rootController?.latestPresented.dismiss(animated: animated, completion: completion)
+        rootController.latestPresented.dismiss(animated: animated, completion: completion)
     }
 
     func push(_ module: Presentable?, animated: Bool) {
@@ -50,7 +50,7 @@ final class AppRouterImp: NSObject, AppRouter {
             controller is UINavigationController == false
         else { assertionFailure("Deprecated push UINavigationController."); return }
 
-        guard let rootNavigation = rootController?.latestPresented as? UINavigationController else {
+        guard let rootNavigation = rootController.latestPresented as? UINavigationController else {
             assertionFailure("Latest controller isn't UINavigationController")
             return
         }
@@ -64,11 +64,11 @@ final class AppRouterImp: NSObject, AppRouter {
             return
         }
 
-        rootController?.pushViewController(controller, animated: animated)
+        rootController.pushViewController(controller, animated: animated)
     }
 
     func popModule(animated: Bool) {
-        guard let rootNavigation = rootController?.latestPresented as? UINavigationController else {
+        guard let rootNavigation = rootController.latestPresented as? UINavigationController else {
             assertionFailure("Latest controller isn't UINavigationController")
             return
         }
@@ -78,11 +78,14 @@ final class AppRouterImp: NSObject, AppRouter {
 
     func setRootModule(_ module: Presentable?, animated: Bool) {
         guard let controller = module?.toPresent() else { return }
-        rootController?.setViewControllers([controller], animated: animated)
+        DispatchQueue.main.async { [weak self] in
+            self?.rootController.setViewControllers([controller], animated: animated)
+        }
+//        rootController.setViewControllers([controller], animated: animated)
     }
 
     func popToRootModule(animated: Bool) {
-        guard let rootNavigation = rootController?.latestPresented as? UINavigationController else {
+        guard let rootNavigation = rootController.latestPresented as? UINavigationController else {
             assertionFailure("Latest controller isn't UINavigationController")
             return
         }

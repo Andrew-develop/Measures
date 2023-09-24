@@ -5,6 +5,7 @@
 //  Created by Pavel Zorin on 27.02.2022.
 //
 
+import RxSwift
 import RxCocoa
 
 protocol PropsProducer {
@@ -16,6 +17,7 @@ protocol PropsProducer {
 protocol PropsConsumer {
     associatedtype Props
 
+    var disposeBag: DisposeBag { get set }
     var props: Props { get set }
 }
 
@@ -27,6 +29,7 @@ extension PropsConsumer where Self: NSObject {
             .drive(onNext: { [weak self] props in
                 self?.props = props
             })
+            .disposed(by: disposeBag)
     }
 }
 

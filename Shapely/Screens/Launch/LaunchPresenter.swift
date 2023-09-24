@@ -29,5 +29,7 @@ final class LaunchPresenter: PropsProducer {
 }
 
 private extension LaunchPresenter {
-    func setup() {}
+    func setup() {
+        router.runInitialStartScreen()
+    }
 }
